@@ -1,0 +1,468 @@
+@media(min-width:768px){
+    .holder{
+        display: flex;
+        align-items: center;
+        text-align: center;
+        
+    }
+
+    
+    .addproduct{
+        width: 60%;
+        height: 30%;
+        padding: 40px;
+        margin: 10px;
+        border-radius: 8px;
+        align-items: center;
+        text-align: center;
+    }
+    .sidbar{
+        margin: auto;
+        width: 35%;
+        border:  1px rebeccapurple solid;
+        border-radius: 8px;
+        padding: 10px;
+        text-align: center;
+    }
+}
+
+.prod{
+    border-radius: 5px;
+    margin: 3px;
+    border-radius: 5px;
+    transition-duration: 1000ms;
+    padding: 20px;
+    text-align: center;
+    
+}
+
+.prod:hover{
+    background-color: #fed053;
+    padding: 30px;
+}
+.menuWrap{
+    
+    transition-delay: 1s;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+.menuWrap a{
+    
+    font-size: 20px;
+    transition-duration: 1000ms;
+    
+}
+.menuWrap a:hover{
+    font-size: 25px;
+    background-color: orange;
+    border-radius: 5px;
+}
+
+.holder div{
+   
+    padding: 10px;
+}
+
+.prod img{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.prod button{
+    background: transparent;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    width: 120px;
+    height: 50px;
+}
+.prod button:hover{
+    background-color: orange;
+
+}
+
+.prod span{
+    font-size: 20px;
+    font-weight: 100px;
+    color: orange;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+.prod h4{
+    color: #fff;
+}
+.brand{
+    padding: 20px;
+    margin-bottom: 10px;
+}
+.submail{
+    margin-bottom: 10px;
+}
+.submail input{
+    width: 220px;
+    height: 35px;
+    border-radius: 3px;
+    border: none;
+}
+.submail button{
+    border: none;
+    width: 100px;
+    height: 35px;
+    color: #fff;
+    background-color: orange;
+    border-radius: 8px;
+}
+
+.viewProd{
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.imgholder{
+    margin: auto;
+    margin-bottom: 25px;
+    width: 80%;
+    height: 30%;
+    
+}
+
+.imgholder img{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.viewProd button{
+    border: none;
+    width: 30%;
+    height: 40px;
+    font-size: 25px;
+    font-weight: 400px;
+    color: #fff;
+    background-color: orange;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.viewProdDetails{
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding-top: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.viewProdDetails h1{
+    color:#fff;
+}
+.prodDesc{
+    color: #6c757d;
+    font-size: 35px;
+    font-weight: 400px;
+    margin-bottom: 10px;
+}
+.viewProdDetails span{
+    color: orange;
+    font-size: 25px;
+    font-weight: 300px;
+    
+}
+.viewProdDetails select{
+    width: 30%;
+    height: 40px;
+    background-color: orange;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.indec{
+    border: none;
+    background-color: transparent;
+    font-size: 40px;
+    color: orange;
+}
+.addtocart{
+    border: none;
+    width: 50%;
+    height: 60px;
+    font-size: 25px;
+    font-weight: 400px;
+    color: #fff;
+    background-color: orange;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+
+
+.list{
+    list-style: none;
+    margin: 20px;
+    font-size: 25px;
+    font-weight: 400px;
+
+}
+.anchor{
+    text-decoration: none;
+    color: #6c757d;
+}
+.formerror{
+    color: red;
+    font-size: 20px;
+    font-weight: 400px;
+}
+
+.editproduct{
+    padding: 20px;
+    height: auto;
+    margin: 10px;
+    border: slateblue 1px solid;
+    border-radius: 5px;
+}
+
+.editimage{
+    width: 100%;
+    height: auto;
+}
+
+.editimage img{
+    width: 100%;
+    height: 100%;
+}
+.editprodinfo{
+    padding: 10px;
+    margin: 6px;
+    text-align: center;
+
+}
+
+.editprodinfo span{
+    font-size: 20px;
+    font-weight: 100px;
+    color: orange;
+    font-family:Georgia, 'Times New Roman', Times, serif
+    
+}
+
+.editprodinfo button{
+    border: none;
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    font-weight: 400px;
+    color: #fff;
+    background-color: orange;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.cartdisplay{
+    padding: 10px;
+    margin: auto;
+    text-align: center; 
+    width: 80%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #f5f5f5;
+}
+
+.cartImage{
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    height: auto;
+    
+}
+
+.cartImage img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.cartinfo{
+    padding: 10px;
+    
+}
+
+.darkcolor{
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 600px;
+    color: black;
+}
+
+.greencolor{
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 600px;
+    color: green;
+}
+
+.sharpButton{
+    color: #fff;
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700px;
+    background-color: orange;
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+}
+.cartTotal{
+    width: 80%;
+    padding: 10px;
+    text-align: right;
+}
+
+.cartdisplaynobg{
+    padding: 10px;
+    margin: auto;
+    text-align: center; 
+    width: 80%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    
+}
+.cartButton{
+    background-color: transparent;
+    border: green 3px solid;
+    color: #6c757d;
+    font-size: 10px;
+    border-radius: 8px;
+
+}
+.signup{
+    padding: 30px;
+    margin: auto;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    margin-bottom: 20px;
+}
+.signupotp{
+    border: none;
+    width: 100px;
+    height: 35px;
+    color: #fff;
+    background-color: orange;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.forminput{
+    border-bottom-width: 2px;
+    border-bottom: 1px solid orange;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 100%;
+    background-color: transparent;
+    height: 40px;
+    margin-bottom: 20px;
+    
+}
+.forminput:focus {
+    outline: none;
+  }
+.signupnext{
+    border: none;
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    background-color: green;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.signuplog{
+    border: none;
+    width: 100%;
+    height: 40px;
+    color: #6c757d;
+    background-color: transparent;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.signupp{
+    font-size: 20px;
+    font-weight: 400px;
+    color: #6c757d;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.aligrightend{
+    font-size: 25px;
+    padding: 5px;
+    float: left;
+    margin: 3px;
+    align-content: space-between;
+}
+
+.aligleftend{
+    font-size: 25px;
+    padding: 5px;
+    float: right;
+    margin-left: 6px;
+}
+.userdetails{
+    border: #6c757d 1px solid;;
+    border-top: none;
+    margin-bottom: 10px;
+    border-radius: 5px;
+   
+}
+.userdetails input{
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+    width: 350px;
+}
+
+.sup{
+    font-size: '15px';
+}
+.order{
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin: auto;
+    
+}
+.payment{
+    margin: auto;
+    padding: 10px;
+    height: auto;
+    background-color: #f5f5f5;
+}
+.paymentimageholder{
+    width: 100%;
+    height: 20%;
+}
+.payment img{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+}
+
+.printmsg{
+    bottom: 1px gray solid;
+}
+
+@media print{
+    body *{
+        visibility: hidden
+    }
+    .printArea, .printArea *{
+        visibility: visible
+    }
+}
