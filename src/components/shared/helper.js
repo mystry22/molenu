@@ -1,4 +1,4 @@
-const urlPointer = 'http://localhost:3222';
+const urlPointer = 'https://molenubackend.herokuapp.com';
 const defaultBodyStyles={
     backgroundColor : '#141414',
    
