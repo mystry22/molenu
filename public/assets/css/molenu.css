@@ -45,17 +45,21 @@
     transition-delay: 1s;
     margin-left: 35px;
     margin-right: 35px;
+    
+   
 }
 .menuWrap a{
-    
-    font-size: 20px;
+    font-weight: 'bold';
+    font-size: 14px;
     transition-duration: 1000ms;
+    
     
 }
 .menuWrap a:hover{
-    font-size: 25px;
-    background-color: orange;
+   
+    background-color: #198754;
     border-radius: 5px;
+
 }
 
 .holder div{
@@ -100,19 +104,14 @@
     margin-bottom: 10px;
 }
 .submail input{
-    width: 220px;
-    height: 35px;
-    border-radius: 3px;
-    border: none;
+    width: 50%;
+    height: 45px;
+    border-radius: 5px;
+    border-color: #ced4da;
+    padding: 10px;
+    margin-right: 10px;
 }
-.submail button{
-    border: none;
-    width: 100px;
-    height: 35px;
-    color: #fff;
-    background-color: orange;
-    border-radius: 8px;
-}
+
 
 .viewProd{
     text-align: center;
@@ -457,6 +456,124 @@
 .printmsg{
     bottom: 1px gray solid;
 }
+
+.homeBg{
+    background-color: #000000;
+    padding: 20;
+    
+}
+
+.leftBoldHome{
+    margin: auto;
+    padding: 50px;
+}
+.boldHomeText{
+    color: #fff;
+    font-weight: 700;
+    font-size: 50px;
+
+}
+
+.bottomHomeText{
+    margin-top: 20px;
+    font-weight: 600;
+    color: #6c757d;
+    font-family: "Inter", sans-serif;
+    margin-bottom: 20px;
+}
+
+.homeButton{
+    background-color: #198754; 
+    border-radius: 50px;
+    height: 50px;
+    width: 150px;
+    font-weight: 600;
+    border: none;
+}
+
+.homeButton2{
+    background-color: #141414; 
+    border-radius: 50px;
+    height: 50px;
+    width: 150px;
+    font-weight: 600;
+    margin-left:10px;
+    color: #fff;
+    border-color: #6c757d;
+}
+
+.homeImageHolder{
+    height:100%;
+    width: 100%;
+    
+}
+
+.homeImage{
+    width:100%;
+    height: 100%;
+    margin: auto;
+    display: block;
+}
+
+.popular{
+    background-color: #dee2e6;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.experiment{
+    color: #141414;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.chooseText{
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  color: #6a6a6a;
+  font-size: 14px;
+}
+
+.footer{
+    padding: 30px;
+}
+
+.links{
+    padding: 10;
+}
+.links ul {
+    /* display: block;
+    text-align: center; */
+    list-style: none;
+}
+
+.links ul li a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #6a6a6a;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.contact{
+    text-decoration: none;
+    font-size: 14px;
+    color: #6a6a6a;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.benefits{
+    text-decoration: none;
+    font-size: 14px;
+    color: #6a6a6a;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
 
 @media print{
     body *{

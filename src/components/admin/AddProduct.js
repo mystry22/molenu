@@ -101,6 +101,7 @@ export default function Home(){
     
     const getAllCats = async()=>{
         const allCats = await getCats();
+        console.log('Hello i am the prod cat' +allCats);
         setCategory(allCats.data);
     }
 

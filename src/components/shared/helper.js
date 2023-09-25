@@ -1,6 +1,8 @@
-const urlPointer = 'http://localhost:3555';
+const urlPointer = 'http://localhost:3222';
 const defaultBodyStyles={
-    backgroundColor : '#141414',
+    backgroundColor : '#000000',
+    padding: 0,
+    margin: 0
    
 }
 export{
