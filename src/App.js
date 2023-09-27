@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PublicHome from '../src/components/user/Home';
+import PublicShop from '../src/components/user/Shop';
 import PublicViewProduct from '../src/components/user/ViewProduct';
 import PublicCart from '../src/components/user/Cart';
 import PublicSignup from '../src/components/user/Signup';
@@ -28,6 +29,7 @@ function App() {
             <Route path="/" exact component={PublicHome} />
             <Route path="/viewproduct/:ref" exact component={PublicViewProduct} />
             <Route path="/cart" exact component={PublicCart} />
+            <Route path="/shop" exact component={PublicShop} />
             <Route path="/login" exact component={PublicLogin} />
             <Route path="/signup" exact component={PublicSignup} />
             <Route path="/order" exact component={PublicOrder} />

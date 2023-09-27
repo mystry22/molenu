@@ -49,7 +49,7 @@ export default function Home() {
                                     <span > The best way to find your own personal style is to try different things. Don't be afraid to mix and match different pieces, or to try out new trends</span>
                                 </div>
 
-                                <a href=''>
+                                <a href='/shop'>
                                     <button className='homeButton'>
                                         Shop Now
                                     </button>

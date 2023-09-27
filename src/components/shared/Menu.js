@@ -38,7 +38,7 @@ export default function Navigation() {
                     </Nav>
                     <Nav>
                         <Nav.Link className='text-secondary' href="/"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }} >Home</span></Nav.Link>
-                        <Nav.Link className="text-secondary" href="/login"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Shop</span></Nav.Link>
+                        <Nav.Link className="text-secondary" href="/shop"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Shop</span></Nav.Link>
                         <Nav.Link className="text-secondary" href="/login"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Aboutus</span></Nav.Link>
                         <Nav.Link className="text-secondary" href="/login"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Contact</span></Nav.Link>
                         <Nav.Link className="text-secondary" href="/login"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>SignUp</span></Nav.Link>
