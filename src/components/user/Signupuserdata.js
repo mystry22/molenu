@@ -91,16 +91,10 @@ export default function SignUpUserData(){
         
     }
 
-    const checkFormail =()=>{
-        if(localStorage.getItem('email')){
-
-        }else{
-            history.push('/signup')
-        }
-    }
+    
 
     useEffect(()=>{
-        checkFormail();
+        
         
     },[])
     return(

@@ -19,6 +19,8 @@ export default function Home(){
     const [cat, setCat] = useState('');
     const [price, setPrice] = useState('');
     const [old_price, setOldPrice] = useState('');
+    const [price_usd, setPriceUsd] = useState('');
+    const [old_price_usd, setOldPriceUsd] = useState('');
     const [description, setDesc] = useState('');
     const [display_home, setDisplay] = useState('');
 
@@ -55,6 +57,16 @@ export default function Home(){
         setDisplay(ev.target.value);
     }
 
+    const setUpdatePriceUsd = (ev)=>{
+        ev.preventDefault();
+        setPriceUsd(ev.target.value);
+    }
+
+    const setUpdateOldPriceUsd = (ev)=>{
+        ev.preventDefault();
+        setOldPriceUsd(ev.target.value);
+    }
+
 
     const doValidation = ()=>{
         setProdNameError(checkName(prod_name));
@@ -83,7 +95,10 @@ export default function Home(){
             cat_name: cat,
             description: description,
             display_home: display_home,
-            image_link: 'blank.jpg'
+            image_link: urlPointer+'/products/',
+            price_usd:price_usd,
+            old_price_usd: old_price_usd
+
         };
 
         if(isValid){
@@ -101,7 +116,6 @@ export default function Home(){
     
     const getAllCats = async()=>{
         const allCats = await getCats();
-        console.log('Hello i am the prod cat' +allCats);
         setCategory(allCats.data);
     }
 
@@ -136,6 +150,12 @@ export default function Home(){
                             <input type='text' name='old_price' className='form-control' placeholder='Old Price' required onChange={(ev)=>setUpdateOldPrice(ev)} /><br />
                             {oldPriceError ? <span className='formerror'>{oldPriceError}</span> : null}
 
+                            <input type='text' name='old_price' className='form-control' placeholder='Old Price in USD' required onChange={(ev)=>setUpdateOldPriceUsd(ev)} /><br />
+                            {oldPriceError ? <span className='formerror'>{oldPriceError}</span> : null}
+
+                            <input type='text' name='old_price' className='form-control' placeholder='Price in USD' required onChange={(ev)=>setUpdatePriceUsd(ev)} /><br />
+                            {oldPriceError ? <span className='formerror'>{oldPriceError}</span> : null}
+
                             <textarea required className='form-control' placeholder='product description (not more than 37 chars Long)' onChange={(ev)=>setUpdateDesc(ev)}>
                             
 
@@ -143,7 +163,8 @@ export default function Home(){
                             {descError ? <span className='formerror'>{descError}</span> : null}
                             <select required className='form-control' name='display' onChange={(ev)=>setUpdateDisplay(ev)}>
                                 <option value=''>Display</option>
-                                <option value='yes'>Yes</option>
+                                <option value='Home'>Home</option>
+                                <option value='Shop'>Shop</option>
                                 <option value='no'>No</option>
                             </select><br />
                             <button className='form-control bg-warning text-light'>Save Product</button>

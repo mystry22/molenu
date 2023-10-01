@@ -12,10 +12,14 @@ import {BarLoader} from 'react-spinners';
 
 
 export default function ProductImage(){
+
     const history = useHistory();
     const [image,setImageUpload] = useState('');
     const [msg,setMsg] = useState('');
+    const [filename, setFilename] = useState('');
+    const [imageFileData,setImageFileData] = useState('');
     const [isSpinner, setIsSpinner] = useState(false);
+
 
     const prod_id = localStorage.getItem('prod_id');
     
@@ -23,6 +27,8 @@ export default function ProductImage(){
     const setImage = (e)=>{
         setMsg('');
         const file = e.target.files[0];
+        setImageFileData(e.target.files[0]); 
+        setFilename(e.target.files[0].name);
         previewFile(file);
         
     }
@@ -45,9 +51,10 @@ export default function ProductImage(){
         uploadImage(image);
     }
 
-    const uploadImage = async (base64EncodedImage)=>{
+    const uploadImage = async ()=>{
         const data = new FormData();
-        data.append('image',base64EncodedImage);
+        data.append('image',imageFileData);
+        data.append('file_name',filename);
         data.append('prod_id',prod_id);
         try{
           const response =  await axios.post(urlPointer + '/api/product/addprodimage',data,{
@@ -65,10 +72,7 @@ export default function ProductImage(){
     }
     
 
-    useEffect(async()=>{
-        
-       
-    },[])
+   
     return(
         <React.Fragment>
             
@@ -83,7 +87,7 @@ export default function ProductImage(){
                         
                             <div className='imgholder'>
                                 {image ? <img src={image} /> : <span>No Image to Preview</span> }
-                                <input type='file' onChange={setImage} className='form-control' />
+                                <input type='file' onChange={setImage} className='form-control' accept='images/*' />
                             </div>
                         
                         <button className='form-control bg-warning text-light'>Save</button>

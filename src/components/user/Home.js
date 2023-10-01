@@ -77,17 +77,19 @@ export default function Home() {
 
 
 
-                    <div className='row'>
+                    <div className='row' style={{ marginBottom: 10 }}>
 
                         <div className='col-lg-3 col-sm-12'>
                             <div style={{ marginTop: 50 }}>
-                                <div className='experiment'>Don't be <br /> afriad to <br />experiment</div>
+                                <div className='experiment'>Don't be afriad to experiment</div>
 
                                 <div className='bottomHomeText' style={{ marginBottom: 30 }}>The most important thing is to wear clothes that make you feel good about yourself. When you feel confident, you'll look your best</div>
 
-                                <button className='homeButton' style={{ marginBottom: 30 }}>
+                                <a href='/shop'>
+                                    <button className='homeButton' style={{ marginBottom: 30 }}>
                                     Shop Now
                                 </button>
+                                </a>
                             </div>
 
                         </div>
@@ -96,38 +98,17 @@ export default function Home() {
                         {prods.map(prod => (
                             <div className='col-lg-3'>
                                 <div className='prod'>
+                                    
                                     <a href={'/viewproduct/:ref' + prod.prod_id}><img src={prod.image_link} /></a>
                                     <h4>{prod.prod_name}</h4>
                                     <h6>{prod.description}</h6>
-                                    <span>{prod.price} <strike>{prod.old_price}</strike></span><br />
+                                    <span >N{prod.price} <strike style={{opacity:0.5}}>N{prod.old_price}</strike></span><br />
                                     <a href={'/viewproduct/:ref' + prod.prod_id}> <button><FaShoppingCart /> Add To Cart</button></a>
                                 </div>
                             </div>
                         ))}
 
-                        {prods.map(prod => (
-                            <div className='col-lg-3'>
-                                <div className='prod'>
-                                    <a href={'/viewproduct/:ref' + prod.prod_id}><img src={prod.image_link} /></a>
-                                    <h4>{prod.prod_name}</h4>
-                                    <h6>{prod.description}</h6>
-                                    <span>{prod.price} <strike>{prod.old_price}</strike></span><br />
-                                    <a href={'/viewproduct/:ref' + prod.prod_id}> <button><FaShoppingCart /> Add To Cart</button></a>
-                                </div>
-                            </div>
-                        ))}
 
-                        {prods.map(prod => (
-                            <div className='col-lg-3'>
-                                <div className='prod'>
-                                    <a href={'/viewproduct/:ref' + prod.prod_id}><img src={prod.image_link} /></a>
-                                    <h4>{prod.prod_name}</h4>
-                                    <h6>{prod.description}</h6>
-                                    <span>{prod.price} <strike>{prod.old_price}</strike></span><br />
-                                    <a href={'/viewproduct/:ref' + prod.prod_id}> <button><FaShoppingCart /> Add To Cart</button></a>
-                                </div>
-                            </div>
-                        ))}
 
 
                     </div>
@@ -141,14 +122,14 @@ export default function Home() {
                             <div className='row' style={{ marginTop: 20 }}>
                                 <div className='col-lg-6 col-sm-12'>
                                     <img src='/assets/img/logistics.png' style={{ marginBottom: 15 }} /> <br />
-                                    <h4>Fast Shipping </h4>
+                                    <h6>Fast Shipping </h6>
                                     <span className='chooseText'> We can help you ship your goods anywhere in the world using fast and reliable shipping agents.</span>
 
                                 </div>
 
                                 <div className='col-lg-6 col-sm-12'>
                                     <img src='/assets/img/easy.png' style={{ marginBottom: 15 }} /> <br />
-                                    <h4>Easy to Shop</h4>
+                                    <h6>Easy to Shop</h6>
                                     <span className='chooseText'>We allow you shop in your local currency and with a fast and reliable payment options</span>
                                 </div>
 
@@ -157,14 +138,14 @@ export default function Home() {
                             <div className='row' style={{ marginTop: 20 }}>
                                 <div className='col-lg-6 col-sm-12'>
                                     <img src='/assets/img/nohassel.png' style={{ marginBottom: 15 }} /> <br />
-                                    <h4>No Hassle </h4>
+                                    <h6>No Hassle </h6>
                                     <span className='chooseText'> We believe that life should be easy. That's why we offer a no-hassle experience for all of our customers..</span>
 
                                 </div>
 
                                 <div className='col-lg-6 col-sm-12'>
                                     <img src='/assets/img/support.png' style={{ marginBottom: 15 }} /> <br />
-                                    <h4>24/7 Support</h4>
+                                    <h6>24/7 Support</h6>
                                     <span className='chooseText'>We know that life doesn't happen on a 9-to-5 schedule. That's why we offer 24/7 support to our customers.</span>
                                 </div>
 

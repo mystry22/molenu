@@ -26,8 +26,11 @@ export default function Home() {
     }, [])
     return (
         <React.Fragment>
+            <div style={defaultBodyStyles}>
+                <Menu />
+            </div>
             <div className='mainHolder'>
-
+                    
                     <Slider />
             
                 
@@ -43,35 +46,13 @@ export default function Home() {
                                     <a href={'/viewproduct/:ref' + prod.prod_id}><img src={prod.image_link} /></a>
                                     <h4>{prod.prod_name}</h4>
                                     <h6>{prod.description}</h6>
-                                    <span>{prod.price} <strike>{prod.old_price}</strike></span><br />
+                                    <span>N{prod.price} <strike style={{opacity:0.5}}>N{prod.old_price}</strike></span><br />
                                     <a href={'/viewproduct/:ref' + prod.prod_id}> <button><FaShoppingCart /> Add To Cart</button></a>
                                 </div>
                             </div>
                         ))}
 
-                        {prods.map(prod => (
-                            <div className='col-lg-3'>
-                                <div className='prod'>
-                                    <a href={'/viewproduct/:ref' + prod.prod_id}><img src={prod.image_link} /></a>
-                                    <h4>{prod.prod_name}</h4>
-                                    <h6>{prod.description}</h6>
-                                    <span>{prod.price} <strike>{prod.old_price}</strike></span><br />
-                                    <a href={'/viewproduct/:ref' + prod.prod_id}> <button><FaShoppingCart /> Add To Cart</button></a>
-                                </div>
-                            </div>
-                        ))}
-
-                        {prods.map(prod => (
-                            <div className='col-lg-3'>
-                                <div className='prod'>
-                                    <a href={'/viewproduct/:ref' + prod.prod_id}><img src={prod.image_link} /></a>
-                                    <h4>{prod.prod_name}</h4>
-                                    <h6>{prod.description}</h6>
-                                    <span>{prod.price} <strike>{prod.old_price}</strike></span><br />
-                                    <a href={'/viewproduct/:ref' + prod.prod_id}> <button><FaShoppingCart /> Add To Cart</button></a>
-                                </div>
-                            </div>
-                        ))}
+                       
 
 
                     </div>

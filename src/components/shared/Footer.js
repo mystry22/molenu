@@ -1,5 +1,5 @@
 import React from 'react';
-
+import SocialMedia from './SocialMedia';
 export default function Footer() {
     return (
         <React.Fragment>
@@ -9,7 +9,8 @@ export default function Footer() {
                         <div className='submail'>
                             <img src='/assets/img/email.png' /> <span className='experiment' style={{ fontSize: 20 }}>Subscribe to Newsletter</span>
                             <input type='email' placeholder='johndoe@gmail.com' />
-                            <button className='homeButton' style={{ borderRadius: 20, width: 120 }}> Subscribe</button>
+                            <button className='homeButton' style={{ borderRadius: 20, width: 120 }}> Subscribe</button> <br />
+                            <SocialMedia />
                         </div>
                     </div>
                     <div className='col-lg-2 col-sm-12'>
@@ -18,10 +19,11 @@ export default function Footer() {
                             <ul>
                                 <li><a href='/'>Home</a></li>
                                 <li><a href='#'>Aboutus</a></li>
-                                <li><a href='#'>Signup</a></li>
-                                <li><a href='#'>Login</a></li>
+                                <li><a href='/signup'>Signup</a></li>
+                                <li><a href='/login'>Login</a></li>
                                 <li><a href='#'>Contact</a></li>
                                 <li><a href='/shop'>Shop</a></li>
+                                <li><a href='/cart'>Cart</a></li>
                             </ul>
                         </div>
 
@@ -53,6 +55,29 @@ export default function Footer() {
 
 
                     </div>
+                </div>
+
+                <div className='row'>
+                    <div className='col-lg-12 col-sm-4'>
+                        <hr style={{ margin: 30 }} />
+                    </div>
+
+                </div>
+
+                <div className='row contact'>
+                    <div className='col-lg-6 col-sm-4' style={{textAlign:'left'}}>
+                        Copyright ©2023. All Rights Reserved. <br /> Designed by Hentech Pro
+                    </div>
+
+                    <div className='col-lg-6 col-sm-4 contact' style={{textAlign:'right'}}>
+
+
+                        Terms & Conditions
+                        Privacy Policy
+
+
+                    </div>
+
                 </div>
             </div>
         </React.Fragment>
