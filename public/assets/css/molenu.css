@@ -426,8 +426,8 @@
 }
 
 .aligrightend {
-    font-size: 25px;
-    padding: 5px;
+    
+    padding: 20px;
     float: left;
     margin: 3px;
     align-content: space-between;
@@ -442,19 +442,20 @@
 
 .userdetails {
     border: #6c757d 1px solid;
-    ;
     border-top: none;
     margin-bottom: 10px;
     border-radius: 5px;
+    padding: 10px;
 
 }
 
 .userdetails input {
-    height: 30px;
+    height: 40px;
     border-radius: 5px;
     border: none;
     font-size: 15px;
-    width: 350px;
+    width: 70%;
+    margin: 10px;
 }
 
 .sup {
@@ -636,13 +637,18 @@
     height: 30px;
     margin-right: 10px;
 }
-.centerFlashMsg{
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
+.userdetailsSearch{
+    background-color: #198754;
+    border-radius: 50px;
+    height: 40px;
+    width: 120px;
+    font-weight: 500;
+    border: none;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    padding: 10px;
+    color: #fff;
+   
 }
 
 

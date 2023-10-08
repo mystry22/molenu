@@ -27,6 +27,7 @@ export default function Home() {
     return (
         <React.Fragment>
             <div style={defaultBodyStyles}>
+                <Info />
                 <Menu />
             </div>
             <div className='mainHolder'>

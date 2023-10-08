@@ -9,6 +9,7 @@ import { fetchIP, getProdInfo } from '../shared/functions';
 import { FaTrashAlt, FaShoppingCart } from 'react-icons/fa';
 import Info from '../shared/Userdetails';
 import SocialMedia from '../shared/SocialMedia';
+import {defaultBodyStyles} from '../shared/helper'
 
 
 export default function Cart() {
@@ -58,12 +59,13 @@ export default function Cart() {
     }, [])
     return (
         <React.Fragment>
-            <Info />
+            
+
+            <div style={defaultBodyStyles}>
             <Menu />
+            </div>
 
-
-
-            <div className='row'>
+            <div className='row' style={{marginTop:20}}>
 
                 <div className='col-lg-8'>
                     {cartItems.length > 0 ?

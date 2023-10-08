@@ -114,6 +114,12 @@ export default function SignUp() {
         return mailres;
     }
 
+    useEffect(() => {
+        if (localStorage.getItem('usertoken')) {
+            history.push('/');
+        }
+    }, [])
+
 
     return (
         <React.Fragment>
