@@ -3,9 +3,7 @@ import Menu from '../shared/AdminMenu';
 import Footer from '../shared/Footer';
 import axios from 'axios';
 import {urlPointer} from '../shared/helper';
-import {getProdInfo} from '../shared/functions';
 import {useHistory} from 'react-router-dom';
-import {BarLoader} from 'react-spinners';
 
 
 
@@ -15,10 +13,6 @@ import {BarLoader} from 'react-spinners';
 export default function ProductImage(){
     const history = useHistory();
     const [prodInfo, setProdInfo] = useState([]);
-    
-    const id = 1234;
-
-   
 
     const uploadImage = async ()=>{
         

@@ -15,7 +15,7 @@ export default function Home() {
     const [prods, setProds] = useState([]);
 
     const getAllProducts = async () => {
-        const products = await axios.post(urlPointer + '/api/product/homeproducts');
+        const products = await axios.post(urlPointer + '/api/product/shopproducts');
         console.log(products)
         setProds(products.data);
 

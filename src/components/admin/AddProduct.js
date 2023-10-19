@@ -6,6 +6,7 @@ import {checkName,checkDesc,checkNumber} from '../shared/validation';
 import axios from 'axios';
 import { urlPointer } from '../shared/helper';
 import {useHistory} from 'react-router-dom';
+import {allPostReqs} from '../shared/functions'
 
 
 
@@ -28,8 +29,9 @@ export default function Home(){
     const [priceError, setPriceError] = useState('');
     const [oldPriceError, setOldPriceError] = useState('');
     const [descError, setDescError] = useState('');
+    const [price_usdErr, setPriceUsdErr] = useState('');
+    const [oldPriceUsdError, setOldPriceUsdErrorr] = useState('');
 
-    const [isValid, setIsValid] = useState(false);
 
     const setUpdateCat =(ev)=>{
         ev.preventDefault();
@@ -69,23 +71,32 @@ export default function Home(){
 
 
     const doValidation = ()=>{
-        setProdNameError(checkName(prod_name));
-        setPriceError(checkNumber(price));
-        setOldPriceError(checkNumber(old_price));
-        setDescError(checkDesc(description));
+        const prodNameRes = checkName(prod_name);
+        const priceRes = checkNumber(price);
+        const oldPriceRes = checkNumber(old_price);
+        const descRes = checkDesc(description);
+        const oldPriceUsedRes = checkNumber(old_price_usd);
+        const priceUsdRes = checkNumber(price_usd);
 
-        if(proNameError || priceError || oldPriceError || descError){
-            setIsValid(false);
+        setProdNameError(prodNameRes);
+        setPriceError(priceRes);
+        setOldPriceError(oldPriceRes);
+        setDescError(descRes);
+        setPriceUsdErr(priceUsdRes);
+        setOldPriceError(oldPriceUsedRes)
+
+
+        if(proNameError || priceError || oldPriceError || descError || price_usdErr || oldPriceUsdError){
+            return 'err'
         }else{
-            setIsValid(true);
+            return 'ok'
         }
     }
 
     const addproduct = async(ev)=>{
         ev.preventDefault();
-        setIsValid(false);
 
-        doValidation();
+        const isValid = doValidation();
 
         const data = {
             prod_name: prod_name,
@@ -101,12 +112,20 @@ export default function Home(){
 
         };
 
-        if(isValid){
-            let feed =  await axios.post(urlPointer+ '/api/product/addproduct',data);
-            if(feed.data == 'New Product Added'){
+        if(isValid == 'ok'){
+            const res = await allPostReqs('/api/product/addproduct',data,'New Product Added');
+
+            if(res == 'New Product Added'){
                 localStorage.setItem('prod_id',prod_id);
                 history.push('/addproductimage');
             }
+            // let feed =  await axios.post(urlPointer + '/api/product/addproduct',data);
+            // if(feed.data == 'New Product Added'){
+            //     localStorage.setItem('prod_id',prod_id);
+            //     history.push('/addproductimage');
+            // }else{
+
+            // }
         }else{
             
         }
@@ -132,7 +151,7 @@ export default function Home(){
                       <div className='col-lg-12'>
                     <div className='addproduct'>
                         <h1>Add Product</h1>
-                        <form onSubmit={addproduct}>
+                        <form>
 
                         
                             <select required className='form-control' name='Category' onChange={(ev)=>setUpdateCat(ev)}>
@@ -167,7 +186,7 @@ export default function Home(){
                                 <option value='Shop'>Shop</option>
                                 <option value='no'>No</option>
                             </select><br />
-                            <button className='form-control bg-warning text-light'>Save Product</button>
+                            <button className='form-control bg-warning text-light' onClick={(ev)=>addproduct(ev)}>Save Product</button>
                         </form>
                     </div>
 

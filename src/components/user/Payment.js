@@ -1,143 +1,194 @@
-import React,{useEffect, useState} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Menu from '../shared/Menu';
 import Footer from '../shared/Footer';
-import {useHistory} from 'react-router-dom';
-import Info  from '../shared/Userdetails';
-import { usePaystackPayment } from 'react-paystack';
-import axios  from 'axios';
-import {urlPointer} from '../shared/helper';
-import {FaCreditCard} from 'react-icons/fa'
+import { useHistory } from 'react-router-dom';
+import { PaystackButton } from 'react-paystack';
+import axios from 'axios';
+import { urlPointer } from '../shared/helper';
+import { defaultBodyStyles } from '../shared/helper';
+import { CartContext } from '../../context/CartContext';
+import {transactionReference} from '../shared/functions';
 
 
+export default function Order() {
+    const history = useHistory();
+    const [pstackTransRef, setPstackTransRef] = useState('');
 
-export default function Order(){
-    const history =useHistory();
-   const [user,setUserData] = useState('');
-   const [name,setName] = useState('');
-   const [email,setMail] = useState('');
-   const [phone,setPhone] = useState('');
-   const [sumCart,setSumSubTotal] = useState([]);
-   const [amount,setAmount] = useState('');
-  
-   
-   const myIp =localStorage.getItem('i_ran_zyyx');
- 
+    const { 
+        sumsubtotal, setOptLga,
+        deliveryFee, setFullName,
+        fullName, setCity,
+        user, setAddress,
+        phone, setPhone,
+        address, setStates,
+        optLga, 
+        city
+    } = useContext(CartContext);
+    const [amtPlusDel, setAmtPlusDelivery] = useState('');
+
     const config = {
         reference: (new Date()).getTime().toString(),
-        email: email,
-        amount: amount *100,
-        publicKey: 'pk_test_0e73cfbb6c5273ec366b95f9f512686ac46950c3',
+        email: user.email,
+        amount: parseInt(sumsubtotal + deliveryFee) * 100,
+        publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
     };
 
-    const onSuccess = (reference) => {
-        localStorage.setItem('paystack_ref',reference.reference);
-        localStorage.setItem('a_m_payable',amount);
-        history.push('/order');
 
-      };
-      const onClose = () => {
-        
-    
-      }
+    const handlePaystackSuccessAction = (reference) => {
+        setPstackTransRef(reference.reference);
+        saveTransDetails();
 
-      const PaystackHookExample = () => {
-        const initializePayment = usePaystackPayment(config);
+    };
+
+    // you can call this function anything
+    const handlePaystackCloseAction = () => {
+
+
+    }
+
+    const saveTransDetails = async()=>{
+        const data ={
+            full_name:fullName,
+            phone:phone,
+            address: address,
+            user_ip: localStorage.getItem('i_ran_zyyx'),
+            ref: transactionReference(),
+            paystack_ref: pstackTransRef,
+            email: user.email,
+            amount: sumsubtotal,
+            lga:optLga,
+            city:city
+        }
+
+        const report = await axios.post(urlPointer+'/api/order/completeorder',data);
+        if(report.data == 'order completed'){
+            setFullName('');
+            setAddress('');
+            setCity('');
+            setPhone('');
+            setStates('');
+            setOptLga('');
+            localStorage.removeItem('paystack_ref');
+            history.push('/success');
+        }else{
+            alert(report.data);
+        }
+    }
+
+    const returnPayment = () => {
         return (
-          <div>
-              <a  onClick={() => {
-                  initializePayment(onSuccess, onClose)
-              }}><button className='sharpButton'><FaCreditCard /> Make Payment</button></a>
-          </div>
-        );
+            <div className='row'>
+                <div className='col-lg-12'>
+                    <img src="/assets/img/payment.png" />
+                </div>
+            </div>
+        )
+    }
+
+    const componentProps = {
+        ...config,
+        text: returnPayment(),
+        onSuccess: (reference) => handlePaystackSuccessAction(reference),
+        onClose: handlePaystackCloseAction,
     };
-   
 
-    const userData = ()=>{
-        const token = localStorage.getItem('usertoken');
-        if(token){
-         const authAxios = axios.create({
-           headers: {
-             authorization: `Bearer ${token}`
-           }
-         });
- 
- 
-         authAxios.post(urlPointer +'/api/registration/userdetail')
-         .then(result =>{
-          setName(result.data.first_name);
-          setMail(result.data.email);
-          setPhone(result.data.phone);
-          
-    
-         })
+
+    const myIp = localStorage.getItem('i_ran_zyyx');
+
+    const moveToDelivery = () => {
+        if (fullName) {
+
+        } else {
+            history.push('/delivery');
         }
     }
 
-    const getSubTotalSum = async()=>{
+    const doTotalling = () => {
+        setAmtPlusDelivery(parseInt(sumsubtotal) + deliveryFee);
 
-        
-        const data = {ip: myIp}
-        const cart = await axios.post(urlPointer+'/api/cart/getsubtotalosum',data);
-        if(cart.data < 1){
-            history.push('/');
-        }else{
-            
-            setSumSubTotal(cart.data);
-            setAmount((cart.data[0].subtotal)/2);
-            localStorage.setItem('payment_amt',cart.data[0].subtotal*0.5)
-        }
-        
-        
     }
 
-    
 
-    useEffect(()=>{
-        userData();
-        getSubTotalSum();
-        if(localStorage.getItem('usertoken')){
-            
-        }else{
+
+    useEffect(() => {
+
+        if (localStorage.getItem('usertoken')) {
+
+        } else {
             history.push('/login');
         }
-    },[])
-    return(
+        moveToDelivery();
+        doTotalling();
+    }, [])
+    return (
         <React.Fragment>
-            <Info />
-            <Menu />
+
+            <div style={defaultBodyStyles}>
+                <Menu />
+            </div>
+
             <div className='container'>
                 <div className='row'>
-                    <div className='col-lg-2'>
+                    <div className='col-lg-4'>
 
                     </div>
-                    <div className='col-lg-8'>
+                    <div className='col-lg-4' style={{ marginTop: 20 }}>
                         <div className='payment'>
-                            <p className='signupp'>Dear {name} Kindly <b>note</b> that your order may take up to <b>7 working days</b> to deliver and you are expected to
-                            secure your order by making half payment this is to ensure your commitment.<br />
-                            one of our agents will reach out to you once
-                            payment is made.<br/><br/>
-                            you can always reach us on our mobile numbers or mail us using contact@molenu.com.ng<br />
-                            However you will be required to make complete payment plus delivery fee of <b>N1500 </b>  
-                             if your delivery address is in Lagos and <b>N2500</b> to any other location within Nigeria
-                            on delivery of your product.
-                            </p>
-                            <span>Total Amount</span>: {sumCart.map(sum=>(<span>{sum.subtotal}</span>))} <br />
-                            <span>Email: {email}</span><br/>
-                            <span>Phone: {phone}</span><br/>
-                            <span>Down Payment: </span> {sumCart.map(sum=>(<span>{sum.subtotal/2}</span>))}
-                             {sumCart.map(sum=>(
-                                <input type='hidden' value={sum.subtotal*0.5 } className='form-control' /> 
-                            ))}
-                            <br/>
-                            <PaystackHookExample />
+
+                            <div style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>Payment</div>
+
+                            <div style={{ display: 'block', marginBottom: 10 }}>
+                                <div className='paymentTitle'>
+                                    Subtotal:
+                                </div>
+                                <div className='paymentValue'>
+                                    NGN {sumsubtotal}
+                                </div>
+                            </div><br />
+
+                            <div style={{ display: 'block', marginBottom: 10 }}>
+                                <div className='paymentTitle'>
+                                    Delivery:
+                                </div>
+                                <div className='paymentValue'>
+                                    NGN {deliveryFee}
+                                </div>
+                            </div><br />
+
+                            <div style={{ display: 'block', marginBottom: 10 }}>
+                                <div className='paymentTitle'>
+                                    Other Charges:
+                                </div>
+                                <div className='paymentValue'>
+                                    NA
+                                </div>
+                            </div><br />
+
+                            <div style={{ display: 'block', marginBottom: 10 }}>
+                                <div className='paymentTitle' style={{ fontWeight: 'bold', fontSize: 18 }}>
+                                    Total:
+                                </div>
+                                <div className='paymentValue'>
+                                    NGN {amtPlusDel}
+                                </div>
+                            </div>
+
+                            <div style={{textAlign:'center'}}>
+                                <span style={{fontWeight:'bold'}}>Pay Now</span>
+                                <PaystackButton {...componentProps} className='paymentButtonHack' />
+                            </div>
+
+
+
+
                         </div>
                     </div>
-                    <div className='col-lg-2'>
+                    <div className='col-lg-4'>
 
                     </div>
                 </div>
             </div>
-               
+
             <Footer />
         </React.Fragment>
     )

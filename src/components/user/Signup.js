@@ -1,18 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Menu from '../shared/Menu';
 import Footer from '../shared/Footer';
 import { defaultBodyStyles } from '../shared/helper';
 import { urlPointer } from '../shared/helper';
 import axios from 'axios';
 import { CgLogIn } from 'react-icons/cg';
-import { CgLogOut } from 'react-icons/cg';
-import { CgProfile } from 'react-icons/cg';
-
-import { FaAngleDoubleRight } from 'react-icons/fa';
 import { checkMail } from '../shared/validation';
 import { useHistory } from 'react-router-dom';
-import Info from '../shared/Userdetails';
 import { checkName, checkPhone, checkPass } from '../shared/validation';
+import { CartContext } from '../../context/CartContext';
+
 
 
 
@@ -24,6 +21,8 @@ export default function SignUp() {
     const [lname, setLname] = useState('');
     const [phone, setPhone] = useState('');
     const [pass, setPass] = useState('');
+    const {setRefresh} = useContext(CartContext);
+
 
 
     const [fnameError, setFnameError] = useState('');
@@ -87,8 +86,9 @@ export default function SignUp() {
             const res = await axios.post(urlPointer + '/api/registration/register', data);
             if (res.data.msg == 'registration okay') {
                 localStorage.setItem('usertoken', res.data.token);
+                setRefresh('random rubishs')
                 if (localStorage.getItem('fart_cart')) {
-                    history.push('/order');
+                    history.push('/delivery');
                 } else {
                     history.push('/');
                 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import Menu from '../shared/Menu';
 import Footer from '../shared/Footer';
 import { defaultBodyStyles } from '../shared/helper';
@@ -11,6 +11,7 @@ import { FaShoppingCart, FaPlus, FaMinus } from 'react-icons/fa';
 import Info from '../shared/Userdetails';
 import SocialMedia from '../shared/SocialMedia';
 import FlashMsg from '../shared/FlashMsg';
+import { CartContext } from '../../context/CartContext';
 
 
 
@@ -23,25 +24,17 @@ export default function ViewProduct() {
   const [qty, setQty] = useState(1);
   const [price, setPrice] = useState('');
   const [size, setSize] = useState('');
+  const [heights, setHeights] = useState('');
   const [ip, setIp] = useState();
   const [sizeError, setSizeError] = useState('');
   const [displayFlash, setDisplayFlash] = useState(false);
-
-  const checkSize = (size) => {
-    const mesize = selectedSize(size)
-    setSizeError(mesize);
-    if (sizeError !== null) {
-      return 'error'
-    } else {
-      return 'ok'
-    }
-  }
+  const {setRefresh} = useContext(CartContext);
 
 
   const addtocart = async (e) => {
     e.preventDefault();
 
-    if (size) {
+    if (size && heights) {
       setSizeError('');
       const data = {
         prod_id: prodInfo.prod_id,
@@ -52,14 +45,22 @@ export default function ViewProduct() {
         user_ip: localStorage.getItem('i_ran_zyyx'),
         size: size,
         qty: qty,
+        heights:heights
       }
 
-      const req = await axios.post(urlPointer + '/api/cart/addtocart', data);
-      setDisplayFlash(true)
-      //alert(req.data);
+
+       const req = await axios.post(urlPointer + '/api/cart/addtocart', data);
+      if(req.data == 'Product Inserted Successfuly'){
+        setRefresh('random rubish')
+        setDisplayFlash(true)
+      }else{
+        
+      }
+      
+    
     } else {
 
-      setSizeError('Please enter a valid size');
+      setSizeError('Please enter a valid size and height');
 
     }
 
@@ -68,6 +69,12 @@ export default function ViewProduct() {
   const updateSize = (e) => {
     e.preventDefault();
     setSize(e.target.value);
+
+  }
+
+  const updateHeight = (e) => {
+    e.preventDefault();
+    setHeights(e.target.value);
 
   }
   const getSelected = async () => {
@@ -134,15 +141,29 @@ export default function ViewProduct() {
                 <h6 className='prodDesc'>{prodInfo.description}</h6>
                 <span >N{prodInfo.price} <strike style={{ opacity: 0.5 }}>N{prodInfo.old_price}</strike></span><br />
                 <select name='size' required onChange={updateSize}>
-                  <option value=''>Size</option>
-                  <option value='40'>40</option>
-                  <option value='41'>41</option>
-                  <option value='42'>42</option>
-                  <option value='43'>43</option>
-                  <option value='44'>44</option>
-                  <option value='45'>45</option>
-                  <option value='46'>46</option>
+                  <option value=''>Size [UK Sizes]</option>
+                  <option value='4'>4</option>
+                  <option value='6'>6</option>
+                  <option value='8'>8</option>
+                  <option value='10'>10</option>
+                  <option value='12'>12</option>
+                  <option value='14'>14</option>
+                  <option value='16'>16</option>
+                  <option value='18'>18</option>
+                  <option value='20'>20</option>
+                  <option value='22'>22</option>
+                  <option value='24'>24</option>
+                  <option value='26'>26</option>
                 </select><br />
+
+                <select name='size' required onChange={updateHeight}>
+                  <option value=''>Height</option>
+                  <option value='5.0ft-5.5ft'>5.0ft-5.5ft</option>
+                  <option value='5.6ft-5.7ft'>5.6ft-5.7ft</option>
+                  <option value='5.8ft-6.0ft'>5.8ft-6.0ft</option>
+                  
+                </select><br />
+                
                 {sizeError ? <span style={{ color: 'red' }}>{sizeError}</span> : null}<br />
                 {/* {
                   displayFlash ? <FlashMsg /> : null

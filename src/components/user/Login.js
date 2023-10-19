@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Menu from '../shared/Menu';
 import Footer from '../shared/Footer';
 import { defaultBodyStyles } from '../shared/helper';
@@ -9,16 +9,16 @@ import { FaAngleDoubleRight } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import Info from '../shared/Userdetails';
 import { checkMail, checkPass } from '../shared/validation';
+import { CartContext } from '../../context/CartContext';
 
 
 export default function Login() {
     const history = useHistory();
-
-    const [visible, setVisible] = useState(false);
     const [pass, setPass] = useState('');
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passError, setPassError] = useState('');
+    const {setRefresh} = useContext(CartContext);
 
 
 
@@ -57,7 +57,9 @@ export default function Login() {
             const res = await axios.post(urlPointer + '/api/auth/userlogin', data);
             if (res.data.msg == 'login success') {
                 localStorage.setItem('usertoken', res.data.token);
+                setRefresh('random strings')
                 history.push('/');
+                
             } else {
                 alert('error validating user')
             }

@@ -651,6 +651,31 @@
    
 }
 
+.paymentTitle{
+    float: left;
+    text-align: left;
+    font-size: 12px;
+}
+
+.paymentValue{
+    float: right;
+    text-align: right;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.success{
+    margin: auto;
+    text-align: center;
+}
+
+.paymentButtonHack{
+    background-color: none;
+    border: none;
+    padding: 0px;
+    margin-top: 10px;
+}
+
 
 
 

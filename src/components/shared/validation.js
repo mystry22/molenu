@@ -186,6 +186,8 @@ const selectedSize =(size)=>{
 
 
 
+
+
 export {
     checkName,
     checkLastName,

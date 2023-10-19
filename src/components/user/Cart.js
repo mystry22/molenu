@@ -1,43 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import Menu from '../shared/Menu';
 import Footer from '../shared/Footer';
-
-import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { urlPointer } from '../shared/helper';
-import { fetchIP, getProdInfo } from '../shared/functions';
 import { FaTrashAlt, FaShoppingCart } from 'react-icons/fa';
-import Info from '../shared/Userdetails';
-import SocialMedia from '../shared/SocialMedia';
-import {defaultBodyStyles} from '../shared/helper'
+import {defaultBodyStyles} from '../shared/helper';
+import {CartContext} from '../../context/CartContext';
+import { useHistory } from 'react-router-dom';
+
+
 
 
 export default function Cart() {
-    const [sumsubtotal, setSumSubTotal] = useState([]);
-    const [cartItems, setCartItems] = useState([]);
     const myIp = localStorage.getItem('i_ran_zyyx');
-
-    const getProdInfo = async () => {
-
-
-
-        const data = { user_ip: myIp }
-        const cart = await axios.post(urlPointer + '/api/cart/allcartitems', data);
-        setCartItems(cart.data);
-
-
-    }
-
-    const getSubTotalSum = async () => {
-
-
-        const data = { ip: myIp }
-        const cart = await axios.post(urlPointer + '/api/cart/getsubtotalosum', data);
-        setSumSubTotal(cart.data);
+    const{sumsubtotal,cartItems} = useContext(CartContext);
+    const history = useHistory();
+    const [amount,setAmount] = useState('');    
 
 
 
-    }
 
     const deleteCartItem = async (prod_id, user_ip) => {
         const data = {
@@ -52,11 +33,19 @@ export default function Cart() {
 
     }
 
+    const checkIfSignedIn = ()=>{
+        if(localStorage.getItem('usertoken')){
+            history.push('/delivery')
+        }else{
+            history.push('/login')
+        }
+    }
 
-    useEffect(() => {
-        getProdInfo();
-        getSubTotalSum();
-    }, [])
+     useEffect(()=>{
+    
+     },[])
+
+
     return (
         <React.Fragment>
             
@@ -136,28 +125,28 @@ export default function Cart() {
                             </div>
                         </div>
                         <hr />
-                        {sumsubtotal.length > 0 ?
+                        {sumsubtotal ?
                             <div className='row'>
                                 <div className='col-lg-12'>
                                     <div className='cartTotal'>
-                                        {sumsubtotal.map(sumsub => (
+                                        
                                             <div className='row'>
                                                 <div className='col-lg-6'>
                                                     <span className='cartSubtotalText'>Subtotal</span>
 
                                                 </div>
                                                 <div className='col-lg-6'>
-                                                    <span style={{ textAlign: 'right', fontWeight: 'bold', fontSize: 18 }}>N {sumsub.subtotal}</span>
+                                                    <span style={{ textAlign: 'right', fontWeight: 'bold', fontSize: 18 }}>NGN {sumsubtotal}</span>
 
                                                 </div>
                                             </div>
 
-                                        ))}
+                                        
                                     </div>
                                 </div>
                                 <div className='col-lg-12'>
                                     <div className='cartdisplaynobg'>
-                                        <a href='/payment' ><button className='sharpButton' style={{ backgroundColor: 'orange', color: '#fff', width: '100%' }}><FaShoppingCart size='1em' /> Checkout </button></a>
+                                        <button className='sharpButton' onClick={(ev)=>checkIfSignedIn(ev)} style={{ backgroundColor: 'orange', color: '#fff', width: '100%' }}><FaShoppingCart size='1em' /> Checkout </button>
                                     </div>
                                     <hr />
                                 </div>
