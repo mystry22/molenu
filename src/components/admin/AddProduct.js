@@ -97,9 +97,10 @@ export default function Home(){
         ev.preventDefault();
 
         const isValid = doValidation();
+        const setCharForprodName = prod_name.toLowerCase();
 
         const data = {
-            prod_name: prod_name,
+            prod_name: setCharForprodName,
             prod_id: prod_id,
             price: price,
             old_price: old_price,
@@ -119,13 +120,7 @@ export default function Home(){
                 localStorage.setItem('prod_id',prod_id);
                 history.push('/addproductimage');
             }
-            // let feed =  await axios.post(urlPointer + '/api/product/addproduct',data);
-            // if(feed.data == 'New Product Added'){
-            //     localStorage.setItem('prod_id',prod_id);
-            //     history.push('/addproductimage');
-            // }else{
-
-            // }
+            
         }else{
             
         }

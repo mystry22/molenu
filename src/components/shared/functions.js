@@ -110,13 +110,11 @@ const getRejected = async()=>{
 }
 
 const allPostReqs = async(url,data)=>{
-
 const res = await fetch(urlPointer + url, {
   method: "POST",
   body: JSON.stringify(data),
   headers: {"Content-type": "application/json"}
 })
-console.log(res)
 return res.json();
 
 }

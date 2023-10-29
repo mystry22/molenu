@@ -1,9 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import Menu from '../shared/AdminMenu';
-import Footer from '../shared/Footer';
 import axios from 'axios';
 import {urlPointer} from '../shared/helper';
-import {getPending,getWorking,getReady,getRejected} from '../shared/functions';
 import {useHistory} from 'react-router-dom';
 
 
@@ -32,10 +30,8 @@ export default function Pending(){
     }
     
 
-    useEffect(async()=>{
-        getAllPendings(); 
-        
-       
+    useEffect(()=>{
+        getAllPendings();
     },[])
     return(
         <React.Fragment>

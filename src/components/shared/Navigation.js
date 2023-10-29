@@ -2,6 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PublicHome from '../user/Home';
+import PublicContact from '../user/Contact';
+import PublicAbout from '../user/About';
 import PublicSuccess from '../user/Success';
 import PublicShop from '../user/Shop';
 import PublicDelivery from '../user/Delivery';
@@ -32,6 +34,8 @@ function Navigation() {
         <Switch>
         
           <Route path="/" exact component={PublicHome} />
+          <Route path="/about" exact component={PublicAbout} />
+          <Route path="/contact" exact component={PublicContact} />
           <Route path="/success" exact component={PublicSuccess} />
           <Route path="/viewproduct/:ref" exact component={PublicViewProduct} />
           <Route path="/cart" exact component={PublicCart} />

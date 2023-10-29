@@ -8,7 +8,7 @@ const NotSignedInMenu =()=>{
     return(
         <div className="menuWrap">
         <Navbar bg="" expand="lg">
-            <Navbar.Brand className="text-secondary"><span style={{ fontSize: '25px ',color:'#fff' }}>FancyFinery</span></Navbar.Brand>
+            <Navbar.Brand className="text-secondary"><a href='/' style={{ fontSize: '25px ',color:'#fff', textDecoration:'none' }}>FancyFinery</a></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="container-fluid mr-auto">
@@ -18,8 +18,8 @@ const NotSignedInMenu =()=>{
                 <Nav>
                     <Nav.Link className='text-secondary' href="/"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }} >Home</span></Nav.Link>
                     <Nav.Link className="text-secondary" href="/shop"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Shop</span></Nav.Link>
-                    <Nav.Link className="text-secondary" href="/login"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Aboutus</span></Nav.Link>
-                    <Nav.Link className="text-secondary" href="/login"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Contact</span></Nav.Link>
+                    <Nav.Link className="text-secondary" href="/about"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Aboutus</span></Nav.Link>
+                    <Nav.Link className="text-secondary" href="/contact"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Contact</span></Nav.Link>
                     <Nav.Link className="text-secondary" href="/signup"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>SignUp</span></Nav.Link>
                     <Nav.Link className="text-secondary" href="/login"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>SignIn</span></Nav.Link>
 
@@ -38,7 +38,7 @@ const SignedInMenu =()=>{
     return(
         <div className="menuWrap">
         <Navbar bg="" expand="lg">
-            <Navbar.Brand className="text-secondary"><span style={{ fontSize: '25px ',color:'#fff' }}>FancyFinery</span></Navbar.Brand>
+            <Navbar.Brand className="text-secondary"><a href='/' style={{ fontSize: '25px ',color:'#fff', textDecoration:'none' }}>FancyFinery</a></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="container-fluid mr-auto">
@@ -48,8 +48,8 @@ const SignedInMenu =()=>{
                 <Nav>
                     <Nav.Link className='text-secondary' href="/"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }} >Home</span></Nav.Link>
                     <Nav.Link className="text-secondary" href="/shop"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Shop</span></Nav.Link>
-                    <Nav.Link className="text-secondary" href="/login"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Aboutus</span></Nav.Link>
-                    <Nav.Link className="text-secondary" href="/login"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Contact</span></Nav.Link>
+                    <Nav.Link className="text-secondary" href="/about"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Aboutus</span></Nav.Link>
+                    <Nav.Link className="text-secondary" href="/contact"><span style={{ fontSize: 14, fontWeight: 'bold', color:'#fff' }}>Contact</span></Nav.Link>
                    
 
 

@@ -9,9 +9,31 @@ import {CartContext} from '../../context/CartContext'
 
 
 export default function UserDetails() {
-    const {logout,user, setUserDetails,cartSum, setCartSum} = useContext(CartContext)
+    const {logout,user,cartSum,setProds,setRefresh} = useContext(CartContext);
+    const [search,setSearchParam]= useState('');
 
+    const setSearch =async(e)=>{
+        e.preventDefault();
+        
 
+        if(search){
+            const data = {
+                prod_name: search.toLowerCase()
+            }
+            
+            const res = await axios.post(urlPointer + '/api/product/search',data);
+
+            if(res.data == 'No product found'){
+                alert(res.data);
+            }else{
+                setProds(res.data);
+                alert('Product found')
+            }
+        }else{
+            
+        }
+
+    }
     
     return (
 
@@ -28,8 +50,8 @@ export default function UserDetails() {
                         <div className='col-lg-6'>
 
 
-                            <input type='text' placeholder=' Search ' />
-                            <button className='userdetailsSearch'>
+                            <input type='text' placeholder=' Search ' onChange={(e)=>setSearchParam(e.target.value)} />
+                            <button className='userdetailsSearch' onClick={(e)=>setSearch(e)}>
                                 Search
                             </button>
                         </div>

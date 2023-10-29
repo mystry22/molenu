@@ -61,7 +61,7 @@ export default function Order() {
         }
 
         const report = await axios.post(urlPointer+'/api/order/completeorder',data);
-        if(report.data == 'order completed'){
+        if(report.data == 'Transaction Completed'){
             setFullName('');
             setAddress('');
             setCity('');

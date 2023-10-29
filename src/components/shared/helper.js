@@ -1,4 +1,4 @@
-const urlPointer = 'http://localhost:3222';
+const urlPointer = 'https://fancybackend.onrender.com';
 const defaultBodyStyles={
     backgroundColor : '#000000',
     padding: 0,

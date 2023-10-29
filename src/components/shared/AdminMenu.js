@@ -45,7 +45,7 @@ export default function Navigation() {
 
             <div className="menuWrap">
              <Navbar bg="" expand="lg">
-                <Navbar.Brand className="text-secondary"><a href='/'><span style={{fontSize:'25px '}}>Molenu</span></a></Navbar.Brand>
+                <Navbar.Brand className="text-secondary"><a href='/'><span style={{fontSize:'25px '}}>FancyFinery</span></a></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="container-fluid mr-auto">

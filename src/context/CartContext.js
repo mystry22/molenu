@@ -23,6 +23,8 @@ export const GlobalCartContext = ({ children }) => {
     const [phone, setPhone] = useState('');
     const [states, setStates] = useState('');
     const [optLga, setOptLga] = useState('');
+    const [prods, setProds] = useState([]);
+
 
 
     const fetchCartSum = async () => {
@@ -62,6 +64,7 @@ export const GlobalCartContext = ({ children }) => {
         makeIp();
         fetchCartSum();
         userData();
+        getAllProducts();
     }, [cartSum, user, refre])
 
     const getProdInfo = async () => {
@@ -82,8 +85,14 @@ export const GlobalCartContext = ({ children }) => {
             const actualData = firstObject.subtotal;
             setSumSubTotal(actualData);
         }else{
-            
+
         }
+
+    }
+
+    const getAllProducts = async () => {
+        const products = await axios.post(urlPointer + '/api/product/shopproducts');
+        setProds(products.data);
 
     }
 
@@ -111,7 +120,9 @@ export const GlobalCartContext = ({ children }) => {
         city,
         phone,
         states,
-        optLga,
+        optLga,getAllProducts,
+        setProds,prods
+
     }}>
         {children}
     </CartContext.Provider>

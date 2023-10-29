@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useContext } from 'react';
 import Menu from '../shared/Menu';
 import Footer from '../shared/Footer';
-import { defaultBodyStyles } from '../shared/helper';
+import { defaultBodyStyles, } from '../shared/helper';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { urlPointer } from '../shared/helper';
@@ -12,6 +12,7 @@ import Info from '../shared/Userdetails';
 import SocialMedia from '../shared/SocialMedia';
 import FlashMsg from '../shared/FlashMsg';
 import { CartContext } from '../../context/CartContext';
+import {allPostReqs} from '../shared/functions';
 
 
 
@@ -33,7 +34,7 @@ export default function ViewProduct() {
 
   const addtocart = async (e) => {
     e.preventDefault();
-
+  
     if (size && heights) {
       setSizeError('');
       const data = {
@@ -49,7 +50,8 @@ export default function ViewProduct() {
       }
 
 
-       const req = await axios.post(urlPointer + '/api/cart/addtocart', data);
+       const req = await axios.post(urlPointer+'/api/cart/addtocart', data);
+       //const req = await allPostReqs('/api/cart/addtocart',data);
       if(req.data == 'Product Inserted Successfuly'){
         setRefresh('random rubish')
         setDisplayFlash(true)

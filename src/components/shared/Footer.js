@@ -18,10 +18,10 @@ export default function Footer() {
                         <div className='links'>
                             <ul>
                                 <li><a href='/'>Home</a></li>
-                                <li><a href='#'>Aboutus</a></li>
+                                <li><a href='/about'>Aboutus</a></li>
                                 <li><a href='/signup'>Signup</a></li>
                                 <li><a href='/login'>Login</a></li>
-                                <li><a href='#'>Contact</a></li>
+                                <li><a href='/contact'>Contact</a></li>
                                 <li><a href='/shop'>Shop</a></li>
                                 <li><a href='/cart'>Cart</a></li>
                             </ul>
