@@ -24,6 +24,8 @@ export default function Home(){
     const [old_price_usd, setOldPriceUsd] = useState('');
     const [description, setDesc] = useState('');
     const [display_home, setDisplay] = useState('');
+    const [video, setvideo] = useState('');
+
 
     const [proNameError, setProdNameError] = useState('');
     const [priceError, setPriceError] = useState('');
@@ -69,6 +71,13 @@ export default function Home(){
         setOldPriceUsd(ev.target.value);
     }
 
+    const setUpdatedVideoLink = (ev)=>{
+        ev.preventDefault();
+        setvideo(ev.target.value);
+    }
+
+    
+
 
     const doValidation = ()=>{
         const prodNameRes = checkName(prod_name);
@@ -77,6 +86,7 @@ export default function Home(){
         const descRes = checkDesc(description);
         const oldPriceUsedRes = checkNumber(old_price_usd);
         const priceUsdRes = checkNumber(price_usd);
+        
 
         setProdNameError(prodNameRes);
         setPriceError(priceRes);
@@ -109,7 +119,8 @@ export default function Home(){
             display_home: display_home,
             image_link: urlPointer+'/products/',
             price_usd:price_usd,
-            old_price_usd: old_price_usd
+            old_price_usd: old_price_usd,
+            video:video
 
         };
 
@@ -169,6 +180,9 @@ export default function Home(){
 
                             <input type='text' name='old_price' className='form-control' placeholder='Price in USD' required onChange={(ev)=>setUpdatePriceUsd(ev)} /><br />
                             {oldPriceError ? <span className='formerror'>{oldPriceError}</span> : null}
+
+                            <input type='text' name='video' className='form-control' placeholder='Video Link' onChange={(ev)=>setUpdatedVideoLink(ev)} /><br />
+                            
 
                             <textarea required className='form-control' placeholder='product description (not more than 37 chars Long)' onChange={(ev)=>setUpdateDesc(ev)}>
                             

@@ -19,6 +19,7 @@ export default function AffectChanges(){
   const [price, setPrice] = useState('');
   const [oldPrice, setOldPrice] = useState('');
   const [cat_name, setCatName] = useState('');
+  const [video, setVideo] = useState('');
   const [display_home, setDisplayHome] = useState('');
   const prod_id = ref.substring(4);
 
@@ -45,7 +46,7 @@ export default function AffectChanges(){
       setProductDesc(products.data.description);
       setPrice(products.data.price);
       setOldPrice(products.data.old_price);
-            
+      setVideo(products.data.video)
     }
 
     const allCats = async()=>{
@@ -102,6 +103,11 @@ export default function AffectChanges(){
         e.preventDefault();
         setOldPrice(e.target.value);
     }
+
+    const updateVideoLink =(e)=>{
+        e.preventDefault();
+        setVideo(e.target.value);
+    }
     useEffect(()=>{
       getSelected();
       allCats();
@@ -131,10 +137,14 @@ export default function AffectChanges(){
                                 <textarea className='form-control' defaultValue={prod_desc} onChange={updateDesc}></textarea><br />
                                 <input type='text' className='form-control' defaultValue={price} onChange={updatePrice}/> <br />
                                 <input type='text' className='form-control' defaultValue={oldPrice} onChange={updateOldPrice} /><br />
+                                <input type='text' className='form-control' defaultValue={video} onChange={updateVideoLink} /><br />
+
                                 <select name='display_home' onChange={updateDisplay} required className='form-control'>
-                                    <option value=''>Display Home</option>
-                                    <option value='yes'>Yes</option>
-                                    <option value='no'>No</option>
+                                    <option value=''>Display</option>
+                                    <option value='Shop'>Shop</option>
+                                    <option value='Home'>Home</option>
+                                    <option value='No'>No</option>
+
                                 </select><br />
                                 <input type='' className='form-control' value={display_home} /><br />
 
