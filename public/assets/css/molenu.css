@@ -38,7 +38,7 @@
 }
 
 .prod:hover {
-    background-color: #fed053;
+    background-color: #666362;
     padding: 10px;
 }
 
@@ -79,7 +79,8 @@
 }
 
 .prod button {
-    background: transparent;
+    /* background: transparent; */
+    background-color: #32cd32;
     border: none;
     color: #fff;
     border-radius: 5px;
