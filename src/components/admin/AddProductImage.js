@@ -11,8 +11,8 @@ import {BarLoader} from 'react-spinners';
 
 
 
-export default function ProductImage(){
 
+export default function ProductImage(){
     const history = useHistory();
     const [image,setImageUpload] = useState('');
     const [msg,setMsg] = useState('');
@@ -53,9 +53,10 @@ export default function ProductImage(){
 
     const uploadImage = async ()=>{
         const data = new FormData();
-        data.append('image',imageFileData);
-        data.append('file_name',filename);
         data.append('prod_id',prod_id);
+        data.append('file_name',filename);
+        data.append('image',imageFileData);
+        
         try{
           const response =  await axios.post(urlPointer + '/api/product/addprodimage',data,{
                     headers: {'Content-Type': 'multipart/form-data'}
@@ -65,6 +66,8 @@ export default function ProductImage(){
                     localStorage.removeItem(prod_id);
                     history.push('/addproduct');
                     
+                }else{
+                    alert(response.data);
                 }
         }catch(error){
 

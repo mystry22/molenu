@@ -3,12 +3,14 @@ import {Nav,Navbar} from 'react-bootstrap';
 import axios  from 'axios';
 import { urlPointer } from './helper';
 import {getPending,getWorking,getReady,getRejected} from '../shared/functions';
+import { useHistory } from 'react-router-dom';
+
 
 
 
 
 export default function Navigation() {
-    const [cartSum,setCartSum] = useState('');
+    const history = useHistory();
     const [pending, setPending] = useState('');
     const [working, setWorking] = useState('');
     const [ready, setReady] = useState('');
@@ -32,6 +34,22 @@ export default function Navigation() {
         setRejected(myRejected);
     }
 
+    const logOut = (ev)=>{
+        ev.preventDefault()
+        localStorage.removeItem('admintoken');
+        history.push('/admin');
+
+    }
+
+    const checkLogin = ()=>{
+        const adminToken = localStorage.getItem('admintoken');
+        if(adminToken){
+
+        }else{
+            history.push('/admin');
+        }
+    }
+
     
 
     useEffect(()=>{
@@ -39,13 +57,14 @@ export default function Navigation() {
         doWorking();
         doReady();
         doRejected();
+        checkLogin();
     },[])
 
     return (
 
             <div className="menuWrap">
              <Navbar bg="" expand="lg">
-                <Navbar.Brand className="text-secondary"><a href='/'><span style={{fontSize:'25px '}}>FancyFinery</span></a></Navbar.Brand>
+                <Navbar.Brand className="text-secondary"><a href='#' onClick={(ev)=>logOut(ev)}><span style={{fontSize:'25px '}}>Logout</span></a></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="container-fluid mr-auto">

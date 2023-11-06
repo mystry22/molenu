@@ -15,6 +15,7 @@ import PublicLogin from '../user/Login';
 import PublicOrder from '../user/Order';
 import PublicPayment from '../user/Payment';
 import AdminAddProducts from '../admin/AddProduct';
+import AdminLogin from '../admin/AdminLogin';
 import AdminPending from '../admin/Pending';
 import AdminWorking from '../admin/Working';
 import AdminAddCategory from '../admin/AddCategory';
@@ -57,6 +58,7 @@ function Navigation() {
           <Route path="/working" exact component={AdminWorking} />
           <Route path="/ready" exact component={AdminViewReady} />
           <Route path="/print/:ref" exact component={AdminPrintReady} />
+          <Route path="/admin" exact component={AdminLogin} /> 
         </Switch>
       </Router>
       

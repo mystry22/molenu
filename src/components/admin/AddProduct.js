@@ -87,16 +87,16 @@ export default function Home(){
         const oldPriceUsedRes = checkNumber(old_price_usd);
         const priceUsdRes = checkNumber(price_usd);
         
-
         setProdNameError(prodNameRes);
         setPriceError(priceRes);
         setOldPriceError(oldPriceRes);
         setDescError(descRes);
+        setOldPriceUsdErrorr(oldPriceUsedRes);
         setPriceUsdErr(priceUsdRes);
-        setOldPriceError(oldPriceUsedRes)
 
 
-        if(proNameError || priceError || oldPriceError || descError || price_usdErr || oldPriceUsdError){
+
+        if(prodNameRes || priceRes || oldPriceRes || descRes || oldPriceUsedRes || priceUsdRes){
             return 'err'
         }else{
             return 'ok'
@@ -117,15 +117,16 @@ export default function Home(){
             cat_name: cat,
             description: description,
             display_home: display_home,
-            image_link: urlPointer+'/products/',
+            image_link: 'no_image_yet',
             price_usd:price_usd,
             old_price_usd: old_price_usd,
             video:video
 
         };
 
-        if(isValid == 'ok'){
-            const res = await allPostReqs('/api/product/addproduct',data,'New Product Added');
+        if(isValid === 'ok'){
+
+            const res = await allPostReqs('/api/product/addproduct',data);
 
             if(res == 'New Product Added'){
                 localStorage.setItem('prod_id',prod_id);
@@ -133,7 +134,7 @@ export default function Home(){
             }
             
         }else{
-            
+            alert('Data validation error')
         }
 
        
@@ -176,15 +177,15 @@ export default function Home(){
                             {oldPriceError ? <span className='formerror'>{oldPriceError}</span> : null}
 
                             <input type='text' name='old_price' className='form-control' placeholder='Old Price in USD' required onChange={(ev)=>setUpdateOldPriceUsd(ev)} /><br />
-                            {oldPriceError ? <span className='formerror'>{oldPriceError}</span> : null}
+                            {oldPriceError ? <span className='formerror'>{oldPriceUsdError}</span> : null}
 
                             <input type='text' name='old_price' className='form-control' placeholder='Price in USD' required onChange={(ev)=>setUpdatePriceUsd(ev)} /><br />
-                            {oldPriceError ? <span className='formerror'>{oldPriceError}</span> : null}
+                            {oldPriceError ? <span className='formerror'>{price_usdErr}</span> : null}
 
                             <input type='text' name='video' className='form-control' placeholder='Video Link' onChange={(ev)=>setUpdatedVideoLink(ev)} /><br />
                             
 
-                            <textarea required className='form-control' placeholder='product description (not more than 37 chars Long)' onChange={(ev)=>setUpdateDesc(ev)}>
+                            <textarea required className='form-control' placeholder='product description' onChange={(ev)=>setUpdateDesc(ev)}>
                             
 
                             </textarea> <br />

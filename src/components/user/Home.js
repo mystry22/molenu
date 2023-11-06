@@ -105,7 +105,7 @@ export default function Home() {
                                     </div>
 
                                     <h4>{prod.prod_name.charAt(0).toUpperCase() + prod.prod_name.slice(1)}</h4>
-                                    <h6>{prod.description}</h6>
+                                    <h6>{prod.description.length > 33 ? prod.description.substring(0,32) + '...' : prod.description }</h6>
                                     <span >N{prod.price} <strike style={{ opacity: 0.5 }}>N{prod.old_price}</strike></span><br />
                                     <a href={'/viewproduct/:ref' + prod.prod_id}> <button><FaShoppingCart /> Add To Cart</button></a>
                                 </div>

@@ -77,6 +77,7 @@ export default function Login() {
             <div style={defaultBodyStyles}>
                 <Info />
                 <Menu />
+            
 
                 <div className='container'>
 

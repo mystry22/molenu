@@ -65,49 +65,7 @@ function About() {
                     </div>
                 </div>
 
-                <div className='row' style={{ marginTop: 30, backgroundColor:'#dee2e6',padding:15 }}>
-                    <div className='col-lg-12' style={{ textAlign: 'center' }} >
-
-                        <hr style={{ color: '#198754', height: 5, width: 35, margin: 'auto' }} />
-                        <h4 style={{ marginTop: 10, fontWeight: 'bold' }}>Meet our Hero's</h4>
-
-                    </div>
-
-                </div>
-
-                <div className='row' style={{ background: '#dee2e6', padding: 10 }}>
-                    <div className='col-lg-4' style={{marginBottom:10}}>
-                        <img src='/assets/img/ceo.png' style={{ width: '100%', height: 500, borderRadius: 20 }} />
-                        <div style={{ backgroundColor: '#fff', padding: 20 }}>
-
-                            <h4>Daniel Imuse</h4>
-                            <span style={{color:'#d9dddc', fontWeight:400, fontSize:14}}>Chief Product Designer</span>
-
-                        </div>
-
-
-                    </div>
-
-                    <div className='col-lg-4' style={{marginBottom:10}}>
-                        <img src='/assets/img/designer.png' style={{ width: '100%', height: 500, borderRadius: 20 }} />
-                        <div style={{ backgroundColor: '#fff', padding: 20 }}>
-                            <h4>Brad Imuse</h4>
-                            <span style={{color:'#d9dddc', fontWeight:400, fontSize:14}}>COO</span>
-                        </div>
-
-
-                    </div>
-
-                    <div className='col-lg-4'  style={{marginBottom:10}}>
-                        <img src='/assets/img/hoo.png' style={{ width: '100%', height: 500, borderRadius: 20 }} />
-                        <div style={{ backgroundColor: '#fff', padding: 20 }}>
-                            <h4>Mark Hughes</h4>
-                            <span style={{color:'#d9dddc', fontWeight:400, fontSize:14}}>Marketing Strategist</span>
-                        </div>
-
-                    </div>
-
-                </div>
+                
 
             </div>
 

@@ -167,8 +167,10 @@ const checkNumber =(num)=>{
 const checkDesc =(desc)=>{
     let msg = '';
 
-    if(desc.length > 37){
-        msg= 'Product desciption cannot be more than 37 char long'
+    if(desc.length > 0){
+
+    }else{
+        msg = 'Product description cannot be empty'
     }
 
     return msg;

@@ -4,12 +4,14 @@ import Footer from '../shared/Footer';
 import { proCat, getCats } from '../shared/functions';
 import axios from 'axios';
 import { urlPointer } from '../shared/helper';
+import { useHistory } from 'react-router-dom';
 
 
 
 
 
 export default function Home() {
+    const history = useHistory();
     const [category, setCategory] = useState([]);
     const [cat_name, setCatName] = useState('');
 

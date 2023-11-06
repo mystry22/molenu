@@ -34,12 +34,12 @@
     transition-duration: 1000ms;
     padding: 20px;
     text-align: center;
-
+    background-color: #343434;
 }
 
 .prod:hover {
     background-color: #fed053;
-    padding: 30px;
+    padding: 10px;
 }
 
 .menuWrap {
@@ -131,7 +131,7 @@
 .imgholder {
     margin: auto;
     margin-bottom: 25px;
-    width: 80%;
+    width: 60%;
     height: 30%;
 
 }
@@ -361,6 +361,7 @@
     border-radius: 5px;
     background-color: #f5f5f5;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .signupotp {
@@ -688,6 +689,12 @@
 .image-holder{
     width: 100%;
     height: 280px;
+}
+
+.contactsection{
+    background-color: #dee2e6;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 

@@ -12,10 +12,9 @@ import { useHistory } from 'react-router-dom';
 
 
 export default function Cart() {
-    const myIp = localStorage.getItem('i_ran_zyyx');
     const{sumsubtotal,cartItems} = useContext(CartContext);
     const history = useHistory();
-    const [amount,setAmount] = useState('');    
+      
 
 
 
@@ -41,9 +40,7 @@ export default function Cart() {
         }
     }
 
-     useEffect(()=>{
-    
-     },[])
+     
 
 
     return (
@@ -66,7 +63,7 @@ export default function Cart() {
                                             <div className='row'>
                                                 <div className='col-lg-6'>
                                                     <div className='cartImage'>
-                                                        <img src={cartitem.image_link} style={{ width: '100%', height: '100%' }} />
+                                                        <img src={cartitem.image_link}  />
                                                     </div>
                                                 </div>
                                                 <div className='col-lg-6' style={{ textAlign: 'left' }}>
