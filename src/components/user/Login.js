@@ -48,14 +48,15 @@ export default function Login() {
     }
     const login = async (e) => {
         e.preventDefault();
+        
         const isOk = validateInput();
-        if (isOk == 'ok') {
+        if (isOk === 'ok') {
             const data = {
                 email: email,
                 pass: pass
             }
             const res = await axios.post(urlPointer + '/api/auth/userlogin', data);
-            if (res.data.msg == 'login success') {
+            if (res.data.msg === 'login success') {
                 localStorage.setItem('usertoken', res.data.token);
                 setRefresh('random strings')
                 history.push('/');

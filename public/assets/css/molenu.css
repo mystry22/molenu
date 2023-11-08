@@ -615,16 +615,15 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 20px;
+
 
 }
 
 .sliderImageHolder{
-    width:85%;
-    height: 35rem;
+    width:100%;
+    height: 20rem;
     margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  
 }
 
 .socialMedia{

@@ -14,7 +14,8 @@ import { CartContext } from '../../context/CartContext';
 
 export default function Home() {
     
-    const {prods} = useContext(CartContext);
+    const {prods,base_currency,setBaseCurrency} = useContext(CartContext);
+  
     
     return (
         <React.Fragment>
@@ -31,8 +32,11 @@ export default function Home() {
 
                 <div className='popular'>
 
-                    <div className='row'>
+                    {
 
+                        prods.length > 0 ?
+                        <div className='row'>
+                    
                         {prods.map(prod => (
                             <div className='col-lg-3'>
                                 <div className='prod'>
@@ -42,19 +46,22 @@ export default function Home() {
                                     </div>
                                     <h4>{prod.prod_name.charAt(0).toUpperCase() + prod.prod_name.slice(1)}</h4>
                                     <h6 style={{color:'#fff'}}>{prod.description.length > 33 ? prod.description.substring(0,32) + '...' : prod.description }</h6> 
-                                    <span>N{prod.price} <strike style={{opacity:0.5}}>N{prod.old_price}</strike></span><br />
+                                    <span>{base_currency}{base_currency === '₦' ? prod.price : prod.price_usd} <strike style={{opacity:0.5}}>{base_currency}{base_currency === '₦' ? prod.price : prod.old_price_usd}</strike></span><br />
                                     <a href={prod.video} style={{textDecoration:'none',margin:10, color:'#fff', fontWeight:'bold'}}>Product Video <FaInstagram color='#990f02' /></a><br />
                                     <a href={'/viewproduct/:ref' + prod.prod_id}> <button><FaShoppingCart /> Add To Cart</button></a>
                                 </div>
                             </div>
                         ))}
 
-                       
+
+                    </div>:
+
+                    <h4 style={{textAlign:'center'}}>Loading....</h4>
 
 
-                    </div>
+                    }
 
-
+                    
 
                 </div>
 

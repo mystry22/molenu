@@ -33,12 +33,13 @@ function Contact() {
         message: message
       }
 
-      const res = await axios.post(urlPointer + '/api/auth/userlogin', data);
+      const res = await axios.post(urlPointer + '/api/product/contact', data);
 
       if (res.data === 'mail sent') {
         setSendButton('Send');
         setMsg('');
-        alert('Your mail has been sent and an agent will reach out to you shortly')
+        alert('Your mail has been sent and an agent will reach out to you shortly');
+        window.location.reload(true);
       } else {
         setSendButton('Send');
         setMsg('');

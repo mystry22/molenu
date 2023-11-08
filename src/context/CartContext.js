@@ -24,6 +24,8 @@ export const GlobalCartContext = ({ children }) => {
     const [states, setStates] = useState('');
     const [optLga, setOptLga] = useState('');
     const [prods, setProds] = useState([]);
+    const [base_currency, setBaseCurrency] = useState('₦');
+
 
 
 
@@ -48,7 +50,6 @@ export const GlobalCartContext = ({ children }) => {
             authAxios.post(urlPointer + '/api/registration/userdetail')
                 .then(result => {
                     setUserDetails(result.data);
-
                 })
         }
     }
@@ -65,7 +66,21 @@ export const GlobalCartContext = ({ children }) => {
         fetchCartSum();
         userData();
         getAllProducts();
+        setANewCurreny();
     }, [cartSum, user, refre])
+
+    const setANewCurreny = async()=>{
+        const ip = localStorage.getItem('i_ran_zyyx');
+        const data = {ip:ip}
+        const res = await axios.post(urlPointer+'/api/product/getcurrency',data);
+        if(res.data === 'not set'){
+
+        }else{
+            setBaseCurrency(res.data.base_currency);
+        }
+    }
+
+   
 
     const getProdInfo = async () => {
 
@@ -121,7 +136,8 @@ export const GlobalCartContext = ({ children }) => {
         phone,
         states,
         optLga,getAllProducts,
-        setProds,prods
+        setProds,prods,
+        base_currency,setBaseCurrency
 
     }}>
         {children}
