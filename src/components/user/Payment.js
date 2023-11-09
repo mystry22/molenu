@@ -21,17 +21,35 @@ export default function Order() {
         user, setAddress,
         phone, setPhone,
         address, setStates,
-        optLga, 
-        city
+        optLga,sumsubtotalUsd,
+        city,base_currency,
+        countries
     } = useContext(CartContext);
     const [amtPlusDel, setAmtPlusDelivery] = useState('');
 
-    const config = {
-        reference: (new Date()).getTime().toString(),
-        email: user.email,
-        amount: parseInt(sumsubtotal + deliveryFee) * 100,
-        publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
-    };
+    
+
+    const dynamicConfig = ()=>{
+
+        const config = {
+            reference: (new Date()).getTime().toString(),
+            email: user.email,
+            amount: parseInt(sumsubtotal + deliveryFee) * 100,
+            publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
+        };
+        const config2 = {
+            reference: (new Date()).getTime().toString(),
+            email: user.email,
+            amount: parseInt(sumsubtotalUsd + deliveryFee) * 100,
+            publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
+        };
+
+        if(base_currency === '₦'){
+            return config;
+        }else{
+            return config2;
+        }
+    }
 
 
     const handlePaystackSuccessAction = (reference) => {
@@ -46,6 +64,14 @@ export default function Order() {
 
     }
 
+    const dynamicAmount = ()=>{
+        if(base_currency === '₦'){
+            return sumsubtotal;
+        }else{
+            return sumsubtotalUsd
+        }
+    }
+
     const saveTransDetails = async()=>{
         const data ={
             full_name:fullName,
@@ -55,9 +81,12 @@ export default function Order() {
             ref: transactionReference(),
             paystack_ref: pstackTransRef,
             email: user.email,
-            amount: sumsubtotal,
+            amount: dynamicAmount(),
             lga:optLga,
-            city:city
+            city:city,
+            base_currency:base_currency,
+            delivery_fee: deliveryFee,
+            country: countries,
         }
 
         const report = await axios.post(urlPointer+'/api/order/completeorder',data);
@@ -86,7 +115,7 @@ export default function Order() {
     }
 
     const componentProps = {
-        ...config,
+        ...dynamicConfig(),
         text: returnPayment(),
         onSuccess: (reference) => handlePaystackSuccessAction(reference),
         onClose: handlePaystackCloseAction,
@@ -104,7 +133,13 @@ export default function Order() {
     }
 
     const doTotalling = () => {
+        if(base_currency === '₦'){
         setAmtPlusDelivery(parseInt(sumsubtotal) + deliveryFee);
+
+        }else{
+        setAmtPlusDelivery(parseInt(sumsubtotalUsd) + deliveryFee);
+
+        }
 
     }
 
@@ -142,7 +177,7 @@ export default function Order() {
                                     Subtotal:
                                 </div>
                                 <div className='paymentValue'>
-                                    NGN {sumsubtotal}
+                                    {base_currency} {base_currency === '₦' ? sumsubtotal : sumsubtotalUsd}
                                 </div>
                             </div><br />
 

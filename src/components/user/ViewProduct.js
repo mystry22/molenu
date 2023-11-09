@@ -5,16 +5,12 @@ import { defaultBodyStyles, } from '../shared/helper';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { urlPointer } from '../shared/helper';
-import { selectedSize } from '../shared/validation';
 import { fetchIP } from '../shared/functions';
-import { FaShoppingCart, FaPlus, FaMinus } from 'react-icons/fa';
+import { FaPlus, FaMinus } from 'react-icons/fa';
 import Info from '../shared/Userdetails';
 import SocialMedia from '../shared/SocialMedia';
 import FlashMsg from '../shared/FlashMsg';
 import { CartContext } from '../../context/CartContext';
-import {allPostReqs} from '../shared/functions';
-
-
 
 
 
@@ -24,12 +20,13 @@ export default function ViewProduct() {
   const [prodInfo, setProdInfo] = useState([]);
   const [qty, setQty] = useState(1);
   const [price, setPrice] = useState('');
+  const [priceUsd, setPriceUsd] = useState('');
   const [size, setSize] = useState('');
   const [heights, setHeights] = useState('');
   const [ip, setIp] = useState();
   const [sizeError, setSizeError] = useState('');
   const [displayFlash, setDisplayFlash] = useState(false);
-  const {setRefresh} = useContext(CartContext);
+  const {setRefresh,base_currency} = useContext(CartContext);
 
 
   const addtocart = async (e) => {
@@ -41,6 +38,7 @@ export default function ViewProduct() {
         prod_id: prodInfo.prod_id,
         prod_name: prodInfo.prod_name,
         price: prodInfo.price,
+        price_usd: prodInfo.price_usd,
         image_link: prodInfo.image_link,
         description: prodInfo.description,
         user_ip: localStorage.getItem('i_ran_zyyx'),
@@ -48,7 +46,6 @@ export default function ViewProduct() {
         qty: qty,
         heights:heights
       }
-
 
        const req = await axios.post(urlPointer+'/api/cart/addtocart', data);
        //const req = await allPostReqs('/api/cart/addtocart',data);
@@ -87,6 +84,7 @@ export default function ViewProduct() {
     const products = await axios.post(urlPointer + '/api/product/productinfo', data);
     setProdInfo(products.data);
     setPrice(products.data.price);
+    setPriceUsd(products.data.price_usd);
 
 
   }
@@ -141,8 +139,8 @@ export default function ViewProduct() {
 
                 <h1>{prodInfo.prod_name}</h1>
                 <h6 className='prodDesc'>{prodInfo.description}</h6>
-                <span >N{prodInfo.price} <strike style={{ opacity: 0.5 }}>N{prodInfo.old_price}</strike></span><br />
-                <select name='size' required onChange={updateSize}>
+                <span >{base_currency}{base_currency === '₦' ? prodInfo.price : prodInfo.price_usd} <strike style={{ opacity: 0.5 }}>{base_currency}{base_currency === '₦' ? prodInfo.old_price : prodInfo.old_price_usd }</strike></span><br />
+                <select name='size' required onChange={updateSize} >
                   <option value=''>Size [UK Sizes]</option>
                   <option value='4'>4</option>
                   <option value='6'>6</option>
@@ -174,7 +172,8 @@ export default function ViewProduct() {
                 <input type='text' name='qty' size='2' value={qty} style={{ textAlign: 'center' }} />
                 <button className='indec' onClick={doInc}><FaPlus /></button><br />
                 <FlashMsg addtocart={addtocart} displayFlash={displayFlash} setDisplayFlash={setDisplayFlash} />
-                <SocialMedia />
+
+            
               </form>
             </div>
           </div>

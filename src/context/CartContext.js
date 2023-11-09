@@ -8,6 +8,7 @@ import { makeIp } from '../components/shared/functions';
 export const CartContext = createContext({});
 export const GlobalCartContext = ({ children }) => {
     const [sumsubtotal, setSumSubTotal] = useState([]);
+    const [sumsubtotalUsd, setSumSubTotalUsd] = useState([]);
     const [cartItems, setCartItems] = useState([]);
     const myIp = localStorage.getItem('i_ran_zyyx');
     const [cartSum, setCartSum] = useState('');
@@ -23,6 +24,7 @@ export const GlobalCartContext = ({ children }) => {
     const [phone, setPhone] = useState('');
     const [states, setStates] = useState('');
     const [optLga, setOptLga] = useState('');
+    const [countries,setCountry] = useState('');
     const [prods, setProds] = useState([]);
     const [base_currency, setBaseCurrency] = useState('₦');
 
@@ -67,6 +69,7 @@ export const GlobalCartContext = ({ children }) => {
         userData();
         getAllProducts();
         setANewCurreny();
+        getSubTotalSumUsd();
     }, [cartSum, user, refre])
 
     const setANewCurreny = async()=>{
@@ -105,6 +108,19 @@ export const GlobalCartContext = ({ children }) => {
 
     }
 
+    const getSubTotalSumUsd = async ()=>{
+        const data = { ip: myIp }
+        const cart = await axios.post(urlPointer + '/api/cart/getsubtotalosumusd', data);
+        if (cart.data.length > 0) {
+            const convertToObject = Object.assign({}, cart.data);
+            const firstObject = convertToObject[0]
+            const actualData = firstObject.subtotal;
+            setSumSubTotalUsd(actualData);
+        }else{
+
+        }
+    }
+
     const getAllProducts = async () => {
         const products = await axios.post(urlPointer + '/api/product/shopproducts');
         setProds(products.data);
@@ -137,7 +153,9 @@ export const GlobalCartContext = ({ children }) => {
         states,
         optLga,getAllProducts,
         setProds,prods,
-        base_currency,setBaseCurrency
+        base_currency,setBaseCurrency,
+        sumsubtotalUsd,
+        countries,setCountry
 
     }}>
         {children}

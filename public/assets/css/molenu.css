@@ -160,6 +160,7 @@
     margin-top: 30px;
     padding-left: 20px;
     padding-right: 20px;
+    text-align: center;
 }
 
 .viewProdDetails h1 {
@@ -172,6 +173,8 @@
     font-size: 20px;
     font-weight: 400px;
     margin-bottom: 10px;
+    width: 60%;
+    margin: auto;
 }
 
 .viewProdDetails span {
@@ -182,7 +185,7 @@
 }
 
 .viewProdDetails select {
-    width: 30%;
+    width: 60%;
     height: 40px;
     background-color: #198754;
     color: #fff;
@@ -201,7 +204,7 @@
 
 .addtocart {
     border: none;
-    width: 31%;
+    width: 60%;
     height: 40px;
     font-size: 15px;
     font-weight: 400px;
@@ -402,7 +405,8 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.signupText{
+
+.signupText {
     font-weight: 600;
     font-size: 20px;
     margin-bottom: 30px;
@@ -428,7 +432,7 @@
 }
 
 .aligrightend {
-    
+
     padding: 20px;
     float: left;
     margin: 3px;
@@ -529,6 +533,7 @@
     width: 150px;
     font-weight: 600;
     border: none;
+    margin-bottom: 10px;
 }
 
 .homeButton2 {
@@ -619,35 +624,37 @@
 
 }
 
-.sliderImageHolder{
-    width:100%;
+.sliderImageHolder {
+    width: 100%;
     height: 20rem;
     margin: auto;
-  
+
 }
 
-.socialMedia{
+.socialMedia {
     margin-top: 20px;
     width: 150px;
 }
 
-.totalcart{
+.totalcart {
     background-color: #f5f5f5;
     border-radius: 5px;
     padding: 10px;
 }
 
-.cartSubtotalText{
+.cartSubtotalText {
     font-size: 14px;
     display: block;
     text-align: left;
 }
-.cardList{
+
+.cardList {
     width: 50px;
     height: 30px;
     margin-right: 10px;
 }
-.userdetailsSearch{
+
+.userdetailsSearch {
     background-color: #198754;
     border-radius: 50px;
     height: 40px;
@@ -658,40 +665,40 @@
     margin-bottom: 5px;
     padding: 10px;
     color: #fff;
-   
+
 }
 
-.paymentTitle{
+.paymentTitle {
     float: left;
     text-align: left;
     font-size: 12px;
 }
 
-.paymentValue{
+.paymentValue {
     float: right;
     text-align: right;
     font-size: 16px;
     font-weight: 600;
 }
 
-.success{
+.success {
     margin: auto;
     text-align: center;
 }
 
-.paymentButtonHack{
+.paymentButtonHack {
     background-color: none;
     border: none;
     padding: 0px;
     margin-top: 10px;
 }
 
-.image-holder{
+.image-holder {
     width: 100%;
     height: 280px;
 }
 
-.contactsection{
+.contactsection {
     background-color: #dee2e6;
     border-radius: 10px;
     padding: 20px;
@@ -709,4 +716,11 @@
     .printArea * {
         visibility: visible
     }
+}
+
+@media only screen and (max-width: 1026px) {
+    .sliderImageHolder {
+        display: none;
+    }
+
 }

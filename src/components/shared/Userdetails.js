@@ -72,13 +72,8 @@ export default function UserDetails() {
 
                 <div className='userdetails'>
                     <div className='row'>
-                        <div className='col-lg-2'>
-
-
+                        <div className='col-lg-8'>
                             <img src='/assets/img/logo.png' style={{ width: 50, height: 50 }} />
-                        </div>
-                        <div className='col-lg-6'>
-
 
                             <input type='text' placeholder=' Search ' onChange={(e) => setSearchParam(e.target.value)} />
                             <button className='userdetailsSearch' onClick={(e) => setSearch(e)}>
@@ -92,7 +87,7 @@ export default function UserDetails() {
                             {user ? <span style={{ fontSize: '15px', color: '#6c757d' }}>Hi {user.first_name} </span> : <a href='/login' className='anchor'><MdAccountCircle /> </a>}
                             {user ? <a onClick={logout} style={{ fontSize: '15px', color: '#6c757d', textDecoration: 'none', cursor: 'pointer' }}> Logout </a> : null}
                             <span style={{ fontSize: '15px', color: '#6c757d' }}>Currency: {base_currency}</span>
-                            <select name="currency" id="cars" style={{ fontSize: '10px', marginLeft: 5 }} onChange={(e) => updateCurrency(e)} ref={ref}>
+                            <select name="currency" id="cars" style={{ fontSize: '10px', marginLeft: 5, backgroundColor:'#fff'}} onChange={(e) => updateCurrency(e)} ref={ref}>
                                 {
                                     currencyList.map(curr => (
                                         <option value={curr.value} key={curr.id} >{curr.label}</option>

@@ -12,7 +12,8 @@ import { useHistory } from 'react-router-dom';
 
 
 export default function Cart() {
-    const{sumsubtotal,cartItems} = useContext(CartContext);
+    const{sumsubtotal,cartItems,base_currency,sumsubtotalUsd} = useContext(CartContext);
+    
     const history = useHistory();
       
 
@@ -83,11 +84,11 @@ export default function Cart() {
 
                                             <div className='cartinfo'>
 
-                                                <span className='greencolor'>N {cartitem.price}</span><br />
+                                                <span className='greencolor'>{base_currency} {base_currency === '₦' ? cartitem.price : cartitem.price_usd}</span><br />
 
                                                 <div className='greencolor' style={{ opacity: 0.6, marginTop: 20, }}>
-                                                    <span>N {cartitem.subtotal}</span>
-                                                    <span style={{ backgroundColor: '#b2d3c2', marginLeft: 10, padding: 10, borderRadius: 10, color: '#198754', fontSize: 12 }}>{cartitem.price + ' x ' + cartitem.qty}</span>
+                                                    <span>{base_currency} {base_currency === '₦' ?  cartitem.subtotal : cartitem.subtotal_usd}</span>
+                                                    <span style={{ backgroundColor: '#b2d3c2', marginLeft: 10, padding: 10, borderRadius: 10, color: '#198754', fontSize: 12 }}>{base_currency === '₦' ? cartitem.price : cartitem.price_usd + ' x ' + cartitem.qty}</span>
                                                 </div>
                                                 <button className='sharpButton' onClick={() => deleteCartItem(cartitem.prod_id, cartitem.user_ip)}><FaTrashAlt size='0.6em' /> Remove</button>
 
@@ -122,35 +123,68 @@ export default function Cart() {
                             </div>
                         </div>
                         <hr />
-                        {sumsubtotal ?
-                            <div className='row'>
-                                <div className='col-lg-12'>
-                                    <div className='cartTotal'>
-                                        
-                                            <div className='row'>
-                                                <div className='col-lg-6'>
-                                                    <span className='cartSubtotalText'>Subtotal</span>
+                        {
+                            base_currency === '₦' ? 
 
+                        
+                                <div className='row'>
+                                    <div className='col-lg-12'>
+                                        <div className='cartTotal'>
+                                            
+                                                <div className='row'>
+                                                    <div className='col-lg-6'>
+                                                        <span className='cartSubtotalText'>Subtotal</span>
+    
+                                                    </div>
+                                                    <div className='col-lg-6'>
+                                                        <span style={{ textAlign: 'right', fontWeight: 'bold', fontSize: 18 }}>NGN {sumsubtotal}</span>
+    
+                                                    </div>
                                                 </div>
-                                                <div className='col-lg-6'>
-                                                    <span style={{ textAlign: 'right', fontWeight: 'bold', fontSize: 18 }}>NGN {sumsubtotal}</span>
+    
+                                            
+                                        </div>
+                                    </div>
+                                    <div className='col-lg-12'>
+                                        <div className='cartdisplaynobg'>
+                                            <button className='sharpButton' onClick={(ev)=>checkIfSignedIn(ev)} style={{ backgroundColor: 'orange', color: '#fff', width: '100%' }}><FaShoppingCart size='1em' /> Checkout </button>
+                                        </div>
+                                        <hr />
+                                    </div>
+                                </div>
 
-                                                </div>
+                                :
+
+                            
+                                    <div className='row'>
+                                        <div className='col-lg-12'>
+                                            <div className='cartTotal'>
+                                                
+                                                    <div className='row'>
+                                                        <div className='col-lg-6'>
+                                                            <span className='cartSubtotalText'>Subtotal</span>
+        
+                                                        </div>
+                                                        <div className='col-lg-6'>
+                                                            <span style={{ textAlign: 'right', fontWeight: 'bold', fontSize: 18 }}>USD {sumsubtotalUsd}</span>
+        
+                                                        </div>
+                                                    </div>
+        
+                                                
                                             </div>
-
-                                        
+                                        </div>
+                                        <div className='col-lg-12'>
+                                            <div className='cartdisplaynobg'>
+                                                <button className='sharpButton' onClick={(ev)=>checkIfSignedIn(ev)} style={{ backgroundColor: 'orange', color: '#fff', width: '100%' }}><FaShoppingCart size='1em' /> Checkout </button>
+                                            </div>
+                                            <hr />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className='col-lg-12'>
-                                    <div className='cartdisplaynobg'>
-                                        <button className='sharpButton' onClick={(ev)=>checkIfSignedIn(ev)} style={{ backgroundColor: 'orange', color: '#fff', width: '100%' }}><FaShoppingCart size='1em' /> Checkout </button>
-                                    </div>
-                                    <hr />
-                                </div>
-                            </div>
-                            :
-                            null
+            
+                              
                         }
+                        
 
                         <div className='row'>
                             <div className='col-lg-12'>
