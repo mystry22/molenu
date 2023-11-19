@@ -704,6 +704,20 @@
     padding: 20px;
 }
 
+.stock{
+    width: 60px;
+    height: 20px;
+    position: absolute;
+    background-color: #f3ead3;
+    font-size: 12px;
+    padding: 2px;
+    margin:5px;
+    border-radius: 5px;
+    font-weight: 700;
+}
+
+
+
 
 
 

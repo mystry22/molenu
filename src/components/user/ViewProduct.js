@@ -31,9 +31,11 @@ export default function ViewProduct() {
 
   const addtocart = async (e) => {
     e.preventDefault();
+    const valiStock = await validateStock();
   
     if (size && heights) {
-      setSizeError('');
+      if(valiStock == 'ok'){
+        setSizeError('');
       const data = {
         prod_id: prodInfo.prod_id,
         prod_name: prodInfo.prod_name,
@@ -54,6 +56,9 @@ export default function ViewProduct() {
         setDisplayFlash(true)
       }else{
         
+      }
+      }else{
+        alert('Sorry this product is out of stock and we are working to restock')
       }
       
     
@@ -93,8 +98,7 @@ export default function ViewProduct() {
     e.preventDefault();
     let newQty = qty + 1;
     setQty(newQty);
-
-
+    
   }
 
   const doDed = (e) => {
@@ -105,6 +109,22 @@ export default function ViewProduct() {
     if (newQty < 1) {
       setQty(1);
 
+    }
+
+  }
+
+  const validateStock =async()=>{
+
+    const data = {
+      prod_id: prodInfo.prod_id
+    }
+
+    const stockValue = await axios.post(urlPointer +'/api/product/getstockvalue',data);
+  
+    if(stockValue.data >= qty){
+      return 'ok';
+    }else{
+      return 'err'
     }
 
   }

@@ -26,7 +26,7 @@ export const GlobalCartContext = ({ children }) => {
     const [optLga, setOptLga] = useState('');
     const [countries,setCountry] = useState('');
     const [prods, setProds] = useState([]);
-    const [base_currency, setBaseCurrency] = useState('₦');
+    const [base_currency, setBaseCurrency] = useState('$');
 
 
 
