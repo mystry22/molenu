@@ -73,7 +73,7 @@ export default function UserDetails() {
                 <div className='userdetails'>
                     <div className='row'>
                         <div className='col-lg-8'>
-                            <img src='/assets/img/logo.png' style={{ width: 50, height: 50 }} />
+                            <a href='/' ><img src='/assets/img/logo.png' style={{ width: 50, height: 50 }} /></a>
 
                             <input type='text' placeholder=' Search ' onChange={(e) => setSearchParam(e.target.value)} />
                             <button className='userdetailsSearch' onClick={(e) => setSearch(e)}>
