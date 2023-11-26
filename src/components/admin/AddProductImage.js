@@ -19,6 +19,7 @@ export default function ProductImage(){
     const [filename, setFilename] = useState('');
     const [imageFileData,setImageFileData] = useState('');
     const [isSpinner, setIsSpinner] = useState(false);
+    const [nomenclature,setNomen] = useState('Save');
 
 
     const prod_id = localStorage.getItem('prod_id');
@@ -42,10 +43,12 @@ export default function ProductImage(){
     }
     const addimage = (ev)=>{
         ev.preventDefault();
+        setNomen('Saving Image ....');
         setMsg('');
         setIsSpinner(true);
         if(!image){
             setMsg('No Image Selected');
+            setNomen('Save');
         }
 
         uploadImage(image);
@@ -93,7 +96,7 @@ export default function ProductImage(){
                                 <input type='file' onChange={setImage} className='form-control' accept='images/*' />
                             </div>
                         
-                        <button className='form-control bg-warning text-light'>Save</button>
+                        <button className='form-control bg-warning text-light'>{nomenclature}</button>
                         </form>
                     </div>
 

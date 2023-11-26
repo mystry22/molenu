@@ -27,6 +27,7 @@ export default function Home() {
     const [video, setvideo] = useState('');
     const [stock, setStock] = useState('');
     const [weight, setWeight] = useState('');
+    const [nomenclature,setNomen] = useState('Save Product');
 
 
     const [proNameError, setProdNameError] = useState('');
@@ -125,6 +126,7 @@ export default function Home() {
 
     const addproduct = async (ev) => {
         ev.preventDefault();
+        setNomen('Saving...');
 
 
         const isValid = doValidation();
@@ -153,9 +155,13 @@ export default function Home() {
             if (res.data == 'New Product Added') {
                 localStorage.setItem('prod_id', prod_id);
                 history.push('/addproductimage');
+            }else{
+                setNomen('Save Product')
+                alert(res.data);
             }
 
         } else {
+            setNomen('Save Product');
             alert('Data validation error')
         }
 
@@ -224,7 +230,7 @@ export default function Home() {
                                 <option value='Shop'>Shop</option>
                                 <option value='no'>No</option>
                             </select><br />
-                            <button className='form-control bg-warning text-light' onClick={(ev) => addproduct(ev)}>Save Product</button>
+                            <button className='form-control bg-warning text-light' onClick={(ev) => addproduct(ev)}>{nomenclature}</button>
                         </form>
                     </div>
 

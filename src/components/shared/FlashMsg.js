@@ -4,13 +4,13 @@ import Modal from 'react-bootstrap/Modal';
 import { FaShoppingCart,FaCheck } from 'react-icons/fa';
 
 
-function FlashMsg({addtocart,displayFlash, setDisplayFlash }) {
+function FlashMsg({addtocart,displayFlash, setDisplayFlash,nomenclature }) {
 
 
 
   return (
     <>
-     <button className='addtocart' onClick={addtocart}><FaShoppingCart /> Add To Cart</button>
+     <button className='addtocart' onClick={addtocart}><FaShoppingCart /> {nomenclature}</button>
 
 
       <Modal

@@ -15,6 +15,9 @@ export const GlobalCartContext = ({ children }) => {
     const [user, setUserDetails] = useState('');
     const [refre, setRefresh] = useState('');
     const [deliveryFee, setDeliveryFee] = useState('');
+    const [totalWeight, setTotalWeight] = useState(0);
+    const [region, setRegion] = useState('');
+
 
     //delivery state Items
 
@@ -70,7 +73,27 @@ export const GlobalCartContext = ({ children }) => {
         getAllProducts();
         setANewCurreny();
         getSubTotalSumUsd();
+        getToTalWeight();
     }, [cartSum, user, refre])
+
+    const getToTalWeight = async()=>{
+        const data = {
+            ip:localStorage.getItem('i_ran_zyyx')
+        }
+
+        const res = await axios.post('/api/cart/gettotalweightsum',data);
+        if(res.data == 'no item'){
+            setTotalWeight(0);
+        }else{
+            
+                const convertToObject = Object.assign({}, res.data);
+                const firstObject = convertToObject[0]
+                const actualData = firstObject.totalWeight;
+                setTotalWeight(actualData);
+               
+            
+        }
+    }
 
     const setANewCurreny = async()=>{
         const ip = localStorage.getItem('i_ran_zyyx');
@@ -155,7 +178,9 @@ export const GlobalCartContext = ({ children }) => {
         setProds,prods,
         base_currency,setBaseCurrency,
         sumsubtotalUsd,
-        countries,setCountry
+        countries,setCountry,
+        totalWeight,setTotalWeight,
+        region, setRegion
 
     }}>
         {children}

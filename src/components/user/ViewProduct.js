@@ -25,17 +25,22 @@ export default function ViewProduct() {
   const [heights, setHeights] = useState('');
   const [ip, setIp] = useState();
   const [sizeError, setSizeError] = useState('');
+  const [weight, setWeight] = useState('');
   const [displayFlash, setDisplayFlash] = useState(false);
-  const {setRefresh,base_currency} = useContext(CartContext);
+  const {setRefresh,base_currency,totalWeight,setTotalWeight} = useContext(CartContext);
+  const [nomenclature,setNomen] = useState('Add To Cart');
 
 
   const addtocart = async (e) => {
     e.preventDefault();
+    setNomen('Adding....');
     const valiStock = await validateStock();
+    const evalWeiht = doWeight(prodInfo.weight *qty);
   
     if (size && heights) {
-      if(valiStock == 'ok'){
+      if(valiStock == 'ok' && evalWeiht =='ok'){
         setSizeError('');
+        
       const data = {
         prod_id: prodInfo.prod_id,
         prod_name: prodInfo.prod_name,
@@ -46,24 +51,27 @@ export default function ViewProduct() {
         user_ip: localStorage.getItem('i_ran_zyyx'),
         size: size,
         qty: qty,
-        heights:heights
+        heights:heights,
+        weight: prodInfo.weight * qty
       }
 
        const req = await axios.post(urlPointer+'/api/cart/addtocart', data);
        //const req = await allPostReqs('/api/cart/addtocart',data);
       if(req.data == 'Product Inserted Successfuly'){
+        setNomen('Product Added');
         setRefresh('random rubish')
         setDisplayFlash(true)
       }else{
-        
+        setNomen('Add To Cart');
       }
       }else{
-        alert('Sorry this product is out of stock and we are working to restock')
+        setNomen('Add To Cart');
+        alert('Sorry this product may be out of stock or the cummulative weight of the product is more than 4KG')
       }
       
     
     } else {
-
+      setNomen('Add To Cart');
       setSizeError('Please enter a valid size and height');
 
     }
@@ -96,13 +104,26 @@ export default function ViewProduct() {
 
   const doInc = (e) => {
     e.preventDefault();
-    let newQty = qty + 1;
-    setQty(newQty);
+    
+    // const newWeight = prodInfo.weight
+    // const sumWeight = newWeight *qty;
+    
+    // const currentWeight = totalWeight + sumWeight;
+
+    // if(currentWeight > 4){
+
+    // }else{
+      let newQty = qty + 1;
+      setQty(newQty);
+    // }
+
+    
     
   }
 
   const doDed = (e) => {
     e.preventDefault();
+
     let newQty = qty - 1;
     setQty(newQty);
 
@@ -132,6 +153,15 @@ export default function ViewProduct() {
   const getUserIp = async () => {
     const userIp = await fetchIP();
     setIp(userIp);
+  }
+
+  const doWeight = (weight)=>{
+     const currentTotalWeight =  weight + totalWeight;
+    if(currentTotalWeight > 4.0){
+      return 'err';
+    }else{
+      return 'ok';
+    }
   }
   useEffect(() => {
     getSelected();
@@ -191,7 +221,7 @@ export default function ViewProduct() {
                 <button className='indec' onClick={doDed}><FaMinus /></button>
                 <input type='text' name='qty' size='2' value={qty} style={{ textAlign: 'center' }} />
                 <button className='indec' onClick={doInc}><FaPlus /></button><br />
-                <FlashMsg addtocart={addtocart} displayFlash={displayFlash} setDisplayFlash={setDisplayFlash} />
+                <FlashMsg addtocart={addtocart} displayFlash={displayFlash} setDisplayFlash={setDisplayFlash} nomenclature={nomenclature} />
 
             
               </form>

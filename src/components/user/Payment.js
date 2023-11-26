@@ -10,7 +10,7 @@ import { CartContext } from '../../context/CartContext';
 import {transactionReference} from '../shared/functions';
 
 
-export default function Order() {
+export default function Payment() {
     const history = useHistory();
     const [pstackTransRef, setPstackTransRef] = useState('');
 
@@ -35,12 +35,14 @@ export default function Order() {
             reference: (new Date()).getTime().toString(),
             email: user.email,
             amount: parseInt(sumsubtotal + deliveryFee) * 100,
+            //publicKey: 'pk_test_1a1fec024222ba28bd902380bb1511969115e080'
             publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
         };
         const config2 = {
             reference: (new Date()).getTime().toString(),
             email: user.email,
             amount: parseInt(sumsubtotalUsd + deliveryFee) * 100,
+            //publicKey: 'pk_test_1a1fec024222ba28bd902380bb1511969115e080'
             publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
         };
 
@@ -91,14 +93,14 @@ export default function Order() {
 
         const report = await axios.post(urlPointer+'/api/order/completeorder',data);
         if(report.data == 'Transaction Completed'){
-            setFullName('');
-            setAddress('');
-            setCity('');
-            setPhone('');
-            setStates('');
-            setOptLga('');
-            localStorage.removeItem('paystack_ref');
-            history.push('/success');
+            const updateStock = await axios.post(urlPointer + '/api/order/managestock',{ip:localStorage.getItem('i_ran_zyyx')});
+            if(updateStock.data == 'Product stock updated successfully'){
+                localStorage.removeItem('paystack_ref');
+                history.push('/success');
+            }else{
+                alert('Sorry please contact support as product may be out of stock')
+            }
+            
         }else{
             alert(report.data);
         }
@@ -183,10 +185,10 @@ export default function Order() {
 
                             <div style={{ display: 'block', marginBottom: 10 }}>
                                 <div className='paymentTitle'>
-                                    Delivery:
+                                    Shipping:
                                 </div>
                                 <div className='paymentValue'>
-                                    NGN {deliveryFee}
+                                    {base_currency} {deliveryFee}
                                 </div>
                             </div><br />
 
@@ -204,7 +206,7 @@ export default function Order() {
                                     Total:
                                 </div>
                                 <div className='paymentValue'>
-                                    NGN {amtPlusDel}
+                                    {base_currency} {amtPlusDel}
                                 </div>
                             </div>
 

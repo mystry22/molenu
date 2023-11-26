@@ -19,6 +19,8 @@ export default function Login() {
     const [emailError, setEmailError] = useState('');
     const [passError, setPassError] = useState('');
     const {setRefresh} = useContext(CartContext);
+    const [nomenclature,setNomen] = useState('Login');
+ 
 
 
 
@@ -48,7 +50,7 @@ export default function Login() {
     }
     const login = async (e) => {
         e.preventDefault();
-        
+        setNomen('Logging in ...');
         const isOk = validateInput();
         if (isOk === 'ok') {
             const data = {
@@ -62,8 +64,11 @@ export default function Login() {
                 history.push('/');
                 
             } else {
-                alert('error validating user')
+                setNomen('Login');
+                alert('error validating user');
             }
+        }else{
+            setNomen('Login');
         }
 
     }
@@ -101,7 +106,7 @@ export default function Login() {
                                     {passError ? <span style={{ color: 'red' }}>{passError}</span> : null}
                                     <div className='row'>
                                         <div className='col-lg-12'>
-                                            <button className='signupnext' onClick={login}><CgLogIn /> Login</button>
+                                            <button className='signupnext' onClick={login}><CgLogIn /> {nomenclature}</button>
                                             <div style={{ textAlign: 'center' }}>
                                                 <span>Don't Have an Account ?</span><br />
                                                 <a href='/signup' className='anchor'><FaAngleDoubleRight /> Signup</a>

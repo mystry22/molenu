@@ -22,7 +22,7 @@ export default function SignUp() {
     const [phone, setPhone] = useState('');
     const [pass, setPass] = useState('');
     const {setRefresh} = useContext(CartContext);
-
+    const [nomenclature,setNomen] = useState('Create Account');
 
 
     const [fnameError, setFnameError] = useState('');
@@ -47,8 +47,8 @@ export default function SignUp() {
         setLnameError(lnameerr);
         setEmailError(emailValErr);
 
-        if (paserr || phoneerr || fnameerr || lnameerr || emailError) {
-            return 'err validating'
+        if (paserr != '' || phoneerr != '' || fnameerr != '' || lnameerr != ''  || emailValErr != '') {
+            return 'err'
         } else {
             return 'ok';
         }
@@ -73,9 +73,10 @@ export default function SignUp() {
     }
     const createAccount = async (e) => {
         e.preventDefault();
+        setNomen('Submiting....');
         const doVali = dovalidations();
 
-        if (doVali == 'ok') {
+        if (doVali === 'ok') {
             const data = {
                 first_name: fname,
                 last_name: lname,
@@ -83,6 +84,8 @@ export default function SignUp() {
                 pass: pass,
                 email: email,
             }
+
+           
             const res = await axios.post(urlPointer + '/api/registration/register', data);
             if (res.data.msg == 'registration okay') {
                 localStorage.setItem('usertoken', res.data.token);
@@ -94,10 +97,11 @@ export default function SignUp() {
                 }
 
             } else {
+                setNomen('Create Account');
                 alert(res.data.msg)
             }
         } else {
-
+            setNomen('Create Account');
         }
 
 
@@ -153,7 +157,7 @@ export default function SignUp() {
 
                                     <div className='row'>
                                         <div className='col-lg-12'>
-                                            <button className='signupnext' onClick={createAccount}>Create Account</button>
+                                            <button className='signupnext' onClick={createAccount}>{nomenclature}</button>
                                             <div style={{ textAlign: 'center' }}>
                                                 <span>Aready have an Account ?</span><br />
                                                 <a href='/login' className='anchor'><CgLogIn /> Login</a>

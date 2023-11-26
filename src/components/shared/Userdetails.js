@@ -60,7 +60,7 @@ export default function UserDetails() {
     }
 
     const currencyList = [
-        { label: 'CUR', value: '', id: 1 },
+        { label: 'CUR', value: '', id: 0 },
         { label: 'NGN', value: '₦', id: 1 },
         { label: 'USD', value: '$', id: 2 }
     ]

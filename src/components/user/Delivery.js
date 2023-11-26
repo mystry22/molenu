@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import { defaultBodyStyles } from '../shared/helper';
 import Menu from '../shared/Menu';
 import Footer from '../shared/Footer';
@@ -7,6 +7,8 @@ import { CartContext } from '../../context/CartContext';
 import { checkName, checkAddress, checkCity, checkPhone, } from '../shared/validation';
 import { useHistory } from 'react-router-dom';
 import Countries from '../shared/countries';
+import axios from 'axios';
+import { urlPointer } from '../shared/helper';
 
 
 function Delivery() {
@@ -20,7 +22,7 @@ function Delivery() {
     phone, setPhone,
     states, setStates,
     optLga, setOptLga,
-    countries, setCountry
+    countries, base_currency,
 
   } = useContext(CartContext);
   const [errMsg, setErrMsg] = useState('');
@@ -36,10 +38,6 @@ function Delivery() {
 
   const TestOp = (val) => {
     setStates(val.target.value)
-  }
-
-  const updateCountry = (val) => {
-    setCountry(val);
   }
 
   const setFee = (val) => {
@@ -66,9 +64,34 @@ function Delivery() {
 
   }
 
+  const updateCurrency = async () => {
+    //e.preventDefault();
+    let curr = '';
+
+    if(countries == 'Nigeria' && base_currency == '$'){
+      await setShoppingcurrency('₦')
+    }else if(countries != 'Nigeria' && base_currency == '₦'){
+      await setShoppingcurrency('$')
+    }else{
+      
+    }
+    
+}
+
+const setShoppingcurrency = async(curr)=>{
+  const data = {
+    base_currency: curr,
+    ip: localStorage.getItem('i_ran_zyyx')
+}
+const res = await axios.post(urlPointer + '/api/product/changecurrency', data);
+if (res.data === 'currency update') {
+    window.location.reload(true);
+}
+}
 
 
-  const validation = () => {
+
+  const validation = async() => {
     const fnRes = checkName(fullName);
     const addRes = checkAddress(address);
     const cityRes = checkCity(city);
@@ -76,46 +99,14 @@ function Delivery() {
     const stateRes = checkName(fullName);
     const countryRes = checkName(countries);
 
-
-    // setFullnameError(fnRes);
-    // setAddressError(addRes);
-    // setCityError(cityRes);
-    // setPhoneError(phoneRes);
-    // setStateError(stateRes)
-
-
-    // if(states=='Lagos')
-    // {
-    //   if(fullnameError || addressErr || CityErr || phoneErr || countryRes || stateErr || !optLga ){
-    //   setErrMsg('One or more fieds failed validation');
-
-    //     return 'err';
-    //   }else{
-    //     return 'ok';
-    //   }
-    // }else if(states != 'Lagos' && states != ''){
-    //   if(fullnameError || addressErr || CityErr || phoneErr || stateErr ){
-    //   setErrMsg('One or more fieds failed validation');
-
-    //     return 'err';
-    //   }else{
-    //     setDeliveryFee(50);
-    //     return 'ok';
-    //   }
-    // }else{
-
-    //   setErrMsg('Please Select A Valid State');
-    //   return 'err'
-    // }
-
    if(countries == ''){
     setErrMsg('Please select a valid country');
     return 'err';
    }else if(countries == 'Nigeria'){
+  
     if (states == 'Lagos') {
       if (stateRes || addRes || cityRes || phoneRes || stateRes || !optLga) {
         setErrMsg('One or more fieds failed validation');
-
         return 'err';
       } else {
         return 'ok';
@@ -126,7 +117,7 @@ function Delivery() {
 
         return 'err';
       } else {
-        setDeliveryFee(50);
+        setDeliveryFee(5000);
         return 'ok';
       }
     } else {
@@ -134,17 +125,22 @@ function Delivery() {
       setErrMsg('One or more fieds failed validation');
       return 'err'
     }
-   }else if(countries != 'Nigeria'){
+   }
+   
+   else if(countries != 'Nigeria'){
     if(fnRes || addRes || cityRes || phoneRes){
       setErrMsg('One or more fieds failed validation');
       return 'err';
     }else{
-      setDeliveryFee(1);
       return 'ok';
     }
     
    }
 }
+
+useEffect(()=>{
+  updateCurrency();
+},[countries])
 
 
 
@@ -170,7 +166,7 @@ function Delivery() {
           }
           <form className='form'>
 
-            <Countries setcountry={updateCountry} /><br />
+            <Countries /><br />
 
             <input className='form-control' placeholder='Full Name' Name='fullname' required onChange={(ev) => setFullName(ev.target.value)} />
             {

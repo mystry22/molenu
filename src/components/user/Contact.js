@@ -136,7 +136,16 @@ function Contact() {
               <div className='col-lg-12'>
                 <div className='contactsection'>
                   <h4>Social Media:</h4>
+                  <p>
+                    You can also reach out to us via our social media accounts below <br/ >
+                    as this is most likely where you will find variety of designs and get a feel of how people engage with us, our products and services.
+                    <br />
+                    <br />
+                    <br />
+                    <a style={{textDecoration:'none', color:'#000'}} href='https://www.tiktok.com/@fancyfinery?_t=8hKvG9GJcF3&_r=1'><FaTiktok  /> https://www.tiktok.com/@fancyfinery </a>  <br />
+                    <a style={{textDecoration:'none', color:'#000'}} href='https://www.instagram.com/fancyfinery_/'><FaInstagram color='#FD1D1D' /> https://www.instagram.com/fancyfinery </a> 
 
+                  </p>
 
                   
                 </div>

@@ -110,7 +110,7 @@ export default function Home() {
                                     </div>
                                     <h4>{prod.prod_name.charAt(0).toUpperCase() + prod.prod_name.slice(1)}</h4>
                                     <h6 style={{ color: '#fff' }}>{prod.description.length > 33 ? prod.description.substring(0, 32) + '...' : prod.description}</h6>
-                                    <span>{base_currency}{base_currency === '₦' ? prod.price : prod.price_usd} <strike style={{ opacity: 0.5 }}>{base_currency}{base_currency === '₦' ? prod.price : prod.old_price_usd}</strike></span><br />
+                                    <span>{base_currency}{base_currency === '₦' ? prod.price : prod.price_usd} <strike style={{ opacity: 0.5 }}>{base_currency}{base_currency === '₦' ? prod.old_price : prod.old_price_usd}</strike></span><br />
                                     <a href={prod.video} style={{ textDecoration: 'none', margin: 10, color: '#fff', fontWeight: 'bold' }}>Product Video <FaInstagram color='#990f02' /></a><br />
                                     <a href={'/viewproduct/:ref' + prod.prod_id}> <button><FaShoppingCart /> Add To Cart</button></a>
                                 </div>
