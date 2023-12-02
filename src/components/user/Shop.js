@@ -16,7 +16,9 @@ export default function Home() {
     
     const {prods,base_currency,setBaseCurrency} = useContext(CartContext);
   
-    
+    useEffect(()=>{
+        document.title = "Fancy Finery | Shop"
+    },[])
     return (
         <React.Fragment>
             <div style={defaultBodyStyles}>

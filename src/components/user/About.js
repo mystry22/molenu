@@ -1,9 +1,12 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { defaultBodyStyles } from '../shared/helper';
 import Menu from '../shared/Menu';
 import Footer from '../shared/Footer';
 
 function About() {
+    useEffect(()=>{
+        document.title = "Fancy Finery | About"
+    },[])
     return (
         <>
             <div style={defaultBodyStyles}>

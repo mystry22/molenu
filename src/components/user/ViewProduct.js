@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Menu from '../shared/Menu';
 import Footer from '../shared/Footer';
 import { defaultBodyStyles, } from '../shared/helper';
@@ -8,7 +8,6 @@ import { urlPointer } from '../shared/helper';
 import { fetchIP } from '../shared/functions';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Info from '../shared/Userdetails';
-import SocialMedia from '../shared/SocialMedia';
 import FlashMsg from '../shared/FlashMsg';
 import { CartContext } from '../../context/CartContext';
 
@@ -27,49 +26,50 @@ export default function ViewProduct() {
   const [sizeError, setSizeError] = useState('');
   const [weight, setWeight] = useState('');
   const [displayFlash, setDisplayFlash] = useState(false);
-  const {setRefresh,base_currency,totalWeight,setTotalWeight} = useContext(CartContext);
-  const [nomenclature,setNomen] = useState('Add To Cart');
+  const { setRefresh, base_currency, totalWeight, setTotalWeight } = useContext(CartContext);
+  const [nomenclature, setNomen] = useState('Add To Cart');
+  const [displayImage,setDp] = useState('');
 
 
   const addtocart = async (e) => {
     e.preventDefault();
     setNomen('Adding....');
     const valiStock = await validateStock();
-    const evalWeiht = doWeight(prodInfo.weight *qty);
-  
-    if (size && heights) {
-      if(valiStock == 'ok' && evalWeiht =='ok'){
-        setSizeError('');
-        
-      const data = {
-        prod_id: prodInfo.prod_id,
-        prod_name: prodInfo.prod_name,
-        price: prodInfo.price,
-        price_usd: prodInfo.price_usd,
-        image_link: prodInfo.image_link,
-        description: prodInfo.description,
-        user_ip: localStorage.getItem('i_ran_zyyx'),
-        size: size,
-        qty: qty,
-        heights:heights,
-        weight: prodInfo.weight * qty
-      }
+    const evalWeiht = doWeight(prodInfo.weight * qty);
 
-       const req = await axios.post(urlPointer+'/api/cart/addtocart', data);
-       //const req = await allPostReqs('/api/cart/addtocart',data);
-      if(req.data == 'Product Inserted Successfuly'){
-        setNomen('Product Added');
-        setRefresh('random rubish')
-        setDisplayFlash(true)
-      }else{
-        setNomen('Add To Cart');
-      }
-      }else{
+    if (size && heights) {
+      if (valiStock == 'ok' && evalWeiht == 'ok') {
+        setSizeError('');
+
+        const data = {
+          prod_id: prodInfo.prod_id,
+          prod_name: prodInfo.prod_name,
+          price: prodInfo.price,
+          price_usd: prodInfo.price_usd,
+          image_link: prodInfo.image_link,
+          description: prodInfo.description,
+          user_ip: localStorage.getItem('i_ran_zyyx'),
+          size: size,
+          qty: qty,
+          heights: heights,
+          weight: prodInfo.weight * qty
+        }
+
+        const req = await axios.post(urlPointer + '/api/cart/addtocart', data);
+        //const req = await allPostReqs('/api/cart/addtocart',data);
+        if (req.data == 'Product Inserted Successfuly') {
+          setNomen('Product Added');
+          setRefresh('random rubish')
+          setDisplayFlash(true)
+        } else {
+          setNomen('Add To Cart');
+        }
+      } else {
         setNomen('Add To Cart');
         alert('Sorry this product may be out of stock or the cummulative weight of the product is more than 4KG')
       }
-      
-    
+
+
     } else {
       setNomen('Add To Cart');
       setSizeError('Please enter a valid size and height');
@@ -98,27 +98,19 @@ export default function ViewProduct() {
     setProdInfo(products.data);
     setPrice(products.data.price);
     setPriceUsd(products.data.price_usd);
+    setDp(products.data.image_link);
 
 
   }
 
   const doInc = (e) => {
     e.preventDefault();
+    let newQty = qty + 1;
+    setQty(newQty);
     
-    // const newWeight = prodInfo.weight
-    // const sumWeight = newWeight *qty;
-    
-    // const currentWeight = totalWeight + sumWeight;
 
-    // if(currentWeight > 4){
 
-    // }else{
-      let newQty = qty + 1;
-      setQty(newQty);
-    // }
 
-    
-    
   }
 
   const doDed = (e) => {
@@ -134,17 +126,17 @@ export default function ViewProduct() {
 
   }
 
-  const validateStock =async()=>{
+  const validateStock = async () => {
 
     const data = {
       prod_id: prodInfo.prod_id
     }
 
-    const stockValue = await axios.post(urlPointer +'/api/product/getstockvalue',data);
-  
-    if(stockValue.data >= qty){
+    const stockValue = await axios.post(urlPointer + '/api/product/getstockvalue', data);
+
+    if (stockValue.data >= qty) {
       return 'ok';
-    }else{
+    } else {
       return 'err'
     }
 
@@ -155,15 +147,27 @@ export default function ViewProduct() {
     setIp(userIp);
   }
 
-  const doWeight = (weight)=>{
-     const currentTotalWeight =  weight + totalWeight;
-    if(currentTotalWeight > 4.0){
+  const doWeight = (weight) => {
+    const currentTotalWeight = weight + totalWeight;
+    if (currentTotalWeight > 4.0) {
       return 'err';
-    }else{
+    } else {
       return 'ok';
     }
   }
+
+ const changeImageDisplay = (image)=>{
+  if(image){
+    setDp(image)
+  }else{
+
+  }
+ }
+
   useEffect(() => {
+    
+    document.title = "Fancy Finery | View Product"
+  
     getSelected();
     getUserIp();
 
@@ -178,8 +182,26 @@ export default function ViewProduct() {
             <div className='viewProd'>
 
               <div className='imgholder'>
-                <img src={prodInfo.image_link} />
+                <img src={displayImage} /> <br />
               </div>
+
+              <div className='imgholder'>
+              <div className='row' >
+                <div className='col-lg-4  viewProdSmallImg'>
+
+                  <a onClick={()=>changeImageDisplay(prodInfo.image_link)} style={{cursor:'pointer'}}> <img src={prodInfo.image_link} /> </a>
+                </div>
+                <div className='col-lg-4 viewProdSmallImg'>
+                <a onClick={()=>changeImageDisplay(prodInfo.image_variation1)} style={{cursor:'pointer'}}><img src={prodInfo.image_variation1}  /> </a>
+                </div>
+                <div className='col-lg-4 viewProdSmallImg'>
+                  <a onClick={()=>changeImageDisplay(prodInfo.image_variation2)} style={{cursor:'pointer'}}><img src={prodInfo.image_variation2} /> </a>
+                </div>
+
+              </div>
+              </div>
+
+              
             </div>
 
           </div>
@@ -189,7 +211,7 @@ export default function ViewProduct() {
 
                 <h1>{prodInfo.prod_name}</h1>
                 <h6 className='prodDesc'>{prodInfo.description}</h6>
-                <span >{base_currency}{base_currency === '₦' ? prodInfo.price : prodInfo.price_usd} <strike style={{ opacity: 0.5 }}>{base_currency}{base_currency === '₦' ? prodInfo.old_price : prodInfo.old_price_usd }</strike></span><br />
+                <span >{base_currency}{base_currency === '₦' ? prodInfo.price : prodInfo.price_usd} <strike style={{ opacity: 0.5 }}>{base_currency}{base_currency === '₦' ? prodInfo.old_price : prodInfo.old_price_usd}</strike></span><br />
                 <select name='size' required onChange={updateSize} >
                   <option value=''>Size [UK Sizes]</option>
                   <option value='4'>4</option>
@@ -211,19 +233,19 @@ export default function ViewProduct() {
                   <option value='5.0ft-5.5ft'>5.0ft-5.5ft</option>
                   <option value='5.6ft-5.7ft'>5.6ft-5.7ft</option>
                   <option value='5.8ft-6.0ft'>5.8ft-6.0ft</option>
-                  
+
                 </select><br />
-                
+
                 {sizeError ? <span style={{ color: 'red' }}>{sizeError}</span> : null}<br />
                 {/* {
                   displayFlash ? <FlashMsg /> : null
                 } */}
                 <button className='indec' onClick={doDed}><FaMinus /></button>
-                <input type='text' name='qty' size='2' value={qty} style={{ textAlign: 'center' }} />
+                <input type='text' name='qty' size='2' value={qty} style={{ textAlign: 'center',  backgroundColor:'#fff' }} />
                 <button className='indec' onClick={doInc}><FaPlus /></button><br />
                 <FlashMsg addtocart={addtocart} displayFlash={displayFlash} setDisplayFlash={setDisplayFlash} nomenclature={nomenclature} />
 
-            
+
               </form>
             </div>
           </div>

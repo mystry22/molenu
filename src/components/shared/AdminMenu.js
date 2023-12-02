@@ -72,6 +72,7 @@ export default function Navigation() {
                         
                     </Nav>
                     <Nav>
+                        <Nav.Link className="text-secondary" href="/variation"><span>Variation</span></Nav.Link>
                         <Nav.Link className="text-secondary" href="/addproduct"><span>AddProduct</span></Nav.Link>
                         <Nav.Link className="text-secondary" href="/editproduct"><span>EditProduct</span></Nav.Link>
                         <Nav.Link className="text-secondary" href="/addcategory"><span>AddCategory</span></Nav.Link>

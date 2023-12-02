@@ -73,7 +73,7 @@ function Delivery() {
     }else if(countries != 'Nigeria' && base_currency == '₦'){
       await setShoppingcurrency('$')
     }else{
-      
+
     }
     
 }
@@ -140,6 +140,7 @@ if (res.data === 'currency update') {
 
 useEffect(()=>{
   updateCurrency();
+    document.title = "Fancy Finery | Delivery";
 },[countries])
 
 

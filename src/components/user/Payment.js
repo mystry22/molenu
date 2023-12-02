@@ -148,7 +148,9 @@ export default function Payment() {
 
 
     useEffect(() => {
-
+        
+        document.title = "Fancy Finery | Payment"
+        
         if (localStorage.getItem('usertoken')) {
 
         } else {

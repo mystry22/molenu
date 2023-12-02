@@ -23,6 +23,9 @@ export default function Home() {
     }
 
     useEffect(() => {
+        
+        document.title = "Fancy Finery | Home"
+        
         getAllProducts();
     }, [])
     return (

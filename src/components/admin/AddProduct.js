@@ -141,6 +141,8 @@ export default function Home() {
             description: description,
             display_home: display_home,
             image_link: 'no_image_yet',
+            image_variation1 : 'no_image_yet',
+            image_variation2 : 'no_image_yet',
             price_usd: price_usd,
             old_price_usd: old_price_usd,
             video: video,

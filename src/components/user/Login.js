@@ -74,6 +74,9 @@ export default function Login() {
     }
 
     useEffect(() => {
+        
+        document.title = "Fancy Finery | Login"
+        
         if (localStorage.getItem('usertoken')) {
             history.push('/');
         }

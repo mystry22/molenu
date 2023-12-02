@@ -21,12 +21,14 @@ import AdminWorking from '../admin/Working';
 import AdminAddCategory from '../admin/AddCategory';
 import AdminRemoveCategory from '../admin/removeCategory';
 import AdminAddProdImage from '../admin/AddProductImage';
+import AdminAddProdImageVariation from '../admin/ProductImageVariation';
 import AdminEditProduct from '../admin/EditProduct';
 import AdminChanges from '../admin/AffectChanges';
 import AdminViewPendings from '../admin/ViewPendings';
 import AdminViewWorkings from '../admin/ViewWorking';
 import AdminViewReady from '../admin/ViewReady';
 import AdminPrintReady from '../admin/PrintReady';
+
 
 
 
@@ -61,6 +63,7 @@ function Navigation() {
           <Route path="/print/:ref" exact component={AdminPrintReady} />
           <Route path="/admin" exact component={AdminLogin} /> 
           <Route path="/removecategory" exact component={AdminRemoveCategory} />
+          <Route path="/variation" exact component={AdminAddProdImageVariation} />
           
         </Switch>
       </Router>

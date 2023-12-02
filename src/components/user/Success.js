@@ -1,7 +1,10 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {AiFillCheckCircle} from 'react-icons/ai';
 
 function Success() {
+  useEffect(()=>{
+    document.title = "Fancy Finery | Payment Success"
+},[])
   return (
     <div className='success'>
             <AiFillCheckCircle size={150} color='#198754' /><br />

@@ -119,6 +119,9 @@ export default function SignUp() {
     }
 
     useEffect(() => {
+        
+        document.title = "Fancy Finery | Signup"
+        
         if (localStorage.getItem('usertoken')) {
             history.push('/');
         }

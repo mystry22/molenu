@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { defaultBodyStyles } from '../shared/helper';
 import Menu from '../shared/Menu';
 import Footer from '../shared/Footer';
 import { checkMail, checkName } from '../shared/validation';
 import axios from 'axios';
 import { urlPointer } from '../shared/helper';
-import {FaFacebook,FaInstagram,FaTiktok,FaWhatsapp} from 'react-icons/fa';
+import {FaInstagram,FaTiktok} from 'react-icons/fa';
 
 
 function Contact() {
@@ -63,6 +63,10 @@ function Contact() {
       return 'ok';
     }
   }
+
+  useEffect(()=>{
+    document.title = "Fancy Finery | Contact"
+},[])
   return (
     <>
       <div style={defaultBodyStyles}>

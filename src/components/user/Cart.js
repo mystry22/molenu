@@ -42,7 +42,9 @@ export default function Cart() {
     }
 
      
-
+    useEffect(()=>{
+        document.title = "Fancy Finery | Cart"
+    },[])
 
     return (
         <React.Fragment>
