@@ -15,7 +15,7 @@ import { CartContext } from '../../context/CartContext'
 
 export default function ProductImageVariation() {
     const history = useHistory();
-    const { prods } = useContext(CartContext);
+    const [prods,setProds] = useState([]);
     const [image, setImageUpload] = useState('');
     const [msg, setMsg] = useState('');
     const [filename, setFilename] = useState('');
@@ -103,6 +103,18 @@ export default function ProductImageVariation() {
 
         
     }
+
+    const getAllProds= async()=>{
+        const pro = await axios.post(urlPointer + '/api/product/allproducts');
+        setProds(pro.data);
+      
+    }
+
+
+
+    useEffect(()=>{
+        getAllProds();
+    },[])
 
 
 

@@ -33,20 +33,20 @@ const countries = [
 
 export default function () {
     const {setCountry,setRegion,region,totalWeight,setDeliveryFee} = useContext(CartContext);
-    let tRegion = '';
+    
 
     const handleSelection = (e)=>{
         e.preventDefault();
         const countyObject = countries.find(u => u.value === e.target.value);
         setCountry(countyObject.value);
        setRegion(countyObject.shipping);
-       tRegion = countyObject.shipping
-        evaluateShippingCost();
+       const tRegion = countyObject.shipping
+        evaluateShippingCost(tRegion);
 
     }
     
 
-    const evaluateShippingCost = ()=>{
+    const evaluateShippingCost = (tRegion)=>{
         switch(tRegion){
             case 'Americas':
                 const deliveryCostAmerica = americas(totalWeight);
