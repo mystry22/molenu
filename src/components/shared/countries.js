@@ -44,6 +44,7 @@ export default function () {
        setRegion(countyObject.shipping);
        const tRegion = countyObject.shipping
         evaluateShippingCost(tRegion);
+        
 
     }
     
@@ -52,8 +53,7 @@ export default function () {
         switch(tRegion){
             case 'Americas':
                 const deliveryCostAmerica = americas(totalWeight);
-                localStorage.setItem('delivery_location',deliveryCostAmerica);
-                
+                localStorage.setItem('delivery_cost',deliveryCostAmerica);
                 break;
             case 'Europe':
                 const deliveryCostEurope = europe(totalWeight);
