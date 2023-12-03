@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Menu from '../shared/AdminMenu';
 import Footer from '../shared/Footer';
 import { getCats, genProdId } from '../shared/functions';
-import { checkName, checkDesc, checkNumber } from '../shared/validation';
+import { productName, checkDesc, checkNumber } from '../shared/validation';
 import axios from 'axios';
 import { urlPointer } from '../shared/helper';
 import { useHistory } from 'react-router-dom';
@@ -96,7 +96,7 @@ export default function Home() {
 
 
     const doValidation = () => {
-        const prodNameRes = checkName(prod_name);
+        const prodNameRes = productName(prod_name);
         const priceRes = checkNumber(price);
         const oldPriceRes = checkNumber(old_price);
         const descRes = checkDesc(description);

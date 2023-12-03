@@ -27,6 +27,19 @@ const checkLastName =(name)=>{
     
 }
 
+const productName =(name)=>{
+    let msg = '';
+    const regex = /\d/;
+       
+    if(name.length < 3){
+        msg = 'Last Name cannot be less than 3 chars';
+    }
+    return msg;
+        
+    
+    
+}
+
 const checkAddress =(address)=>{
     let msg = '';
     const regex = /\d/;
@@ -205,5 +218,6 @@ export {
     checkBank,
     checkNumber,
     checkDesc,
-    selectedSize
+    selectedSize,
+    productName
 }

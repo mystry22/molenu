@@ -27,6 +27,8 @@ const countries = [
 {id:21, label: 'United Arab Emirates',value:'United Arab Emirates',shipping:'Uae', },
 {id:22, label: 'United Kingdom',value:'United Kingdom',shipping:'Uk' },
 {id:23, label: 'United States of America',value:'United States of America',shipping:'Americas' },
+{id:23, label: 'Test',value:'Test',shipping:'Test' },
+
 ];
 
 
@@ -50,27 +52,33 @@ export default function () {
         switch(tRegion){
             case 'Americas':
                 const deliveryCostAmerica = americas(totalWeight);
-                setDeliveryFee(deliveryCostAmerica);
+                localStorage.setItem('delivery_location',deliveryCostAmerica);
+                
                 break;
             case 'Europe':
                 const deliveryCostEurope = europe(totalWeight);
-                setDeliveryFee(deliveryCostEurope);
+                localStorage.setItem('delivery_cost',deliveryCostEurope);
+                
                 break;
             case 'Uae':
                 const deliveryCostUae = uae(totalWeight);
-                setDeliveryFee(deliveryCostUae);
+                localStorage.setItem('delivery_cost',deliveryCostUae);
                 break;
             case 'Australia':
                 const deliveryCostAustralia = austria(totalWeight);
-                setDeliveryFee(deliveryCostAustralia);
+                localStorage.setItem('delivery_cost',deliveryCostAustralia);
                 break;
             case 'Africa':
                 const deliveryCostAfrica = africas(totalWeight);
-                setDeliveryFee(deliveryCostAfrica);
+                localStorage.setItem('delivery_cost',deliveryCostAfrica);
                 break;
             case 'Uk':
                 const deliveryCostUk = uk(totalWeight);
-                setDeliveryFee(deliveryCostUk);
+                localStorage.setItem('delivery_cost',deliveryCostUk);
+                break;
+            case 'Test':
+                const deliveryTest = 0.5;
+                localStorage.setItem('delivery_cost',deliveryTest);
                 break;
            
 

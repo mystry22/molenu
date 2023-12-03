@@ -16,32 +16,34 @@ export default function Payment() {
 
     const { 
         sumsubtotal, setOptLga,
-        deliveryFee, setFullName,
+         setFullName,
         fullName, setCity,
         user, setAddress,
         phone, setPhone,
         address, setStates,
         optLga,sumsubtotalUsd,
         city,base_currency,
-        countries
+        countries,totalWeight,
     } = useContext(CartContext);
     const [amtPlusDel, setAmtPlusDelivery] = useState('');
 
+    const deliveryFee = parseFloat(localStorage.getItem('delivery_cost'));
     
 
     const dynamicConfig = ()=>{
 
         const config = {
+            
             reference: (new Date()).getTime().toString(),
             email: user.email,
-            amount: parseInt(sumsubtotal + deliveryFee) * 100,
+            amount: parseFloat(sumsubtotal + deliveryFee) * 100,
             //publicKey: 'pk_test_1a1fec024222ba28bd902380bb1511969115e080'
             publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
         };
         const config2 = {
             reference: (new Date()).getTime().toString(),
             email: user.email,
-            amount: parseInt(sumsubtotalUsd + deliveryFee) * 100,
+            amount: parseFloat(sumsubtotalUsd + deliveryFee) * 100,
             //publicKey: 'pk_test_1a1fec024222ba28bd902380bb1511969115e080'
             publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
         };
@@ -95,6 +97,7 @@ export default function Payment() {
         if(report.data == 'Transaction Completed'){
             const updateStock = await axios.post(urlPointer + '/api/order/managestock',{ip:localStorage.getItem('i_ran_zyyx')});
             if(updateStock.data == 'Product stock updated successfully'){
+                localStorage.removeItem('delivery_cost');
                 localStorage.removeItem('paystack_ref');
                 history.push('/success');
             }else{
@@ -196,10 +199,10 @@ export default function Payment() {
 
                             <div style={{ display: 'block', marginBottom: 10 }}>
                                 <div className='paymentTitle'>
-                                    Other Charges:
+                                    Total Weight:
                                 </div>
                                 <div className='paymentValue'>
-                                    NA
+                                    {totalWeight}
                                 </div>
                             </div><br />
 
@@ -213,7 +216,7 @@ export default function Payment() {
                             </div>
 
                             <div style={{textAlign:'center'}}>
-                                <span style={{fontWeight:'bold'}}>Pay Now</span>
+                                <span style={{fontWeight:'bold'}}>Pay Now</span><br />
                                 <PaystackButton {...componentProps} className='paymentButtonHack' />
                             </div>
 
