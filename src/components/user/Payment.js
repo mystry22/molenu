@@ -13,6 +13,7 @@ import {transactionReference} from '../shared/functions';
 export default function Payment() {
     const history = useHistory();
     const [pstackTransRef, setPstackTransRef] = useState('');
+    const [deliveryFee, setDeliveryFinance] = useState();
 
     const { 
         sumsubtotal, setOptLga,
@@ -27,7 +28,19 @@ export default function Payment() {
     } = useContext(CartContext);
     const [amtPlusDel, setAmtPlusDelivery] = useState('');
 
-    const deliveryFee = parseFloat(localStorage.getItem('delivery_cost'));
+    const get_db_delivery_fee = async ()=>{
+        const myIp = localStorage.getItem('i_ran_zyyx');
+        const data ={ip: myIp};
+        const res = await axios.post(urlPointer + '/api/product/getcurrency',data);
+
+        if(res.data =='not set'){
+            alert('Unable to retrieve delivery information');
+            history.push('/delivery')
+        }else{
+            setDeliveryFinance(res.data.delivery_fee);
+            return res.data.delivery_fee;
+        }
+    }
     
 
     const dynamicConfig = ()=>{
@@ -36,14 +49,14 @@ export default function Payment() {
             
             reference: (new Date()).getTime().toString(),
             email: user.email,
-            amount: parseFloat(sumsubtotal + deliveryFee) * 100,
+            amount: parseInt(sumsubtotal + deliveryFee) * 100,
             //publicKey: 'pk_test_1a1fec024222ba28bd902380bb1511969115e080'
             publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
         };
         const config2 = {
             reference: (new Date()).getTime().toString(),
             email: user.email,
-            amount: parseFloat(sumsubtotalUsd + deliveryFee) * 100,
+            amount: parseInt(sumsubtotalUsd + deliveryFee) * 100,
             //publicKey: 'pk_test_1a1fec024222ba28bd902380bb1511969115e080'
             publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
         };
@@ -127,7 +140,7 @@ export default function Payment() {
     };
 
 
-    const myIp = localStorage.getItem('i_ran_zyyx');
+    
 
     const moveToDelivery = () => {
         if (fullName) {
@@ -159,6 +172,7 @@ export default function Payment() {
         } else {
             history.push('/login');
         }
+        get_db_delivery_fee();
         moveToDelivery();
         doTotalling();
     }, [])
@@ -202,7 +216,7 @@ export default function Payment() {
                                     Total Weight:
                                 </div>
                                 <div className='paymentValue'>
-                                    {totalWeight}
+                                    {totalWeight}KG
                                 </div>
                             </div><br />
 

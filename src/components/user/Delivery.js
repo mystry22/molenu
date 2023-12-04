@@ -13,6 +13,7 @@ import { urlPointer } from '../shared/helper';
 
 function Delivery() {
   const history = useHistory();
+  const [nomen,setNomen] = useState('Continue')
   const {
     setDeliveryFee,
     fullName,
@@ -53,12 +54,27 @@ function Delivery() {
   const Continue = async (ev) => {
     ev.preventDefault();
     setErrMsg('');
+    setNomen('Saving...');
     const vali = validation();
 
     if (vali === 'err') {
-
+      setNomen('Continue');
     } else {
-      history.push('/payment')
+      if(states == 'Lagos' && countries == 'Nigeria'){
+        const res = await saveDeliveryCost(4000);
+        if(res.data == 'delivery set'){
+          history.push('/payment');
+        }else{
+        setNomen('Continue');
+          alert('Error saving details')
+        }
+      }else if( states != 'Lagos' && countries == 'Nigeria'){
+        await saveDeliveryCost(5000);
+        history.push('/payment');
+      }else{
+        history.push('/payment');
+      }
+      
 
     }
 
@@ -89,6 +105,22 @@ if (res.data === 'currency update') {
 }
 }
 
+const saveDeliveryCost = async (deli)=>{
+  const ip = localStorage.getItem('i_ran_zyyx');
+  const data = {
+      ip: ip,
+      delivery_fee: deli,
+      base_currency: base_currency
+  }
+
+  const res = await  axios.post(urlPointer + '/api/product/savedeliveryfee',data);
+  if(res.data == 'delivery set'){
+    
+  }else{
+      alert('Unable to save delivery informations')
+  }
+}
+
 
 
   const validation = async() => {
@@ -117,7 +149,6 @@ if (res.data === 'currency update') {
 
         return 'err';
       } else {
-        setDeliveryFee(5000);
         return 'ok';
       }
     } else {
@@ -140,6 +171,7 @@ if (res.data === 'currency update') {
 
 useEffect(()=>{
   updateCurrency();
+
     document.title = "Fancy Finery | Delivery";
 },[countries])
 
@@ -262,7 +294,7 @@ useEffect(()=>{
 
             <br />
 
-            <button className='homeButton' onClick={(ev) => Continue(ev)} style={{ color: '#fff' }}>Continue</button>
+            <button className='homeButton' onClick={(ev) => Continue(ev)} style={{ color: '#fff' }}>{nomen}</button>
 
           </form>
 

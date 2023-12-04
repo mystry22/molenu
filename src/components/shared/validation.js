@@ -79,6 +79,7 @@ const checkProvince =(province)=>{
 const checkPhone =(phone)=>{
     let msg = '';
     let newphone = '';
+    const  re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/i
     if(isNaN(phone)){
         msg = 'Please enter a valid number';
     }else{

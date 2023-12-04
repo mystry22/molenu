@@ -1,6 +1,8 @@
 import React,{useContext} from 'react';
 import {CartContext} from '../../context/CartContext';
-import {austria,americas,africas,europe,uae,uk} from '../shared/Calculate_shipping'
+import {austria,americas,africas,europe,uae,uk} from '../shared/Calculate_shipping';
+import axios from 'axios';
+import { urlPointer } from './helper';
 
 const countries = [
 {id:1, label: 'Australia',value:'Australia',shipping:'Australia' },
@@ -34,7 +36,7 @@ const countries = [
 
 
 export default function () {
-    const {setCountry,setRegion,region,totalWeight,setDeliveryFee} = useContext(CartContext);
+    const {setCountry,setRegion,region,totalWeight,base_currency} = useContext(CartContext);
     
 
     const handleSelection = (e)=>{
@@ -44,8 +46,22 @@ export default function () {
        setRegion(countyObject.shipping);
        const tRegion = countyObject.shipping
         evaluateShippingCost(tRegion);
-        
+    }
 
+    const saveDeliveryCost = async (deli)=>{
+        const ip = localStorage.getItem('i_ran_zyyx');
+        const data = {
+            ip: ip,
+            delivery_fee: deli,
+            base_currency: base_currency
+        }
+
+        const res = await  axios.post(urlPointer + '/api/product/savedeliveryfee',data);
+        if(res.data == 'delivery set'){
+            
+        }else{
+            alert('Unable to save delivery fee')
+        }
     }
     
 
@@ -53,32 +69,31 @@ export default function () {
         switch(tRegion){
             case 'Americas':
                 const deliveryCostAmerica = americas(totalWeight);
-                localStorage.setItem('delivery_cost',deliveryCostAmerica);
+                saveDeliveryCost(deliveryCostAmerica);
                 break;
             case 'Europe':
                 const deliveryCostEurope = europe(totalWeight);
-                localStorage.setItem('delivery_cost',deliveryCostEurope);
-                
+                saveDeliveryCost(deliveryCostEurope);
                 break;
             case 'Uae':
                 const deliveryCostUae = uae(totalWeight);
-                localStorage.setItem('delivery_cost',deliveryCostUae);
+                saveDeliveryCost(deliveryCostUae);
                 break;
             case 'Australia':
                 const deliveryCostAustralia = austria(totalWeight);
-                localStorage.setItem('delivery_cost',deliveryCostAustralia);
+                saveDeliveryCost(deliveryCostAustralia);
                 break;
             case 'Africa':
                 const deliveryCostAfrica = africas(totalWeight);
-                localStorage.setItem('delivery_cost',deliveryCostAfrica);
+                saveDeliveryCost(deliveryCostAfrica);
                 break;
             case 'Uk':
                 const deliveryCostUk = uk(totalWeight);
-                localStorage.setItem('delivery_cost',deliveryCostUk);
+                saveDeliveryCost(deliveryCostUk);
                 break;
             case 'Test':
                 const deliveryTest = 0.5;
-                localStorage.setItem('delivery_cost',deliveryTest);
+                saveDeliveryCost(deliveryTest);
                 break;
            
 
