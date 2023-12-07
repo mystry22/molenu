@@ -14,7 +14,7 @@ export const GlobalCartContext = ({ children }) => {
     const [cartSum, setCartSum] = useState('');
     const [user, setUserDetails] = useState('');
     const [refre, setRefresh] = useState('');
-    const [deliveryFee, setDeliveryFee] = useState('');
+    const [deliveryFee, setDeliveryFee] = useState(0);
     const [totalWeight, setTotalWeight] = useState(0);
     const [region, setRegion] = useState('');
 

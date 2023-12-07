@@ -16,16 +16,18 @@ function Delivery() {
   const [nomen,setNomen] = useState('Continue')
   const {
     setDeliveryFee,
-    fullName,
-    setFullName,
-    address, setAddress,
-    city, setCity,
-    phone, setPhone,
-    states, setStates,
-    optLga, setOptLga,
     countries, base_currency,
 
   } = useContext(CartContext);
+  const [county, setCounty] = useState('');
+  const [fname, setFname] = useState('');
+  const [streeta, setStreeta] = useState('');
+  const [cita, setCita] = useState('');
+  const [phonee, setPhonee] = useState('');
+  const [sstata, setSStata] = useState('');
+  const [lgaaa, setLgaaa] = useState('');
+  const [delierryAmount, setDelierryAmount] = useState('');
+
   const [errMsg, setErrMsg] = useState('');
   const [fullnameError, setFullnameError] = useState('');
   const [addressErr, setAddressError] = useState('');
@@ -38,7 +40,7 @@ function Delivery() {
 
 
   const TestOp = (val) => {
-    setStates(val.target.value)
+    setSStata(val.target.value)
   }
 
   const setFee = (val) => {
@@ -46,7 +48,7 @@ function Delivery() {
 
     const deliFee = parseInt(lga.substr(-4, 4));
     const delLga = lga.slice(0, -4)
-    setOptLga(delLga);
+    setLgaaa(delLga);
     setDeliveryFee(deliFee);
 
   }
@@ -55,25 +57,46 @@ function Delivery() {
     ev.preventDefault();
     setErrMsg('');
     setNomen('Saving...');
+    
     const vali = validation();
 
     if (vali === 'err') {
       setNomen('Continue');
     } else {
-      if(states == 'Lagos' && countries == 'Nigeria'){
-        const res = await saveDeliveryCost(4000);
-        if(res.data == 'delivery set'){
-          history.push('/payment');
-        }else{
-        setNomen('Continue');
-          alert('Error saving details')
-        }
-      }else if( states != 'Lagos' && countries == 'Nigeria'){
-        await saveDeliveryCost(5000);
+      const data = {
+        delivery_name: fname,
+        delivery_country: county,
+        street: streeta,
+        city: cita,
+        phone: phonee,
+        delivery_state: sstata,
+        user_ip: localStorage.getItem('i_ran_zyyx'),
+        delivery_fee : delierryAmount,
+        lga : lgaaa
+      }
+
+      const response = await axios.post(urlPointer +'/api/product/storedelivery',data);
+
+      if(response.data == 'delivery info saved'){
         history.push('/payment');
       }else{
-        history.push('/payment');
+        alert(response.data)
+        setNomen('Continue');
       }
+      // if(states == 'Lagos' && countries == 'Nigeria'){
+      //   const res = await saveDeliveryCost(4000);
+      //   if(res.data == 'delivery set'){
+      //     history.push('/payment');
+      //   }else{
+      //   setNomen('Continue');
+      //     alert('Error saving details')
+      //   }
+      // }else if( states != 'Lagos' && countries == 'Nigeria'){
+      //   await saveDeliveryCost(5000);
+      //   history.push('/payment');
+      // }else{
+      //   history.push('/payment');
+      // }
       
 
     }
@@ -105,50 +128,38 @@ if (res.data === 'currency update') {
 }
 }
 
-const saveDeliveryCost = async (deli)=>{
-  const ip = localStorage.getItem('i_ran_zyyx');
-  const data = {
-      ip: ip,
-      delivery_fee: deli,
-      base_currency: base_currency
-  }
 
-  const res = await  axios.post(urlPointer + '/api/product/savedeliveryfee',data);
-  if(res.data == 'delivery set'){
-    
-  }else{
-      alert('Unable to save delivery informations')
-  }
-}
 
 
 
   const validation = async() => {
-    const fnRes = checkName(fullName);
-    const addRes = checkAddress(address);
-    const cityRes = checkCity(city);
-    const phoneRes = checkPhone(phone);
-    const stateRes = checkName(fullName);
-    const countryRes = checkName(countries);
+    const fnRes = checkName(fname);
+    const addRes = checkAddress(streeta);
+    const cityRes = checkCity(cita);
+    const phoneRes = checkPhone(phonee);
+    const stateRes = checkName(sstata);
+    const countryRes = checkName(county);
 
-   if(countries == ''){
+   if(county == ''){
     setErrMsg('Please select a valid country');
     return 'err';
    }else if(countries == 'Nigeria'){
   
-    if (states == 'Lagos') {
-      if (stateRes || addRes || cityRes || phoneRes || stateRes || !optLga) {
-        setErrMsg('One or more fieds failed validation');
+    if (sstata == 'Lagos') {
+      if (stateRes || addRes || cityRes || phoneRes || stateRes || !lgaaa) {
+        setErrMsg('Please check that you filled in valid informations');
         return 'err';
       } else {
+        setDelierryAmount(4000)
         return 'ok';
       }
-    } else if (states != 'Lagos' && states != '') {
+    } else if (sstata != 'Lagos' && sstata != '') {
       if (fullnameError || addressErr || CityErr || phoneErr || stateErr) {
-        setErrMsg('One or more fieds failed validation');
+        setErrMsg('Please check that you filled in valid informations');
 
         return 'err';
       } else {
+        setDelierryAmount(5000)
         return 'ok';
       }
     } else {
@@ -199,24 +210,24 @@ useEffect(()=>{
           }
           <form className='form'>
 
-            <Countries /><br />
+            <Countries setCounty={setCounty} setDelierryAmount={setDelierryAmount} /><br />
 
-            <input className='form-control' placeholder='Full Name' Name='fullname' required onChange={(ev) => setFullName(ev.target.value)} />
+            <input className='form-control' placeholder='Full Name' Name='fullname' required onChange={(ev) => setFname(ev.target.value)} />
             {
               fullnameError ? <div style={{ color: 'red' }}>{fullnameError}</div> : null
             }
             <br />
-            <input className='form-control' placeholder='Street Address' Name='address' required onChange={(ev) => setAddress(ev.target.value)} />
+            <input className='form-control' placeholder='Street Address' Name='address' required onChange={(ev) => setStreeta(ev.target.value)} />
             {
               addressErr ? <div style={{ color: 'red' }}>{addressErr}</div> : null
             }
             <br />
-            <input className='form-control' placeholder='City' Name='City' required onChange={(ev) => setCity(ev.target.value)} />
+            <input className='form-control' placeholder='City' Name='City' required onChange={(ev) => setCita(ev.target.value)} />
             {
               CityErr ? <div style={{ color: 'red' }}>{CityErr}</div> : null
             }
             <br />
-            <input className='form-control' placeholder='Phone' Name='number' required onChange={(ev) => setPhone(ev.target.value)} />
+            <input className='form-control' placeholder='Phone' Name='number' required onChange={(ev) => setPhonee(ev.target.value)} />
             {
               phoneErr ? <div style={{ color: 'red' }}>{phoneErr}</div> : null
             }
@@ -277,7 +288,7 @@ useEffect(()=>{
 
 
             {
-              states === 'Lagos' ?
+              sstata === 'Lagos' ?
 
                 <select className='form-control' onChange={(val) => setFee(val)}>
                   <option>--Select LGA--</option>
