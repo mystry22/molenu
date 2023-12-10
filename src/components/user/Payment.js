@@ -8,12 +8,14 @@ import { urlPointer } from '../shared/helper';
 import { defaultBodyStyles } from '../shared/helper';
 import { CartContext } from '../../context/CartContext';
 import { transactionReference } from '../shared/functions';
+import { FaCreditCard } from 'react-icons/fa';
 
 
 export default function Payment() {
     const history = useHistory();
     const [pstackTransRef, setPstackTransRef] = useState('');
-    const [deliver, setDeliver] = useState(0);
+    const del_fee = localStorage.getItem('del_fee');
+    const Inst_del_fee = parseInt(del_fee);
 
 
 
@@ -35,14 +37,14 @@ export default function Payment() {
 
                 reference: (new Date()).getTime().toString(),
                 email: user.email,
-                amount: (sumsubtotal + deliveryInfo.delivery_fee) * 100,
+                amount: (sumsubtotal + Inst_del_fee) * 100,
                 //publicKey: 'pk_test_1a1fec024222ba28bd902380bb1511969115e080'
                 publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
             };
             const config2 = {
                 reference: (new Date()).getTime().toString(),
                 email: user.email,
-                amount: (sumsubtotalUsd + deliveryInfo.delivery_fee) * 100,
+                amount: (sumsubtotalUsd + Inst_del_fee) * 100,
                 //publicKey: 'pk_test_1a1fec024222ba28bd902380bb1511969115e080'
                 publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
             };
@@ -102,8 +104,8 @@ export default function Payment() {
             if (updateStock.data == 'Product stock updated successfully') {
 
                 const removeDelivery = await axios.post(urlPointer +'/api/product/deletedeliveryentry',data);
-                if(removeDelivery == 'delivery entry deleted'){
-                localStorage.removeItem('paystack_ref');
+                if(removeDelivery != ''){
+                localStorage.removeItem('deli_fee');
                 history.push('/success');
                 }else{
                     alert('Sorry your payment was successful however contact the support team for follow up')
@@ -122,7 +124,8 @@ export default function Payment() {
         return (
             <div className='row'>
                 <div className='col-lg-12'>
-                    <img src="/assets/img/payment.png" />
+                    <button>Pay Now <FaCreditCard /> </button>
+                    
                 </div>
             </div>
         )
@@ -179,8 +182,6 @@ export default function Payment() {
             {
                 deliveryInfo ?
 
-
-
                     <div className='container'>
                         <div className='row'>
                             <div className='col-lg-4'>
@@ -205,7 +206,7 @@ export default function Payment() {
                                             Shipping:
                                         </div>
                                         <div className='paymentValue'>
-                                            {base_currency} {deliveryInfo.delivery_fee}
+                                            {base_currency} {Inst_del_fee}
                                         </div>
                                     </div><br />
 
@@ -223,12 +224,12 @@ export default function Payment() {
                                             Total:
                                         </div>
                                         <div className='paymentValue'>
-                                            {base_currency == '$' ? sumsubtotalUsd + deliveryInfo.delivery_fee : sumsubtotal + deliveryInfo.delivery_fee}
+                                            {base_currency == '$' ? sumsubtotalUsd + Inst_del_fee : sumsubtotal + Inst_del_fee}
                                         </div>
                                     </div>
 
                                     <div style={{ textAlign: 'center' }}>
-                                        <span style={{ fontWeight: 'bold' }}>Pay Now</span><br />
+                                        
                                         <PaystackButton {...componentProps} className='paymentButtonHack' />
                                     </div>
 

@@ -16,7 +16,7 @@ import { CartContext } from '../../context/CartContext';
 export default function ViewProduct() {
   const history = useHistory();
   const { ref } = useParams();
-  const [prodInfo, setProdInfo] = useState([]);
+  const [prodInfo, setProdInfo] = useState('');
   const [qty, setQty] = useState(1);
   const [price, setPrice] = useState('');
   const [priceUsd, setPriceUsd] = useState('');
@@ -28,7 +28,7 @@ export default function ViewProduct() {
   const [displayFlash, setDisplayFlash] = useState(false);
   const { setRefresh, base_currency, totalWeight, setTotalWeight } = useContext(CartContext);
   const [nomenclature, setNomen] = useState('Add To Cart');
-  const [displayImage,setDp] = useState('');
+  const [displayImage, setDp] = useState('');
 
 
   const addtocart = async (e) => {
@@ -95,6 +95,7 @@ export default function ViewProduct() {
       prod_id: ref.substring(4)
     }
     const products = await axios.post(urlPointer + '/api/product/productinfo', data);
+    
     setProdInfo(products.data);
     setPrice(products.data.price);
     setPriceUsd(products.data.price_usd);
@@ -107,7 +108,7 @@ export default function ViewProduct() {
     e.preventDefault();
     let newQty = qty + 1;
     setQty(newQty);
-    
+
 
 
 
@@ -156,18 +157,18 @@ export default function ViewProduct() {
     }
   }
 
- const changeImageDisplay = (image)=>{
-  if(image){
-    setDp(image)
-  }else{
+  const changeImageDisplay = (image) => {
+    if (image) {
+      setDp(image)
+    } else {
 
+    }
   }
- }
 
   useEffect(() => {
-    
+
     document.title = "Fancy Finery | View Product"
-  
+
     getSelected();
     getUserIp();
 
@@ -177,80 +178,93 @@ export default function ViewProduct() {
       <div style={defaultBodyStyles}>
         <Info />
         <Menu />
-        <div className='row'>
-          <div className='col-lg-6'>
-            <div className='viewProd'>
 
-              <div className='imgholder'>
-                <img src={displayImage} /> <br />
-              </div>
+        {
+          setProdInfo.length > 0 ?
 
-              <div className='imgholder'>
-              <div className='row' >
-                <div className='col-lg-4  viewProdSmallImg'>
+            <div className='row'>
+              <div className='col-lg-6'>
+                <div className='viewProd'>
 
-                  <a onClick={()=>changeImageDisplay(prodInfo.image_link)} style={{cursor:'pointer'}}> <img src={prodInfo.image_link} /> </a>
+                  <div className='imgholder'>
+                    <img src={displayImage} style={{width:'100%', height:450}} /> <br />
+                  </div>
+
+                  <div className='imgholder'>
+                    <div className='row' >
+                      <div className='col-lg-4  viewProdSmallImg'>
+
+                        <a onClick={() => changeImageDisplay(prodInfo.image_link)} style={{ cursor: 'pointer', height:220 }}> <img src={prodInfo.image_link} /> </a>
+                      </div>
+                      <div className='col-lg-4 viewProdSmallImg'>
+                        <a onClick={() => changeImageDisplay(prodInfo.image_variation1)} style={{ cursor: 'pointer', height:220 }}><img src={prodInfo.image_variation1} /> </a>
+                      </div>
+                      <div className='col-lg-4 viewProdSmallImg'>
+                        <a onClick={() => changeImageDisplay(prodInfo.image_variation2)} style={{ cursor: 'pointer', height:220 }}><img src={prodInfo.image_variation2} /> </a>
+                      </div>
+
+                    </div>
+                  </div>
+
+
                 </div>
-                <div className='col-lg-4 viewProdSmallImg'>
-                <a onClick={()=>changeImageDisplay(prodInfo.image_variation1)} style={{cursor:'pointer'}}><img src={prodInfo.image_variation1}  /> </a>
-                </div>
-                <div className='col-lg-4 viewProdSmallImg'>
-                  <a onClick={()=>changeImageDisplay(prodInfo.image_variation2)} style={{cursor:'pointer'}}><img src={prodInfo.image_variation2} /> </a>
-                </div>
 
               </div>
-              </div>
+              <div className='col-lg-6'>
+                <div className='viewProdDetails'>
+                  <form>
 
-              
-            </div>
+                    <h1>{prodInfo.prod_name}</h1>
+                    <h6 className='prodDesc'>{prodInfo.description}</h6>
+                    <span >{base_currency}{base_currency === '₦' ? prodInfo.price : prodInfo.price_usd} <strike style={{ opacity: 0.5 }}>{base_currency}{base_currency === '₦' ? prodInfo.old_price : prodInfo.old_price_usd}</strike></span><br />
+                    <select name='size' required onChange={updateSize} >
+                      <option value=''>Size [UK Sizes]</option>
+                      <option value='4'>4</option>
+                      <option value='6'>6</option>
+                      <option value='8'>8</option>
+                      <option value='10'>10</option>
+                      <option value='12'>12</option>
+                      <option value='14'>14</option>
+                      <option value='16'>16</option>
+                      <option value='18'>18</option>
+                      <option value='20'>20</option>
+                      <option value='22'>22</option>
+                      <option value='24'>24</option>
+                      <option value='26'>26</option>
+                    </select><br />
 
-          </div>
-          <div className='col-lg-6'>
-            <div className='viewProdDetails'>
-              <form>
+                    <select name='size' required onChange={updateHeight}>
+                      <option value=''>Height</option>
+                      <option value='5.0ft-5.5ft'>5.0ft-5.5ft</option>
+                      <option value='5.6ft-5.7ft'>5.6ft-5.7ft</option>
+                      <option value='5.8ft-6.0ft'>5.8ft-6.0ft</option>
 
-                <h1>{prodInfo.prod_name}</h1>
-                <h6 className='prodDesc'>{prodInfo.description}</h6>
-                <span >{base_currency}{base_currency === '₦' ? prodInfo.price : prodInfo.price_usd} <strike style={{ opacity: 0.5 }}>{base_currency}{base_currency === '₦' ? prodInfo.old_price : prodInfo.old_price_usd}</strike></span><br />
-                <select name='size' required onChange={updateSize} >
-                  <option value=''>Size [UK Sizes]</option>
-                  <option value='4'>4</option>
-                  <option value='6'>6</option>
-                  <option value='8'>8</option>
-                  <option value='10'>10</option>
-                  <option value='12'>12</option>
-                  <option value='14'>14</option>
-                  <option value='16'>16</option>
-                  <option value='18'>18</option>
-                  <option value='20'>20</option>
-                  <option value='22'>22</option>
-                  <option value='24'>24</option>
-                  <option value='26'>26</option>
-                </select><br />
+                    </select><br />
 
-                <select name='size' required onChange={updateHeight}>
-                  <option value=''>Height</option>
-                  <option value='5.0ft-5.5ft'>5.0ft-5.5ft</option>
-                  <option value='5.6ft-5.7ft'>5.6ft-5.7ft</option>
-                  <option value='5.8ft-6.0ft'>5.8ft-6.0ft</option>
-
-                </select><br />
-
-                {sizeError ? <span style={{ color: 'red' }}>{sizeError}</span> : null}<br />
-                {/* {
+                    {sizeError ? <span style={{ color: 'red' }}>{sizeError}</span> : null}<br />
+                    {/* {
                   displayFlash ? <FlashMsg /> : null
                 } */}
-                <button className='indec' onClick={doDed}><FaMinus /></button>
-                <input type='text' name='qty' size='2' value={qty} style={{ textAlign: 'center',  backgroundColor:'#fff' }} />
-                <button className='indec' onClick={doInc}><FaPlus /></button><br />
-                <FlashMsg addtocart={addtocart} displayFlash={displayFlash} setDisplayFlash={setDisplayFlash} nomenclature={nomenclature} />
+                    <button className='indec' onClick={doDed}><FaMinus /></button>
+                    <input type='text' name='qty' size='2' value={qty} style={{ textAlign: 'center', backgroundColor: '#fff' }} />
+                    <button className='indec' onClick={doInc}><FaPlus /></button><br />
+                    <FlashMsg addtocart={addtocart} displayFlash={displayFlash} setDisplayFlash={setDisplayFlash} nomenclature={nomenclature} />
 
 
-              </form>
+                  </form>
+                </div>
+              </div>
+
             </div>
-          </div>
 
-        </div>
+            :
+            <div style={{ margin: 'auto', textAlign: 'center', marginTop: 30 }}>
+              <div className='loader'></div>
+
+              <div style={{ marginTop: 10 }}>{'Loading product information...'}</div>
+
+            </div>
+        }
 
       </div>
 

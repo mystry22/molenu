@@ -81,7 +81,7 @@ export const GlobalCartContext = ({ children }) => {
             ip:localStorage.getItem('i_ran_zyyx')
         }
 
-        const res = await axios.post('/api/cart/gettotalweightsum',data);
+        const res = await axios.post(urlPointer+'/api/cart/gettotalweightsum',data);
         if(res.data == 'no item'){
             setTotalWeight(0);
         }else{
@@ -161,20 +161,7 @@ export const GlobalCartContext = ({ children }) => {
         logout,
         refre,
         setRefresh,
-        setDeliveryFee,
-        deliveryFee,
-        setFullName,
-        setAddress,
-        setCity,
-        setPhone,
-        setStates,
-        setOptLga,
-        fullName,
-        address,
-        city,
-        phone,
-        states,
-        optLga,getAllProducts,
+       getAllProducts,
         setProds,prods,
         base_currency,setBaseCurrency,
         sumsubtotalUsd,
