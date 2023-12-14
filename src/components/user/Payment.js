@@ -24,9 +24,11 @@ export default function Payment() {
         sumsubtotal,
         user,
         optLga, sumsubtotalUsd,
-        city, base_currency,
+        city,
         countries, totalWeight,
     } = useContext(CartContext);
+   const base_currency = localStorage.getItem('base_currency');
+
 
     const [deliveryInfo, setDeliveryInfo] = useState('');
 

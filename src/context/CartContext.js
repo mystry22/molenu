@@ -65,6 +65,11 @@ export const GlobalCartContext = ({ children }) => {
     }
 
     useEffect(() => {
+        if(localStorage.getItem('base_currency')){
+
+        }else{
+            localStorage.setItem('base_currency','$')
+        }
         getSubTotalSum();
         getProdInfo();
         makeIp();

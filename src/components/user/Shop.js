@@ -14,7 +14,8 @@ import { CartContext } from '../../context/CartContext';
 
 export default function Home() {
     
-    const {prods,base_currency,setBaseCurrency} = useContext(CartContext);
+    const {prods,setBaseCurrency} = useContext(CartContext);
+    const base_currency = localStorage.getItem('base_currency');
   
     useEffect(()=>{
         document.title = "Fancy Finery | Shop"

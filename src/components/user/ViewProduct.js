@@ -26,9 +26,11 @@ export default function ViewProduct() {
   const [sizeError, setSizeError] = useState('');
   const [weight, setWeight] = useState('');
   const [displayFlash, setDisplayFlash] = useState(false);
-  const { setRefresh, base_currency, totalWeight, setTotalWeight } = useContext(CartContext);
+  const { setRefresh, totalWeight, setTotalWeight } = useContext(CartContext);
   const [nomenclature, setNomen] = useState('Add To Cart');
   const [displayImage, setDp] = useState('');
+
+  const base_currency = localStorage.getItem('base_currency');
 
 
   const addtocart = async (e) => {

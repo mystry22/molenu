@@ -50,8 +50,11 @@ export default function UserDetails() {
             }
             const res = await axios.post(urlPointer + '/api/product/changecurrency', data);
             if (res.data === 'currency update') {
+                localStorage.setItem('base_currency', base_currency);
+                setBaseCurrency(base_currency);
                 setRefresh('just ajsjjs lll');
                 window.location.reload(true);
+
             }
 
         } else {
@@ -86,8 +89,8 @@ export default function UserDetails() {
 
                             {user ? <span style={{ fontSize: '15px', color: '#6c757d' }}>Hi {user.first_name} </span> : <a href='/login' className='anchor'><MdAccountCircle /> </a>}
                             {user ? <a onClick={logout} style={{ fontSize: '15px', color: '#6c757d', textDecoration: 'none', cursor: 'pointer' }}> Logout </a> : null}
-                            <span style={{ fontSize: '15px', color: '#6c757d' }}>Currency: {base_currency}</span>
-                            <select name="currency" id="cars" style={{ fontSize: '10px', marginLeft: 5, backgroundColor:'#fff'}} onChange={(e) => updateCurrency(e)} ref={ref}>
+                            <span style={{ fontSize: '15px', color: '#6c757d' }}>Currency: {localStorage.getItem('base_currency')}</span>
+                            <select name="currency" id="cars" style={{ fontSize: '10px', marginLeft: 5, backgroundColor: '#fff' }} onChange={(e) => updateCurrency(e)} ref={ref}>
                                 {
                                     currencyList.map(curr => (
                                         <option value={curr.value} key={curr.id} >{curr.label}</option>

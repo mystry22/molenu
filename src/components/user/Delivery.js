@@ -15,6 +15,7 @@ import { africas, americas, uk, uae, austria, europe } from '../shared/Calculate
 
 
 function Delivery() {
+  let base_currency = localStorage.getItem('base_currency');
 
   const countriees = [
     { id: 1, label: 'Australia', value: 'Australia', shipping: 'Australia' },
@@ -48,7 +49,7 @@ function Delivery() {
   const [nomen, setNomen] = useState('Continue')
   const {
     setDeliveryFee, totalWeight, setRefresh,
-    countries, base_currency,
+    countries,
 
   } = useContext(CartContext);
   const [county, setCounty] = useState('');
@@ -123,12 +124,10 @@ function Delivery() {
     } else {
       
 
-      
-
       if(weightItem == 0){
         setLoaderMsg('Summing cart items weight....');
       }else{
-
+        
         const data = {
           delivery_name: fname,
           delivery_country: county,
@@ -180,9 +179,13 @@ function Delivery() {
     let curr = '';
 
     if (countries == 'Nigeria' && base_currency == '$') {
-      await setShoppingcurrency('₦')
+      localStorage.setItem('base_currency','₦');
+      await setShoppingcurrency('₦');
+      window.location.reload('true')
     } else if (countries != 'Nigeria' && base_currency == '₦') {
-      await setShoppingcurrency('$')
+      localStorage.setItem('base_currency','$');
+      await setShoppingcurrency('$');
+      window.location.reload('true')
     } else {
 
     }
@@ -249,8 +252,9 @@ function Delivery() {
     }
   }
 
-  const handleSelection = (e) => {
+  const handleSelection = async(e) => {
     e.preventDefault();
+    updateCurrency();
     const countyObject = countriees.find(u => u.value === e.target.value);
     setCounty(countyObject.value);
     setRegion(countyObject.shipping);
@@ -296,7 +300,6 @@ function Delivery() {
   }
 
   useEffect(() => {
-    updateCurrency();
     getToTalWeight();
     document.title = "Fancy Finery | Delivery";
   }, [countries])
