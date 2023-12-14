@@ -14,6 +14,7 @@ import { FaCreditCard } from 'react-icons/fa';
 export default function Payment() {
     const history = useHistory();
     const [pstackTransRef, setPstackTransRef] = useState('');
+    const [finalisePmt, setFinalisePmt] = useState('no');
     const del_fee = localStorage.getItem('del_fee');
     const Inst_del_fee = parseInt(del_fee);
 
@@ -21,18 +22,18 @@ export default function Payment() {
 
     const {
         sumsubtotal,
-        user, 
+        user,
         optLga, sumsubtotalUsd,
         city, base_currency,
         countries, totalWeight,
     } = useContext(CartContext);
-    
+
     const [deliveryInfo, setDeliveryInfo] = useState('');
 
 
     const dynamicConfig = () => {
 
-        if(deliveryInfo){
+        if (deliveryInfo) {
             const config = {
 
                 reference: (new Date()).getTime().toString(),
@@ -48,16 +49,16 @@ export default function Payment() {
                 //publicKey: 'pk_test_1a1fec024222ba28bd902380bb1511969115e080'
                 publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
             };
-    
+
             if (base_currency === '₦') {
                 return config;
             } else {
                 return config2;
             }
-        }else{
+        } else {
 
         }
-        
+
     }
 
 
@@ -82,6 +83,7 @@ export default function Payment() {
     }
 
     const saveTransDetails = async () => {
+        setFinalisePmt('yes')
         const data = {
             full_name: deliveryInfo.delivery_name,
             phone: deliveryInfo.phone,
@@ -91,7 +93,7 @@ export default function Payment() {
             paystack_ref: pstackTransRef,
             email: user.email,
             amount: dynamicAmount(),
-            lga: deliveryInfo.lga ,
+            lga: deliveryInfo.lga,
             city: deliveryInfo.city,
             base_currency: base_currency,
             delivery_fee: deliveryInfo.delivery_fee,
@@ -103,14 +105,14 @@ export default function Payment() {
             const updateStock = await axios.post(urlPointer + '/api/order/managestock', { ip: localStorage.getItem('i_ran_zyyx') });
             if (updateStock.data == 'Product stock updated successfully') {
 
-                const removeDelivery = await axios.post(urlPointer +'/api/product/deletedeliveryentry',data);
-                if(removeDelivery != ''){
-                localStorage.removeItem('deli_fee');
-                history.push('/success');
-                }else{
+                const removeDelivery = await axios.post(urlPointer + '/api/product/deletedeliveryentry', data);
+                if (removeDelivery.data != null) {
+                    localStorage.removeItem('deli_fee');
+                    history.push('/success');
+                } else {
                     alert('Sorry your payment was successful however contact the support team for follow up')
                 }
-                
+
             } else {
                 alert('Sorry please contact support as product may be out of stock')
             }
@@ -125,7 +127,7 @@ export default function Payment() {
             <div className='row'>
                 <div className='col-lg-12'>
                     <button>Pay Now <FaCreditCard /> </button>
-                    
+
                 </div>
             </div>
         )
@@ -148,12 +150,12 @@ export default function Payment() {
         if (res.data == 'not available') {
             history.push('/delivery')
         } else {
-           setDeliveryInfo(res.data);
+            setDeliveryInfo(res.data);
         }
 
     }
 
-   
+
 
 
 
@@ -170,7 +172,7 @@ export default function Payment() {
         }
 
         moveToDelivery();
-        
+
     }, [])
     return (
         <React.Fragment>
@@ -182,75 +184,88 @@ export default function Payment() {
             {
                 deliveryInfo ?
 
-                    <div className='container'>
-                        <div className='row'>
-                            <div className='col-lg-4'>
+                    
+
+            <div className='container'>
+
+                {
+                        finalisePmt == 'yes' ?
+                        <div style={{ margin: 'auto', textAlign: 'center' }}>
+                            <div className='loader'>
 
                             </div>
-                            <div className='col-lg-4' style={{ marginTop: 20 }}>
-                                <div className='payment'>
+                            <div>Finalizing Operations.....</div>
+                        </div> :
+                        null
+                }
+                <div className='row'>
+                    <div className='col-lg-4'>
 
-                                    <div style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>Payment</div>
+                    </div>
+                    <div className='col-lg-4' style={{ marginTop: 20 }}>
+                        <div className='payment'>
 
-                                    <div style={{ display: 'block', marginBottom: 10 }}>
-                                        <div className='paymentTitle'>
-                                            Subtotal:
-                                        </div>
-                                        <div className='paymentValue'>
-                                            {base_currency} {base_currency === '₦' ? sumsubtotal : sumsubtotalUsd}
-                                        </div>
-                                    </div><br />
+                            <div style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>Payment</div>
 
-                                    <div style={{ display: 'block', marginBottom: 10 }}>
-                                        <div className='paymentTitle'>
-                                            Shipping:
-                                        </div>
-                                        <div className='paymentValue'>
-                                            {base_currency} {Inst_del_fee}
-                                        </div>
-                                    </div><br />
+                            <div style={{ display: 'block', marginBottom: 10 }}>
+                                <div className='paymentTitle'>
+                                    Subtotal:
+                                </div>
+                                <div className='paymentValue'>
+                                    {base_currency} {base_currency === '₦' ? sumsubtotal : sumsubtotalUsd}
+                                </div>
+                            </div><br />
 
-                                    <div style={{ display: 'block', marginBottom: 10 }}>
-                                        <div className='paymentTitle'>
-                                            Total Weight:
-                                        </div>
-                                        <div className='paymentValue'>
-                                            {totalWeight}KG
-                                        </div>
-                                    </div><br />
+                            <div style={{ display: 'block', marginBottom: 10 }}>
+                                <div className='paymentTitle'>
+                                    Shipping:
+                                </div>
+                                <div className='paymentValue'>
+                                    {base_currency} {Inst_del_fee}
+                                </div>
+                            </div><br />
 
-                                    <div style={{ display: 'block', marginBottom: 10 }}>
-                                        <div className='paymentTitle' style={{ fontWeight: 'bold', fontSize: 18 }}>
-                                            Total:
-                                        </div>
-                                        <div className='paymentValue'>
-                                            {base_currency == '$' ? sumsubtotalUsd + Inst_del_fee : sumsubtotal + Inst_del_fee}
-                                        </div>
-                                    </div>
+                            <div style={{ display: 'block', marginBottom: 10 }}>
+                                <div className='paymentTitle'>
+                                    Total Weight:
+                                </div>
+                                <div className='paymentValue'>
+                                    {totalWeight}KG
+                                </div>
+                            </div><br />
 
-                                    <div style={{ textAlign: 'center' }}>
-                                        
-                                        <PaystackButton {...componentProps} className='paymentButtonHack' />
-                                    </div>
-
-
-
-
+                            <div style={{ display: 'block', marginBottom: 10 }}>
+                                <div className='paymentTitle' style={{ fontWeight: 'bold', fontSize: 18 }}>
+                                    Total:
+                                </div>
+                                <div className='paymentValue'>
+                                    {base_currency == '$' ? sumsubtotalUsd + Inst_del_fee : sumsubtotal + Inst_del_fee}
                                 </div>
                             </div>
-                            <div className='col-lg-4'>
 
+                            <div style={{ textAlign: 'center' }}>
+
+                                <PaystackButton {...componentProps} className='paymentButtonHack' />
                             </div>
-                        </div>
-                    </div>
 
-                    :
 
-                    <div style={{margin:'auto',textAlign:'center'}}>
-                        <div className='loader'>
+
 
                         </div>
                     </div>
+                    <div className='col-lg-4'>
+
+                    </div>
+                </div>
+            </div>
+
+            :
+
+            <div style={{ margin: 'auto', textAlign: 'center' }}>
+                <div className='loader'>
+
+                </div>
+            </div>
 
 
             }

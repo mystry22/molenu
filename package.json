@@ -2,6 +2,7 @@
   "name": "molenu",
   "version": "0.1.0",
   "private": true,
+  "proxy" : "https://fancybackenddom.com.ng",
   "dependencies": {
     "@paystack/inline-js": "^2.13.0",
     "@reduxjs/toolkit": "^2.0.1",
