@@ -203,13 +203,13 @@ export default function ViewProduct() {
                   </div>
                 <div className='imgholderSmallDevice'>
                   <div className='row'>
-                    <div className='col-lg-4 viewProdSmallImg'>
+                    <div className='col-lg-4 smallDeviceFrame'>
                     <img src={prodInfo.image_link} style={{width:'100%',height:'100%', borderRadius:5}} />
                       </div>
-                      <div className='col-lg-4 viewProdSmallImg'>
+                      <div className='col-lg-4 smallDeviceFrame'>
                       <img src={prodInfo.image_variation1} style={{width:'100%',height:'100%', borderRadius:5}} />
                       </div>
-                      <div className='col-lg-4 viewProdSmallImg'>
+                      <div className='col-lg-4 smallDeviceFrame'>
                       <img src={prodInfo.image_variation2} style={{width:'100%',height:'100%', borderRadius:5}} />
                       </div>
                   </div>
