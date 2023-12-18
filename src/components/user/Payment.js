@@ -43,6 +43,7 @@ export default function Payment() {
                 amount: (sumsubtotal + Inst_del_fee) * 100,
                 //publicKey: 'pk_test_1a1fec024222ba28bd902380bb1511969115e080'
                 publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
+                currency: 'NGN'
             };
             const config2 = {
                 reference: (new Date()).getTime().toString(),
@@ -50,6 +51,7 @@ export default function Payment() {
                 amount: (sumsubtotalUsd + Inst_del_fee) * 100,
                 //publicKey: 'pk_test_1a1fec024222ba28bd902380bb1511969115e080'
                 publicKey: 'pk_live_c2474218578bc086d8c014d69072bcb309a5e989',
+                currency: 'USD'
             };
 
             if (base_currency === '₦') {

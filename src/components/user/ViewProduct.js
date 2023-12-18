@@ -97,7 +97,7 @@ export default function ViewProduct() {
       prod_id: ref.substring(4)
     }
     const products = await axios.post(urlPointer + '/api/product/productinfo', data);
-    
+
     setProdInfo(products.data);
     setPrice(products.data.price);
     setPriceUsd(products.data.price_usd);
@@ -188,25 +188,52 @@ export default function ViewProduct() {
               <div className='col-lg-6'>
                 <div className='viewProd'>
 
-                  <div className='imgholder'>
-                    <img src={displayImage} style={{width:'100%', height:450}} /> <br />
+                  <div className='row'>
+                    <div className='col-lg-2'>
+                    </div>
+
+                    <div className='col-lg-8'>
+                      <div className='imgholder'>
+                        <img src={displayImage} style={{ width: '100%', height: 350 }} /> <br />
+                      </div>
+                    </div>
+
+                    <div className='col-lg-2'>
+                    </div>
+                  </div>
+                <div className='imgholderSmallDevice'>
+                  <div className='row'>
+                    <div className='col-lg-4 viewProdSmallImg'>
+                    <img src={prodInfo.image_link} style={{width:'100%',height:'100%', borderRadius:5}} />
+                      </div>
+                      <div className='col-lg-4 viewProdSmallImg'>
+                      <img src={prodInfo.image_variation1} style={{width:'100%',height:'100%', borderRadius:5}} />
+                      </div>
+                      <div className='col-lg-4 viewProdSmallImg'>
+                      <img src={prodInfo.image_variation2} style={{width:'100%',height:'100%', borderRadius:5}} />
+                      </div>
+                  </div>
                   </div>
 
-                  <div className='imgholder'>
+
+
+                  <div className='imgholderVariation'>
                     <div className='row' >
                       <div className='col-lg-4  viewProdSmallImg'>
 
-                        <a onClick={() => changeImageDisplay(prodInfo.image_link)} style={{ cursor: 'pointer', height:220 }}> <img src={prodInfo.image_link} /> </a>
+                        <a onClick={() => changeImageDisplay(prodInfo.image_link)} style={{ cursor: 'pointer',  }}> <img src={prodInfo.image_link} style={{width:'100%',height:'100%', borderRadius:5}} /> </a>
                       </div>
                       <div className='col-lg-4 viewProdSmallImg'>
-                        <a onClick={() => changeImageDisplay(prodInfo.image_variation1)} style={{ cursor: 'pointer', height:220 }}><img src={prodInfo.image_variation1} /> </a>
+                        <a onClick={() => changeImageDisplay(prodInfo.image_variation1)} style={{ cursor: 'pointer', height: 220 }}><img src={prodInfo.image_variation1} style={{width:'100%',height:'100%', borderRadius:5}} /> </a>
                       </div>
                       <div className='col-lg-4 viewProdSmallImg'>
-                        <a onClick={() => changeImageDisplay(prodInfo.image_variation2)} style={{ cursor: 'pointer', height:220 }}><img src={prodInfo.image_variation2} /> </a>
+                        <a onClick={() => changeImageDisplay(prodInfo.image_variation2)} style={{ cursor: 'pointer', height: 220 }}><img src={prodInfo.image_variation2}  style={{width:'100%',height:'100%', borderRadius:5}} /> </a>
                       </div>
 
                     </div>
-                  </div>
+
+                    </div>
+              
 
 
                 </div>
