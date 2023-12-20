@@ -42,7 +42,7 @@ function Delivery() {
     { id: 21, label: 'United Arab Emirates', value: 'United Arab Emirates', shipping: 'Uae', },
     { id: 22, label: 'United Kingdom', value: 'United Kingdom', shipping: 'Uk' },
     { id: 23, label: 'United States of America', value: 'United States of America', shipping: 'Americas' },
-    { id: 23, label: 'Test', value: 'Test', shipping: 'Test' },
+    
 
   ];
   const history = useHistory();

@@ -193,7 +193,7 @@ export default function ViewProduct() {
                     </div>
 
                     <div className='col-lg-8'>
-                      <div className='imgholder'>
+                      <div className='imgholderViewProds'>
                         <img src={displayImage} style={{ width: '100%', height: 350 }} /> <br />
                       </div>
                     </div>
@@ -204,13 +204,13 @@ export default function ViewProduct() {
                 <div className='imgholderSmallDevice'>
                   <div className='row'>
                     <div className='col-lg-4 smallDeviceFrame'>
-                    <img src={prodInfo.image_link} style={{width:'100%',height:'100%', borderRadius:5}} />
+                    <img src={prodInfo.image_link} style={{width:'95%',height:'100%', borderRadius:5}} />
                       </div>
                       <div className='col-lg-4 smallDeviceFrame'>
-                      <img src={prodInfo.image_variation1} style={{width:'100%',height:'100%', borderRadius:5}} />
+                      <img src={prodInfo.image_variation1} style={{width:'95%',height:'100%', borderRadius:5}} />
                       </div>
                       <div className='col-lg-4 smallDeviceFrame'>
-                      <img src={prodInfo.image_variation2} style={{width:'100%',height:'100%', borderRadius:5}} />
+                      <img src={prodInfo.image_variation2} style={{width:'95%',height:'100%', borderRadius:5}} />
                       </div>
                   </div>
                   </div>

@@ -129,6 +129,19 @@
     margin-top: 30px;
 }
 
+.imgholderViewProds{
+    margin: auto;
+    margin-bottom: 25px;
+    width: 100%;
+    height: 30%; 
+}
+
+.imgholderViewProds img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
 .imgholder {
     margin: auto;
     margin-bottom: 25px;
@@ -188,6 +201,7 @@
     border-radius: 20px;
     width: 100%; 
     height: 350px;
+    padding: 10px;
 }
 
 .viewProdDetails {
@@ -799,7 +813,7 @@
     .imgholderVariation{
         display: none;
     }
-    .imgholder{
+    .imgholderViewProds{
         display: none;
     }
    
