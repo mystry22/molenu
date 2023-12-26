@@ -87,7 +87,7 @@ export default function Home() {
 
                         <div className='col-lg-3 col-sm-12'>
                             <div style={{ marginTop: 50 }}>
-                                <div className='experiment'>Don't be afriad to experiment</div>
+                                <div className='experiment'>Don't be afraid to experiment</div>
 
                                 <div className='bottomHomeText' style={{ marginBottom: 30 }}>The most important thing is to wear clothes that make you feel good about yourself. When you feel confident, you'll look your best</div>
 
