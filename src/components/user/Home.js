@@ -102,7 +102,7 @@ export default function Home() {
 
 
                         {prods.map(prod => (
-                            <div className='col-lg-3'>
+                            <div className='col-lg-3 col-sm-4 col-md-4'>
                                 <div className='prod'>
                                     <div className='stock'>
                                         Stock: {prod.stock}

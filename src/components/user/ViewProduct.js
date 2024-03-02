@@ -194,7 +194,7 @@ export default function ViewProduct() {
 
                     <div className='col-lg-8'>
                       <div className='imgholderViewProds'>
-                        <img src={displayImage} style={{ width: '100%', height: 350 }} /> <br />
+                        <img src={displayImage} style={{ width: '60%', height: 550 }} /> <br />
                       </div>
                     </div>
 
