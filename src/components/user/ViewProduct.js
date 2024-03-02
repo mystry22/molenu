@@ -40,7 +40,7 @@ export default function ViewProduct() {
     const evalWeiht = doWeight(prodInfo.weight * qty);
 
     if (size && heights) {
-      if (valiStock == 'ok' && evalWeiht == 'ok') {
+      if (valiStock == 'ok') {
         setSizeError('');
 
         const data = {

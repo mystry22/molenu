@@ -16,7 +16,7 @@ export default function Payment() {
     const [pstackTransRef, setPstackTransRef] = useState('');
     const [finalisePmt, setFinalisePmt] = useState('no');
     const del_fee = localStorage.getItem('del_fee');
-    const Inst_del_fee = parseInt(del_fee);
+    const Inst_del_fee = 0;
 
 
 

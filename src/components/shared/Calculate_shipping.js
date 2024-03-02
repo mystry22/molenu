@@ -1,19 +1,19 @@
 
 const austria = (totalWeight)=>{
     if(totalWeight > 0 && totalWeight <= 2){
-        localStorage.setItem('del_fee','65');
+        localStorage.setItem('del_fee','0');
         return 65;
     }else if( totalWeight > 2 && totalWeight <= 2.5 ){
-        localStorage.setItem('del_fee','83');
+        localStorage.setItem('del_fee','0');
         return 83;
     }else if(totalWeight > 2.5 && totalWeight <= 3){
-        localStorage.setItem('del_fee','94');
+        localStorage.setItem('del_fee','0');
         return 94;
     }else if(totalWeight > 3 && totalWeight <= 3.5){
-        localStorage.setItem('del_fee','107');
+        localStorage.setItem('del_fee','0');
         return 107;
     }else if(totalWeight > 3.5 && totalWeight <= 4) {
-        localStorage.setItem('del_fee','127');
+        localStorage.setItem('del_fee','0');
         return 125;
     }
 }
@@ -21,19 +21,19 @@ const austria = (totalWeight)=>{
 
 const americas = (totalWeight)=>{
     if(totalWeight > 0 && totalWeight <= 2){
-        localStorage.setItem('del_fee','43');
+        localStorage.setItem('del_fee','0');
         return 43;
     }else if( totalWeight > 2 && totalWeight <= 2.5 ){
-        localStorage.setItem('del_fee','55');
+        localStorage.setItem('del_fee','0');
         return 55;
     }else if(totalWeight > 2.5 && totalWeight <= 3){
-        localStorage.setItem('del_fee','68');
+        localStorage.setItem('del_fee','0');
         return 68;
     }else if(totalWeight > 3 && totalWeight <= 3.5){
-        localStorage.setItem('del_fee','79');
+        localStorage.setItem('del_fee','0');
         return 79;
     }else if(totalWeight > 3.5 && totalWeight <= 4) {
-        localStorage.setItem('del_fee','93');
+        localStorage.setItem('del_fee','0');
         return 93;
     }
 }
@@ -41,19 +41,19 @@ const americas = (totalWeight)=>{
 
 const africas = (totalWeight)=>{
     if(totalWeight > 0 && totalWeight <= 2){
-        localStorage.setItem('del_fee','48');
+        localStorage.setItem('del_fee','0');
         return 48;
     }else if( totalWeight > 2 && totalWeight <= 2.5 ){
-        localStorage.setItem('del_fee','60');
+        localStorage.setItem('del_fee','0');
         return 60;
     }else if(totalWeight > 2.5 && totalWeight <= 3){
-        localStorage.setItem('del_fee','70');
+        localStorage.setItem('del_fee','0');
         return 73;
     }else if(totalWeight > 3 && totalWeight <= 3.5){
-        localStorage.setItem('del_fee','85');
+        localStorage.setItem('del_fee','0');
         return 85;
     }else if(totalWeight > 3.5 && totalWeight <= 4) {
-        localStorage.setItem('del_fee','98');
+        localStorage.setItem('del_fee','0');
         return 98;
     }
 }
@@ -61,57 +61,57 @@ const africas = (totalWeight)=>{
 
 const europe = (totalWeight)=>{
     if(totalWeight > 0 && totalWeight <= 2){
-        localStorage.setItem('del_fee','47');
+        localStorage.setItem('del_fee','0');
         return 47;
     }else if( totalWeight > 2 && totalWeight <= 2.5 ){
-        localStorage.setItem('del_fee','62');
+        localStorage.setItem('del_fee','0');
         return 62;
     }else if(totalWeight > 2.5 && totalWeight <= 3){
-        localStorage.setItem('del_fee','70');
+        localStorage.setItem('del_fee','0');
         return 70;
     }else if(totalWeight > 3 && totalWeight <= 3.5){
-        localStorage.setItem('del_fee','83');
+        localStorage.setItem('del_fee','0');
         return 83;
     }else if(totalWeight > 3.5 && totalWeight <= 4) {
-        localStorage.setItem('del_fee','97');
+        localStorage.setItem('del_fee','0');
         return 97;
     }
 }
 
 const uae = (totalWeight)=>{
     if(totalWeight > 0 && totalWeight <= 2){
-        localStorage.setItem('del_fee','56');
+        localStorage.setItem('del_fee','0');
         return 56;
     }else if( totalWeight > 2 && totalWeight <= 2.5 ){
-        localStorage.setItem('del_fee','72');
+        localStorage.setItem('del_fee','0');
         return 72;
     }else if(totalWeight > 2.5 && totalWeight <= 3){
-        localStorage.setItem('del_fee','83');
+        localStorage.setItem('del_fee','0');
         return 83;
     }else if(totalWeight > 3 && totalWeight <= 3.5){
-        localStorage.setItem('del_fee','98');
+        localStorage.setItem('del_fee','0');
         return 98;
     }else if(totalWeight > 3.5 && totalWeight <= 4) {
-        localStorage.setItem('del_fee','112');
+        localStorage.setItem('del_fee','0');
         return 112;
     }
 }
 
 const uk = (totalWeight)=>{
     if(totalWeight > 0 && totalWeight <= 2){
-        localStorage.setItem('del_fee','35');
+        localStorage.setItem('del_fee','0');
         return 35;
     }else if( totalWeight > 2 && totalWeight <= 2.5 ){
-        localStorage.setItem('del_fee','46');
+        localStorage.setItem('del_fee','0');
         return 46;
     }else if(totalWeight > 2.5 && totalWeight <= 3){
-        localStorage.setItem('del_fee','54');
+        localStorage.setItem('del_fee','0');
         return 54;
     }else if(totalWeight > 3 && totalWeight <= 3.5){
-        localStorage.setItem('del_fee','61');
+        localStorage.setItem('del_fee','0');
         return 61;
     }else if(totalWeight > 3.5 && totalWeight <= 4) {
-        localStorage.setItem('del_fee','69');
+        localStorage.setItem('del_fee','0');
         return 69;
     }
 }
